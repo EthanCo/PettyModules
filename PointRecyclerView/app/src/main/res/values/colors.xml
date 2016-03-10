@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="text_120">#787878</color>
+    <color name="text_40">#282828</color>
+    <color name="text_80">#505050</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_smoke">#f2f2f2</color>
+    <color name="white_trans">#30FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="gray_8C">#8C8C8C</color>
+    <color name="gray_d8">#d8d8d8</color>
+
+
+    <color name="gray">#ECECEC</color>
+    <color name="blue">#1662AE</color>
+    <color name="light_blue">#2B9ED5</color>
+
+    <color name="Indigo_colorPrimaryDark">#FF9000</color>
+    <!--gujiajia整合-->
+    <color name="font_main">#1E1E1E</color>
+    <color name="font_hint">#888888</color>
+    <color name="bg_gray">#EFEFEF</color>
+    <color name="divider">#D1D1D1</color>
+    <color name="red_hint">#FF4040</color>
+
+    <color name="tick_yellow">#FBA500</color>
+    <color name="tick_blue">#2490FD</color>
+    <color name="tick_red">#F96268</color>
+    <color name="tick_gray">#999999</color>
+    <color name="tick_green">#4ecc80</color>
+</resources>

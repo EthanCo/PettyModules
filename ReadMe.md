@@ -24,3 +24,5 @@
     simpleTabLayout.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(),this));
 
 其中MyFragmenPagerAdapter是继承自BasePagerAdapter
+
+> 关于Material Design Tab 的使用 : [传送门](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html)

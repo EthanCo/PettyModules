@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CountPicker">
+        <!--初始的count值-->
+        <attr name="count" format="integer" />
+        <!-- 显示Count的TextView的size-->
+        <attr name="countTextSize" format="dimension" />
+        <!-- 显示Count的TextView的颜色-->
+        <attr name="countTextColor" format="color" />
+        <!-- 最小count-->
+        <attr name="minCount" format="integer"/>
+        <!-- 最大count-->
+        <attr name="maxCount" format="integer"/>
+        <!-- 默认count值-->
+        <attr name="defCount" format="integer"/>
+    </declare-styleable>
+</resources>

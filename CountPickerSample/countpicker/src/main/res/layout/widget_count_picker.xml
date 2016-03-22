@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_border"
+    android:orientation="horizontal">
+
+
+    <com.ethanco.countpicker.SquareImageView
+        android:id="@+id/img_sub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_border_left"
+        android:padding="10dp"
+        android:src="@mipmap/count_sub" />
+
+    <FrameLayout
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="0" />
+
+    </FrameLayout>
+
+    <com.ethanco.countpicker.SquareImageView
+        android:id="@+id/img_plus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_border_right"
+        android:padding="10dp"
+        android:src="@mipmap/count_plus" />
+
+</LinearLayout>

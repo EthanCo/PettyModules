@@ -12,10 +12,23 @@ public class LoadingDialog {
     private static MaterialDialog mDialog;
 
     public static void show(Context context) {
+        show(context, "正在加载", "请稍等...");
+    }
+
+    public static void show(Context context, String title, String content) {
         dismiss();
         mDialog = new MaterialDialog.Builder(context)
-                .title("正在加载")
-                .content("请稍等...")
+                .title(title)
+                .content(content)
+                .progress(true, 0)
+                .show();
+    }
+
+    public static void show(Context context, int title, int content) {
+        dismiss();
+        mDialog = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
                 .progress(true, 0)
                 .show();
     }

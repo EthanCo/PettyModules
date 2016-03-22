@@ -17,4 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="输入对话框" />
+
+    <Button
+        android:id="@+id/btnWait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="等待对话框" />
 </LinearLayout>

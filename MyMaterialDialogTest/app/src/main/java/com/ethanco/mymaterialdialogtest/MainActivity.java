@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.btnNormal).setOnClickListener(this);
         findViewById(R.id.btnInput).setOnClickListener(this);
+        findViewById(R.id.btnWait).setOnClickListener(this);
     }
 
     @Override
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(getApplication(), input, Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                break;
+            case R.id.btnWait: //等待对话框
+                LoadingDialog.show(this);
                 break;
             default:
         }

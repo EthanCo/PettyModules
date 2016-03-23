@@ -23,4 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="等待对话框" />
+
+    <Button
+        android:id="@+id/btnSingleChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单选对话框" />
+
+    <Button
+        android:id="@+id/btnMultiChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多选对话框" />
 </LinearLayout>

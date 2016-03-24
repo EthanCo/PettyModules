@@ -18,6 +18,7 @@ public class CountPicker extends FrameLayout {
     private ImageView imgSub;
     private ImageView imgPlus;
     private TextView tvCount;
+
     private int currCount = 0;
     private int minCount = 0;
     private int maxCount = 99;
@@ -63,7 +64,7 @@ public class CountPicker extends FrameLayout {
         tvCount.setTextColor(countTextColor);
         if (countTextSize > 0)
             tvCount.setTextSize(TypedValue.COMPLEX_UNIT_PX, countTextSize);
-        updateCountTextView();
+        updateCountTextView(true);
     }
 
     private void initEvent() {
@@ -84,7 +85,7 @@ public class CountPicker extends FrameLayout {
     private void addCount() {
         if (currCount < maxCount) {
             currCount++;
-            updateCountTextView();
+            updateCountTextView(true);
         } else {
 
         }
@@ -93,13 +94,62 @@ public class CountPicker extends FrameLayout {
     private void subCount() {
         if (currCount > minCount) {
             currCount--;
-            updateCountTextView();
+            updateCountTextView(false);
         } else {
 
         }
     }
 
-    private void updateCountTextView() {
+    /**
+     * 监听Count改变
+     */
+    public interface onCountChangeListener {
+        void onCountChange(boolean isAdd, int count);
+    }
+
+    public void setCountChangeListener(onCountChangeListener mCountChangeListener) {
+        this.mCountChangeListener = mCountChangeListener;
+    }
+
+    private onCountChangeListener mCountChangeListener = new onCountChangeListener() {
+        @Override
+        public void onCountChange(boolean isAdd, int count) {
+            //do nothing
+        }
+    };
+
+    private void updateCountTextView(boolean isAdd) {
         tvCount.setText(String.valueOf(currCount));
+        mCountChangeListener.onCountChange(isAdd, currCount);
+    }
+
+    public void setCurrCount(int _currCount) {
+        this.currCount = _currCount;
+        boolean isAdd = false;
+        if (this.currCount < _currCount) {
+            isAdd = true;
+        }
+        updateCountTextView(isAdd);
+    }
+
+    public int getCurrCount() {
+        return currCount;
+    }
+
+    public int getMinCount() {
+        return minCount;
+    }
+
+    public void setMinCount(int minCount) {
+        this.minCount = minCount;
+    }
+
+
+    public int getMaxCount() {
+        return maxCount;
+    }
+
+    public void setMaxCount(int maxCount) {
+        this.maxCount = maxCount;
     }
 }

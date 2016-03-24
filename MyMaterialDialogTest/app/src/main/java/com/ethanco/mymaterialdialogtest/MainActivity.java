@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                 Toast.makeText(getApplication(), "which-" + which + ":" + text, Toast.LENGTH_SHORT).show();
-                                return false;
+                                return true;
                             }
                         })//.alwaysCallSingleChoiceCallback()//设置该选项每次点击都会触发itemsCallbackSingleChoice
                         .positiveText("确定")

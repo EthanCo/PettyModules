@@ -27,6 +27,9 @@
 
 > 关于Material Design Tab 的使用 : [传送门](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0731/3247.html)
 
+## SlideUnlock ##
+一个竖直方向的滑动解锁，采用Scroller来实现滑动
+
 ## MyMaterialDialogTest ##
 基于[material-dialogs](https://github.com/afollestad/material-dialogs#input-dialogs)的一个示例项目  
 material dialogs 是 material 风格的dialog

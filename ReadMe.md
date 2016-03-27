@@ -30,6 +30,9 @@
 ## SlideUnlock ##
 一个竖直方向的滑动解锁，采用Scroller来实现滑动
 
+## Dagger2Sample-coffee ##
+Dagger2经典的coffee示例
+
 ## MyMaterialDialogTest ##
 基于[material-dialogs](https://github.com/afollestad/material-dialogs#input-dialogs)的一个示例项目  
 material dialogs 是 material 风格的dialog

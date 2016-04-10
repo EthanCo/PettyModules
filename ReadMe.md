@@ -36,3 +36,6 @@ Dagger2经典的coffee示例
 ## MyMaterialDialogTest ##
 基于[material-dialogs](https://github.com/afollestad/material-dialogs#input-dialogs)的一个示例项目  
 material dialogs 是 material 风格的dialog
+
+## MRecyclerViewSample ##
+封装了下拉自动加载的RecyclerView

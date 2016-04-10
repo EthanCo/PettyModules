@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MRecyclerView</string>
+    <string name="loading">加载更多 ...</string>
+</resources>

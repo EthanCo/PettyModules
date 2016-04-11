@@ -39,3 +39,7 @@ material dialogs 是 material 风格的dialog
 
 ## MRecyclerViewSample ##
 封装了下拉自动加载的RecyclerView
+
+## SlideAdSample ##
+图片轮播  
+![SlideAdSample](/SlideAdSample/SlideAdSample.gif)

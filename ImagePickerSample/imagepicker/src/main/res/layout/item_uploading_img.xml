@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="120dp"
+    android:layout_height="120dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/img_upload"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_centerInParent="true" />
+
+    <!--<ImageView-->
+    <!--android:id="@+id/img_upload"-->
+    <!--android:layout_width="90dp"-->
+    <!--android:layout_height="90dp"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--android:scaleType="centerCrop" />-->
+
+    <ImageView
+        android:id="@+id/img_del"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:background="@mipmap/ic_del" />
+
+</RelativeLayout>

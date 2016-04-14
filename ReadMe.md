@@ -41,5 +41,5 @@ material dialogs 是 material 风格的dialog
 封装了下拉自动加载的RecyclerView
 
 ## SlideAdSample ##
-图片轮播  
+图片轮播(需在Application中进行Fresco的初始化)  
 ![SlideAdSample](/SlideAdSample/SlideAdSample.gif)

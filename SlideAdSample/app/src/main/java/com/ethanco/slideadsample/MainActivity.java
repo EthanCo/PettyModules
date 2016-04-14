@@ -1,6 +1,8 @@
 package com.ethanco.slideadsample;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -14,14 +16,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
+        //需在Application中进行Fresco的初始化
         adView = (AdView) findViewById(R.id.adView_main);
-        adView.addData(getResources().getDrawable(R.mipmap.img1), "IMAGE1");
-        adView.addData(getResources().getDrawable(R.mipmap.img2), "IMAGE2");
-        adView.addData(getResources().getDrawable(R.mipmap.img3), "IMAGE3");
-        adView.addData(getResources().getDrawable(R.mipmap.img4), "IMAGE4");
-        adView.addData(getResources().getDrawable(R.mipmap.img5), "IMAGE5");
+        adView.addData(getUri(R.mipmap.img1), "IMAGE1");
+        adView.addData(getUri(R.mipmap.img2), "IMAGE2");
+        adView.addData(getUri(R.mipmap.img3), "IMAGE3");
+        adView.addData(getUri(R.mipmap.img4), "IMAGE4");
+        adView.addData(getUri(R.mipmap.img5), "IMAGE5");
         adView.show(true);
 
         final Button nextBtn = (Button) findViewById(R.id.nextBtn);
@@ -39,5 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 adView.toPrevious();
             }
         });
+    }
+
+    private Uri getUri(@DrawableRes int resId) {
+        return Uri.parse("res://" + getPackageName() + "/" + resId);
     }
 }

@@ -1,8 +1,7 @@
 package com.ethanco.slidead;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.PagerAdapter;
@@ -11,9 +10,10 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class AdView extends LinearLayout {
     private ViewPager viewPager;
-    private List<Drawable> drawableList;
+    private List<Uri> uriList;
     private List<String> titleList;
     private LayoutInflater mInflater;
     private DotView dotView;
@@ -68,18 +68,19 @@ public class AdView extends LinearLayout {
     }
 
     private void init() {
+        //Fresco.initialize(getContext());
         View view = View.inflate(getContext(), R.layout.layout_ad, this);
         dotView = (DotView) view.findViewById(R.id.dotView_ad);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager_ad);
         titleTv = (TextView) findViewById(R.id.titleTv);
         mInflater = LayoutInflater.from(getContext());
-        drawableList = new ArrayList<>();
+        uriList = new ArrayList<>();
         titleList = new ArrayList<>();
     }
 
-    public void addData(Drawable drawable, String title) {
-        if (drawable != null && title != null) {
-            drawableList.add(drawable);
+    public void addData(Uri uri, String title) {
+        if (uri != null && title != null) {
+            uriList.add(uri);
             titleList.add(title);
         }
     }
@@ -98,12 +99,8 @@ public class AdView extends LinearLayout {
             public Object instantiateItem(ViewGroup container, int position) {
                 int roundPosition = getRoundPosition(position);
                 View childView = mInflater.inflate(R.layout.ad_child_view, null);
-                ImageView imgChild = (ImageView) childView.findViewById(R.id.img_ad_child_view);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    imgChild.setBackground(drawableList.get(roundPosition));
-                } else {
-                    imgChild.setBackgroundDrawable(drawableList.get(roundPosition));
-                }
+                SimpleDraweeView imgChild = (SimpleDraweeView) childView.findViewById(R.id.img_ad_child_view);
+                imgChild.setImageURI(uriList.get(roundPosition));
                 container.addView(childView);
                 return childView;
             }
@@ -121,14 +118,14 @@ public class AdView extends LinearLayout {
 
             @Override
             public int getCount() {
-                //return drawableList.size();
+                //return uriList.size();
                 return Integer.MAX_VALUE;
             }
         });
-        int initPosition = Integer.MAX_VALUE / drawableList.size() / 2 * drawableList.size();
+        int initPosition = Integer.MAX_VALUE / uriList.size() / 2 * uriList.size();
         viewPager.setCurrentItem(initPosition); //初始位置
 
-        dotView.setDotNumber(drawableList.size());
+        dotView.setDotNumber(uriList.size());
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -151,7 +148,7 @@ public class AdView extends LinearLayout {
     }
 
     private int getRoundPosition(int position) {
-        return position % drawableList.size();
+        return position % uriList.size();
     }
 
     public void toNext() {

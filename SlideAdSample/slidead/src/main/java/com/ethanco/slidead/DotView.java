@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.ethanco.slidead.utils.DisplayUtil;
+
 /**
  * Created by Zhk on 2015/10/3.
  */
@@ -47,7 +49,8 @@ public class DotView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mWidth = measureWidth(widthMeasureSpec);
+        //mWidth = measureWidth(widthMeasureSpec);
+        mWidth = DisplayUtil.dip2px(getContext(), 22) * dotNumber;
         mHeight = measureHeight(heightMeasureSpec);
         setMeasuredDimension(mWidth, mHeight);
     }

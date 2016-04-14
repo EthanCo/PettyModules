@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 /**
  * Created by Zhk on 2016/4/9.
  */
-public class MRecyclerView extends RecyclerView {
+public class PullOnRecyclerView extends RecyclerView {
 
     private int lastVisibleItem;
     private int pageIndex = 0;
@@ -19,15 +19,15 @@ public class MRecyclerView extends RecyclerView {
         this.pageSize = pageSize;
     }
 
-    public MRecyclerView(Context context) {
+    public PullOnRecyclerView(Context context) {
         this(context, null);
     }
 
-    public MRecyclerView(Context context, AttributeSet attrs) {
+    public PullOnRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+    public PullOnRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
 
@@ -73,7 +73,7 @@ public class MRecyclerView extends RecyclerView {
      */
     @Override
     public void setAdapter(Adapter adapter) {
-        if (adapter instanceof MAdapter) {
+        if (adapter instanceof PullOnAdapter) {
             super.setAdapter(adapter);
         } else {
             throw new IllegalArgumentException("Adapter必须继承MAdapter");

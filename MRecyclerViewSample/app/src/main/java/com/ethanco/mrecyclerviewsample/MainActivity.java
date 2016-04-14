@@ -5,14 +5,14 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.ethanco.mrecyclerview.MRecyclerView;
+import com.ethanco.mrecyclerview.PullOnRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MRecyclerView list;
+    private PullOnRecyclerView list;
     private LinearLayoutManager mLayoutManager;
     private MyAdapter mAdapter;
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        list = (MRecyclerView) findViewById(R.id.list);
+        list = (PullOnRecyclerView) findViewById(R.id.list);
 
         List data = new ArrayList();
         for (int i = 0; i < 20; i++) {
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyAdapter(data);
         list.setAdapter(mAdapter);
 
-        list.setPullUpListener(new MRecyclerView.OnPullUpListener() {
+        list.setPullUpListener(new PullOnRecyclerView.OnPullUpListener() {
             @Override
             public void onPullUp(int pageIndex, int pageSize) {
                 new Thread() {

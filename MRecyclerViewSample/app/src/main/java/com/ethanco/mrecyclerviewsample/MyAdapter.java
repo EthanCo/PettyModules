@@ -6,14 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ethanco.mrecyclerview.MAdapter;
+import com.ethanco.mrecyclerview.PullOnAdapter;
 
 import java.util.List;
 
 /**
  * Created by Zhk on 2016/4/9.
  */
-public class MyAdapter extends MAdapter {
+public class MyAdapter extends PullOnAdapter {
     public MyAdapter(List<String> list) {
         this.list = list;
     }

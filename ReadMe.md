@@ -43,3 +43,6 @@ material dialogs 是 material 风格的dialog
 ## SlideAdSample ##
 图片轮播(需在Application中进行Fresco的初始化)  
 ![SlideAdSample](/SlideAdSample/SlideAdSample.gif)
+
+## GridContainerViewSample ##
+格子容器View，为了解决RecyclerView嵌套冲突自己写的一个Grid列表

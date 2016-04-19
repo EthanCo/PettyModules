@@ -58,13 +58,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new MaterialDialog.Builder(this)
                         .title("单选对话框")
                         .items(list)
+                        /* 没有圆点 radiobutton
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+
+                            }
+                        })*/
+                        //有圆点 radiobutton
                         .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                                 Toast.makeText(getApplication(), "which-" + which + ":" + text, Toast.LENGTH_SHORT).show();
                                 return true;
                             }
-                        })//.alwaysCallSingleChoiceCallback()//设置该选项每次点击都会触发itemsCallbackSingleChoice
+                        })
+                        .alwaysCallSingleChoiceCallback()//设置该选项每次点击都会触发itemsCallbackSingleChoice
                         .positiveText("确定")
                         .show();
                 break;

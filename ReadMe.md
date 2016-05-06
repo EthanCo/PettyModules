@@ -46,3 +46,6 @@ material dialogs 是 material 风格的dialog
 
 ## GridContainerViewSample ##
 格子容器View，为了解决RecyclerView嵌套冲突自己写的一个Grid列表
+
+## MaterialBottomNavigationTest ##
+Material disign 的底部导航栏

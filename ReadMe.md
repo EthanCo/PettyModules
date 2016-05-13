@@ -49,3 +49,6 @@ material dialogs 是 material 风格的dialog
 
 ## MaterialBottomNavigationTest ##
 Material disign 的底部导航栏
+
+## ImageTest ##
+对图片加载库的包装  

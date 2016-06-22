@@ -52,3 +52,6 @@ Material disign 的底部导航栏
 
 ## ImageTest ##
 对图片加载库的包装  
+
+## ImageProxySample ##
+对图片加载库的包装 V2 版本

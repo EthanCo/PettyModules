@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         //ImageProxy imageProxy = PicassoProxy.getInstace();
         ImageProxy imageProxy = GlideProxy.getInstace();
+
         imageProxy.with(this).load(url1).into(img1);
         imageProxy.with(this).load(url2).into(img2);
+
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 
 /**
- * @Description 图片加载总代理 - 接口
+ * @Description 图片加载总代理 - 抽象类
  * Created by EthanCo on 2016/6/23.
  */
 public abstract class ImageProxy<T> {
@@ -26,7 +26,7 @@ public abstract class ImageProxy<T> {
      * @param url 图片URL
      * @return
      */
-    public abstract ICreate load(String url);
+    public abstract ICreator load(String url);
 
     /**
      * 初始化Proxy

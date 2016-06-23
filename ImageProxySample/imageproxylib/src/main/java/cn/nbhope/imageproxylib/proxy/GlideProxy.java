@@ -2,6 +2,8 @@ package cn.nbhope.imageproxylib.proxy;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
@@ -9,7 +11,7 @@ import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
-import cn.nbhope.imageproxylib.abs.ICreate;
+import cn.nbhope.imageproxylib.abs.ICreator;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
 
 /**
@@ -29,7 +31,7 @@ public class GlideProxy extends ImageProxy<RequestManager> {
     }
 
     @Override
-    public ICreate load(String url) {
+    public ICreator load(String url) {
         DrawableTypeRequest<String> creator = proxy.load(url);
         return new Creator(creator);
     }
@@ -54,7 +56,7 @@ public class GlideProxy extends ImageProxy<RequestManager> {
         return SingleTonHolder.sInstance;
     }
 
-    public static class Creator implements ICreate {
+    private static class Creator implements ICreator {
         private final DrawableTypeRequest creator;
 
         public Creator(DrawableTypeRequest creator) {
@@ -64,6 +66,48 @@ public class GlideProxy extends ImageProxy<RequestManager> {
         @Override
         public Creator crossFade() {
             creator.crossFade();
+            return this;
+        }
+
+        @Override
+        public Creator centerCrop() {
+            creator.centerCrop();
+            return this;
+        }
+
+        @Override
+        public Creator override(int width, int height) {
+            creator.override(width, height);
+            return this;
+        }
+
+        @Override
+        public ICreator thumbnail(float sizeMultiplier) {
+            creator.thumbnail(sizeMultiplier);
+            return this;
+        }
+
+        @Override
+        public ICreator placeholder(@DrawableRes int resourceId) {
+            creator.placeholder(resourceId);
+            return this;
+        }
+
+        @Override
+        public ICreator placeholder(Drawable drawable) {
+            creator.placeholder(drawable);
+            return this;
+        }
+
+        @Override
+        public Creator error(@DrawableRes int resourceId) {
+            creator.error(resourceId);
+            return this;
+        }
+
+        @Override
+        public Creator error(Drawable drawable) {
+            creator.error(drawable);
             return this;
         }
 

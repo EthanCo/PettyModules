@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
-import cn.nbhope.imageproxylib.proxy.GlideProxy;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
+import cn.nbhope.imageproxylib.proxy.GlideProxy;
 
 public class MainActivity extends AppCompatActivity {
 

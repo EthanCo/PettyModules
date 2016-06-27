@@ -16,13 +16,15 @@ import com.bumptech.glide.RequestManager;
 import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
+import cn.nbhope.imageproxylib.abs.ILoador;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
 
 /**
  * @Description Glide代理
  * Created by EthanCo on 2016/6/23.
  */
-public class GlideProxy extends ImageProxy<RequestManager> {
+public class GlideProxy extends ImageProxy {
+
     private GlideProxy() {
     }
 
@@ -34,60 +36,65 @@ public class GlideProxy extends ImageProxy<RequestManager> {
         return SingleTonHolder.sInstance;
     }
 
-    @Override
-    public ICreator load(String url) {
-        DrawableTypeRequest<String> creator = proxy.load(url);
-        return new Creator(creator);
+    public ILoador with(Context context) {
+        return new Loador(Glide.with(context));
     }
 
-    @Override
-    public ICreator load(Uri uri) {
-        DrawableTypeRequest<Uri> creator = proxy.load(uri);
-        return new Creator(creator);
+    public ILoador with(Activity activity) {
+        return new Loador(Glide.with(activity));
     }
 
-    @Override
-    public ICreator load(File file) {
-        DrawableTypeRequest<File> creator = proxy.load(file);
-        return new Creator(creator);
+    public ILoador with(Fragment fragment) {
+        return new Loador(Glide.with(fragment.getActivity()));
     }
 
-    @Override
-    public ICreator load(@IntegerRes Integer resourceId) {
-        DrawableTypeRequest<Integer> creator = proxy.load(resourceId);
-        return new Creator(creator);
+    public ILoador with(android.app.Fragment fragment) {
+        return new Loador(Glide.with(fragment.getActivity()));
     }
 
-    @Override
-    public ICreator load(byte[] model) {
-        DrawableTypeRequest<byte[]> creator = proxy.load(model);
-        return new Creator(creator);
-    }
+    private static class Loador implements ILoador {
 
-    @Override
-    public <V> ICreator load(V model) {
-        DrawableTypeRequest<V> creator = proxy.load(model);
-        return new Creator(creator);
-    }
+        private RequestManager proxy;
 
-    public GlideProxy with(Context context) {
-        proxy = Glide.with(context);
-        return SingleTonHolder.sInstance;
-    }
+        public Loador(RequestManager proxy) {
+            this.proxy = proxy;
+        }
 
-    public GlideProxy with(Activity activity) {
-        proxy = Glide.with(activity);
-        return SingleTonHolder.sInstance;
-    }
+        @Override
+        public ICreator load(String url) {
+            DrawableTypeRequest<String> creator = proxy.load(url);
+            return new Creator(creator);
+        }
 
-    public GlideProxy with(Fragment fragment) {
-        proxy = Glide.with(fragment.getActivity());
-        return SingleTonHolder.sInstance;
-    }
+        @Override
+        public ICreator load(Uri uri) {
+            DrawableTypeRequest<Uri> creator = proxy.load(uri);
+            return new Creator(creator);
+        }
 
-    public GlideProxy with(android.app.Fragment fragment) {
-        proxy = Glide.with(fragment.getActivity());
-        return SingleTonHolder.sInstance;
+        @Override
+        public ICreator load(File file) {
+            DrawableTypeRequest<File> creator = proxy.load(file);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(@IntegerRes Integer resourceId) {
+            DrawableTypeRequest<Integer> creator = proxy.load(resourceId);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(byte[] model) {
+            DrawableTypeRequest<byte[]> creator = proxy.load(model);
+            return new Creator(creator);
+        }
+
+        @Override
+        public <V> ICreator load(V model) {
+            DrawableTypeRequest<V> creator = proxy.load(model);
+            return new Creator(creator);
+        }
     }
 
     private static class Creator implements ICreator {

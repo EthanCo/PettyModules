@@ -15,13 +15,14 @@ import com.squareup.picasso.RequestCreator;
 import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
+import cn.nbhope.imageproxylib.abs.ILoador;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
 
 /**
  * @Description Picasso代理
  * Created by EthanCo on 2016/6/23.
  */
-public class PicassoProxy extends ImageProxy<Picasso> {
+public class PicassoProxy extends ImageProxy {
 
     private PicassoProxy() {
     }
@@ -35,63 +36,69 @@ public class PicassoProxy extends ImageProxy<Picasso> {
     }
 
     @Override
-    public ICreator load(String url) {
-        RequestCreator creator = proxy.load(url);
-        return new Creator(creator);
+    public ILoador with(Context context) {
+        return new Loader(Picasso.with(context));
     }
 
     @Override
-    public ICreator load(Uri uri) {
-        RequestCreator creator = proxy.load(uri);
-        return new Creator(creator);
+    public ILoador with(Activity activity) {
+        return new Loader(Picasso.with(activity));
     }
 
     @Override
-    public ICreator load(File file) {
-        RequestCreator creator = proxy.load(file);
-        return new Creator(creator);
+    public ILoador with(Fragment fragment) {
+        return new Loader(Picasso.with(fragment.getActivity()));
     }
 
     @Override
-    public ICreator load(@IntegerRes Integer resourceId) {
-        RequestCreator creator = proxy.load(resourceId);
-        return new Creator(creator);
+    public ILoador with(android.app.Fragment fragment) {
+        return new Loader(Picasso.with(fragment.getActivity()));
     }
 
-    @Override
-    public ICreator load(byte[] model) {
-        throw new IllegalArgumentException("Picasso 不支持 byte[]");
+
+    private static class Loader implements ILoador {
+
+        private Picasso proxy;
+
+        public Loader(Picasso proxy) {
+            this.proxy = proxy;
+        }
+
+        @Override
+        public ICreator load(String url) {
+            RequestCreator creator = proxy.load(url);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(Uri uri) {
+            RequestCreator creator = proxy.load(uri);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(File file) {
+            RequestCreator creator = proxy.load(file);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(@IntegerRes Integer resourceId) {
+            RequestCreator creator = proxy.load(resourceId);
+            return new Creator(creator);
+        }
+
+        @Override
+        public ICreator load(byte[] model) {
+            throw new IllegalArgumentException("Picasso 不支持 byte[]");
+        }
+
+        @Override
+        public <V> ICreator load(V model) {
+            throw new IllegalArgumentException("Picasso 不支持 子定义类型");
+        }
     }
 
-    @Override
-    public <V> ICreator load(V model) {
-        throw new IllegalArgumentException("Picasso 不支持 子定义类型");
-    }
-
-    @Override
-    public PicassoProxy with(Context context) {
-        Picasso proxy = Picasso.with(context);
-        SingleTonHolder.sInstance.setProxy(proxy);
-        return SingleTonHolder.sInstance;
-    }
-
-    @Override
-    public PicassoProxy with(Activity activity) {
-        proxy = Picasso.with(activity);
-        return SingleTonHolder.sInstance;
-    }
-
-    @Override
-    public PicassoProxy with(Fragment fragment) {
-        proxy = Picasso.with(fragment.getActivity());
-        return SingleTonHolder.sInstance;
-    }
-
-    @Override
-    public PicassoProxy with(android.app.Fragment fragment) {
-        proxy = Picasso.with(fragment.getActivity());
-        return SingleTonHolder.sInstance;
-    }
 
     public static class Creator implements ICreator {
         private final RequestCreator creator;

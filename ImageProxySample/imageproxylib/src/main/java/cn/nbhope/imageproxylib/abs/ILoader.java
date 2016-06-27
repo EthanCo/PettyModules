@@ -9,7 +9,7 @@ import java.io.File;
  * @Description 装载者
  * Created by EthanCo on 2016/6/27.
  */
-public interface ILoador {
+public interface ILoader {
     /**
      * 加载图片
      *

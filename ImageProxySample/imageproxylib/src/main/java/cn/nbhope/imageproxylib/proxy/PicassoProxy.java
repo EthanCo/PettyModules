@@ -15,7 +15,7 @@ import com.squareup.picasso.RequestCreator;
 import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
-import cn.nbhope.imageproxylib.abs.ILoador;
+import cn.nbhope.imageproxylib.abs.ILoader;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
 
 /**
@@ -36,27 +36,27 @@ public class PicassoProxy extends ImageProxy {
     }
 
     @Override
-    public ILoador with(Context context) {
+    public ILoader with(Context context) {
         return new Loader(Picasso.with(context));
     }
 
     @Override
-    public ILoador with(Activity activity) {
+    public ILoader with(Activity activity) {
         return new Loader(Picasso.with(activity));
     }
 
     @Override
-    public ILoador with(Fragment fragment) {
+    public ILoader with(Fragment fragment) {
         return new Loader(Picasso.with(fragment.getActivity()));
     }
 
     @Override
-    public ILoador with(android.app.Fragment fragment) {
+    public ILoader with(android.app.Fragment fragment) {
         return new Loader(Picasso.with(fragment.getActivity()));
     }
 
 
-    private static class Loader implements ILoador {
+    private static class Loader implements ILoader {
 
         private Picasso proxy;
 

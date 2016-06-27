@@ -16,7 +16,7 @@ import com.bumptech.glide.RequestManager;
 import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
-import cn.nbhope.imageproxylib.abs.ILoador;
+import cn.nbhope.imageproxylib.abs.ILoader;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
 
 /**
@@ -36,27 +36,27 @@ public class GlideProxy extends ImageProxy {
         return SingleTonHolder.sInstance;
     }
 
-    public ILoador with(Context context) {
-        return new Loador(Glide.with(context));
+    public ILoader with(Context context) {
+        return new Loader(Glide.with(context));
     }
 
-    public ILoador with(Activity activity) {
-        return new Loador(Glide.with(activity));
+    public ILoader with(Activity activity) {
+        return new Loader(Glide.with(activity));
     }
 
-    public ILoador with(Fragment fragment) {
-        return new Loador(Glide.with(fragment.getActivity()));
+    public ILoader with(Fragment fragment) {
+        return new Loader(Glide.with(fragment.getActivity()));
     }
 
-    public ILoador with(android.app.Fragment fragment) {
-        return new Loador(Glide.with(fragment.getActivity()));
+    public ILoader with(android.app.Fragment fragment) {
+        return new Loader(Glide.with(fragment.getActivity()));
     }
 
-    private static class Loador implements ILoador {
+    private static class Loader implements ILoader {
 
         private RequestManager proxy;
 
-        public Loador(RequestManager proxy) {
+        public Loader(RequestManager proxy) {
             this.proxy = proxy;
         }
 

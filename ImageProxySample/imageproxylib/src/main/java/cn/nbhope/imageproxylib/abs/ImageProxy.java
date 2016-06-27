@@ -2,7 +2,11 @@ package cn.nbhope.imageproxylib.abs;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.Uri;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
+
+import java.io.File;
 
 /**
  * @Description 图片加载总代理 - 抽象类
@@ -51,6 +55,16 @@ public abstract class ImageProxy<T> {
      * @return
      */
     public abstract ImageProxy with(Activity activity);
+
+    public abstract ICreator load(Uri uri);
+
+    public abstract ICreator load(File file);
+
+    public abstract ICreator load(@IntegerRes Integer resourceId);
+
+    public abstract ICreator load(byte[] model);
+
+    public abstract <V> ICreator load(V model);
 
     /**
      * 初始化Proxy

@@ -3,13 +3,17 @@ package cn.nbhope.imageproxylib.proxy;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+
+import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
@@ -33,6 +37,36 @@ public class GlideProxy extends ImageProxy<RequestManager> {
     @Override
     public ICreator load(String url) {
         DrawableTypeRequest<String> creator = proxy.load(url);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(Uri uri) {
+        DrawableTypeRequest<Uri> creator = proxy.load(uri);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(File file) {
+        DrawableTypeRequest<File> creator = proxy.load(file);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(@IntegerRes Integer resourceId) {
+        DrawableTypeRequest<Integer> creator = proxy.load(resourceId);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(byte[] model) {
+        DrawableTypeRequest<byte[]> creator = proxy.load(model);
+        return new Creator(creator);
+    }
+
+    @Override
+    public <V> ICreator load(V model) {
+        DrawableTypeRequest<V> creator = proxy.load(model);
         return new Creator(creator);
     }
 

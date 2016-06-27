@@ -3,12 +3,16 @@ package cn.nbhope.imageproxylib.proxy;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
+
+import java.io.File;
 
 import cn.nbhope.imageproxylib.abs.ICreator;
 import cn.nbhope.imageproxylib.abs.ImageProxy;
@@ -34,6 +38,34 @@ public class PicassoProxy extends ImageProxy<Picasso> {
     public ICreator load(String url) {
         RequestCreator creator = proxy.load(url);
         return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(Uri uri) {
+        RequestCreator creator = proxy.load(uri);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(File file) {
+        RequestCreator creator = proxy.load(file);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(@IntegerRes Integer resourceId) {
+        RequestCreator creator = proxy.load(resourceId);
+        return new Creator(creator);
+    }
+
+    @Override
+    public ICreator load(byte[] model) {
+        throw new IllegalArgumentException("Picasso 不支持 byte[]");
+    }
+
+    @Override
+    public <V> ICreator load(V model) {
+        throw new IllegalArgumentException("Picasso 不支持 子定义类型");
     }
 
     @Override

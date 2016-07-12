@@ -25,5 +25,14 @@ public class MainActivity extends AppCompatActivity {
         /*for (int i = 0; i < adapter.getGroupCount(); i++) {
             listView.expandGroup(i);
         }*/
+
+        //关于ExpandableListView刷新的解决办法 http://blog.csdn.net/arylo/article/details/8711769
+        /*if (listView.isGroupExpanded(1)) {
+            listView.collapseGroup(1);
+            listView.expandGroup(1);
+        } else {
+            listView.expandGroup(1);
+            listView.collapseGroup(1);
+        }*/
     }
 }

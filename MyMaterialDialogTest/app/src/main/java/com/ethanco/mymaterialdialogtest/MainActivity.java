@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new MaterialDialog.Builder(this)
                         .title("请输入")
                         .content("写点什么东西吧")
-                                //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
-                                //InputType.TYPE_TEXT_VARIATION_PASSWORD 密码框
+                        //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
+                        //InputType.TYPE_TEXT_VARIATION_PASSWORD 密码框
                         .input("hint", "预先装载的", new MaterialDialog.InputCallback() {
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {

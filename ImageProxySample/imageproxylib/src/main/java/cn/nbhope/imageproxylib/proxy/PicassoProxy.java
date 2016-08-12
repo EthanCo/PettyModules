@@ -22,7 +22,7 @@ import cn.nbhope.imageproxylib.abs.ImageProxy;
  * @Description Picasso代理
  * Created by EthanCo on 2016/6/23.
  */
-public class PicassoProxy extends ImageProxy {
+class PicassoProxy extends ImageProxy {
 
     private PicassoProxy() {
     }

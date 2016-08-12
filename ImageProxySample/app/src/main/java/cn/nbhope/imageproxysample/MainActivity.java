@@ -5,7 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import cn.nbhope.imageproxylib.abs.ImageProxy;
-import cn.nbhope.imageproxylib.proxy.GlideProxy;
+import cn.nbhope.imageproxylib.proxy.ImageProxyFactory;
+import cn.nbhope.imageproxylib.proxy.Type;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         //Glide.with(this).load("").into(img1);
         //Picasso.with(this).load("").into(img2);
 
-        //ImageProxy imageProxy = PicassoProxy.getInstace();
-        ImageProxy imageProxy = GlideProxy.getInstace();
+        //ImageProxy imageProxy = ImageProxyFactory.create(Type.PICASSO);
+        ImageProxy imageProxy = ImageProxyFactory.create(Type.GLIDE);
 
         imageProxy.with(this).load(url1).into(img1);
         imageProxy.with(this).load(url2).into(img2);

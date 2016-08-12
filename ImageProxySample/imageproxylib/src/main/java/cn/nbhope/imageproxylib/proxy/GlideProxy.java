@@ -23,7 +23,7 @@ import cn.nbhope.imageproxylib.abs.ImageProxy;
  * @Description Glide代理
  * Created by EthanCo on 2016/6/23.
  */
-public class GlideProxy extends ImageProxy {
+class GlideProxy extends ImageProxy {
 
     private GlideProxy() {
     }

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 import java.io.File;
 
@@ -141,14 +142,20 @@ class GlideProxy extends ImageProxy {
         }
 
         @Override
-        public Creator error(@DrawableRes int resourceId) {
+        public ICreator error(@DrawableRes int resourceId) {
             creator.error(resourceId);
             return this;
         }
 
         @Override
-        public Creator error(Drawable drawable) {
+        public ICreator error(Drawable drawable) {
             creator.error(drawable);
+            return this;
+        }
+
+        @Override
+        public ICreator transform(BitmapTransformation... transformations) {
+            creator.transform(transformations);
             return this;
         }
 

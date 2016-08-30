@@ -9,6 +9,7 @@ import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
@@ -153,6 +154,12 @@ class PicassoProxy extends ImageProxy {
         @Override
         public ICreator error(Drawable drawable) {
             creator.error(drawable);
+            return this;
+        }
+
+        @Override
+        public ICreator transform(BitmapTransformation... transformations) {
+            //picasso can not
             return this;
         }
 

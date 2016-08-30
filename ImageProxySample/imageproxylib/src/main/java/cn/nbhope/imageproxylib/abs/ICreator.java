@@ -4,6 +4,8 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+
 /**
  * @Description 图片建造者
  * Created by EthanCo on 2016/6/23.
@@ -71,6 +73,9 @@ public interface ICreator {
      * @return
      */
     ICreator error(Drawable drawable);
+
+
+    ICreator transform(BitmapTransformation... transformations);
 
     /**
      * 将图片加载到ImageView

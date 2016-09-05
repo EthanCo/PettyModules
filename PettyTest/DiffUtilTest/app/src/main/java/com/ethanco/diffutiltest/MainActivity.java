@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item1:
+                //当数据集很大时，此操作可能耗时较长，需要异步计算
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

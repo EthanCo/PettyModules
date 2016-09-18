@@ -58,3 +58,8 @@ Material disign 的底部导航栏
 
 ## ExpandableListViewTest ##
 可展开的列表Demo
+
+## BottomSheetDemo ##
+Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
+
+![BottomSheetDemo](/BottomSheetDemo/BottomSheetDemo.gif)  

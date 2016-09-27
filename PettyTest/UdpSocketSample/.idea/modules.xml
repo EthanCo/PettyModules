@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/UdpSample.iml" filepath="$PROJECT_DIR$/UdpSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UdpServer/UdpServer.iml" filepath="$PROJECT_DIR$/UdpServer/UdpServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/udpclient/udpclient.iml" filepath="$PROJECT_DIR$/udpclient/udpclient.iml" />
+    </modules>
+  </component>
+</project>

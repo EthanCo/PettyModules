@@ -35,7 +35,11 @@ public class SampleViewModel extends BaseViewModel<ISampleView<ItemModel>> {
         model.loadDataFromNet(pageIndex, pageSize)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(result -> getView().onLoadMoreSuccess(result),
+                .subscribe(result -> {
+                            //设置总共的数据Count，一般为从服务器中获取到，此处为模拟
+                            getView().setTotolCount(64);
+                            getView().onLoadMoreSuccess(result);
+                        },
                         throwable -> getView().onLoadMoreFailed(throwable.getLocalizedMessage()),
                         () -> {
 

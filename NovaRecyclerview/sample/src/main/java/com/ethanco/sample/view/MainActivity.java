@@ -2,7 +2,6 @@ package com.ethanco.sample.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -16,19 +15,14 @@ import com.ethanco.sample.databinding.ActivityMainBinding;
 import com.ethanco.sample.utils.T;
 import com.ethanco.sample.viewmodel.SampleViewModel;
 import com.ethanco.sample.widget.SampleHeader;
-import com.github.jdsjlzx.util.LuRecyclerViewStateUtils;
 import com.github.jdsjlzx.view.LoadingFooter;
 import com.lib.frame.view.BaseActivity;
 
 import java.util.Collection;
 
 public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleViewModel> implements ISampleView, SwipeRefreshLayout.OnRefreshListener {
-
-
-    private static final String TAG = "Z-Main";
-    private static final int TOTAL_COUNTER = 63;
-    private static final int LIST_PAGE_SIZE = 10;
     private ActivityMainBinding binding;
+
     private AdapterWrap<ItemModel> adapterWrap;
     private NovaSupervisor supervisor;
 
@@ -41,18 +35,15 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initVar();
         initView();
         initEvent();
-    }
 
-    private void initVar() {
-
+        reload();
     }
 
     private void initView() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        initToolbar(R.string.app_name, false);
+        setSupportActionBar(binding.toolbar);
 
         adapterWrap = new AdapterWrap(new DataAdapter(this));
         binding.list.setLayoutManager(new LinearLayoutManager(this));
@@ -66,11 +57,15 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     private void initEvent() {
         binding.swipeRefreshLayout.setOnRefreshListener(this);
 
-        supervisor.setListLoad((pageIndex, pageSize) -> mViewModel.loadMore(pageIndex, pageSize));
+        supervisor.setLoadMoreListener((pageIndex, pageSize) -> {
+            if (binding.swipeRefreshLayout.isRefreshing()) return;
 
-        adapterWrap.addOnItemClickListener((v, position) -> T.show("click:" + position));
+            mViewModel.loadMore(pageIndex, pageSize);
+        });
 
-        adapterWrap.addOnItemLongClickListener((v, position) -> T.show("longClick:" + position));
+        adapterWrap.addOnItemClickListener((v, position) -> T.show(binding.fab, "click:" + position));
+
+        adapterWrap.addOnItemLongClickListener((v, position) -> T.show(binding.fab, "long click:" + position));
 
         binding.list.addOnScrollBottomListener(() -> {
 
@@ -114,9 +109,12 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
             }
         });
 
-        binding.fab.setOnClickListener(view -> Snackbar
-                .make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        binding.fab.setOnClickListener(view -> T.show(binding.fab, "Hello"));
+    }
+
+    private void reload() {
+        binding.swipeRefreshLayout.setRefreshing(true);
+        onRefresh();
     }
 
     @Override
@@ -128,24 +126,30 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     public void onRefreshSuccess(Collection collection) {
         adapterWrap.getAdapter().setNewData(collection);
         binding.swipeRefreshLayout.setRefreshing(false);
+        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override
     public void onRefreshFailed(String error) {
+        T.show(binding.fab, "刷新错误:" + error);
         binding.swipeRefreshLayout.setRefreshing(false);
-        binding.fab.setOnClickListener(view -> Snackbar
-                .make(binding.fab, "刷新错误:" + error, Snackbar.LENGTH_LONG).show());
+        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override
     public void onLoadMoreSuccess(Collection collection) {
         adapterWrap.getAdapter().addAll(collection);
-        LuRecyclerViewStateUtils.setFooterViewState(binding.list, LoadingFooter.State.Normal);
+        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override
     public void onLoadMoreFailed(String error) {
-        LuRecyclerViewStateUtils.setFooterViewState(binding.list, LoadingFooter.State.Normal);
-        Snackbar.make(binding.fab, "加载错误:" + error, Snackbar.LENGTH_LONG).show();
+        supervisor.setFooterViewState(LoadingFooter.State.NetWorkError);
+        T.show(binding.fab, "加载错误:" + error);
+    }
+
+    @Override
+    public void setTotolCount(int totalCount) {
+        supervisor.setTotalCount(totalCount);
     }
 }

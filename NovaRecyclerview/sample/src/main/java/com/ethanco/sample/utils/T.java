@@ -1,8 +1,7 @@
 package com.ethanco.sample.utils;
 
-import android.app.Application;
-import android.content.Context;
-import android.widget.Toast;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 /**
  * Toast
@@ -10,28 +9,21 @@ import android.widget.Toast;
 public class T {
 
     private T() {
-        throw new UnsupportedOperationException("Cannot be instantiated");
     }
 
-    private static Application context;
-
-    public static void init(Application application) {
-        context = application;
+    public static void show(View view, int resId) {
+        Snackbar.make(view, resId, Snackbar.LENGTH_LONG).show();
     }
 
-    public static void show(int resId) {
-        show(context, resId, Toast.LENGTH_SHORT);
+    public static void show(View view, CharSequence text) {
+        Snackbar.make(view, text, Snackbar.LENGTH_LONG).show();
     }
 
-    public static void show(CharSequence text) {
-        show(context, text, Toast.LENGTH_SHORT);
+    public static void show(View view, int resId, int actionResId, View.OnClickListener listener) {
+        Snackbar.make(view, resId, Snackbar.LENGTH_LONG).setAction(actionResId, listener).show();
     }
 
-    public static void show(Context context, int resId, int duration) {
-        Toast.makeText(context, resId, duration).show();
-    }
-
-    public static void show(Context context, CharSequence text, int duration) {
-        Toast.makeText(context, text, duration).show();
+    public static void show(View view, CharSequence text, CharSequence action, View.OnClickListener listener) {
+        Snackbar.make(view, text, Snackbar.LENGTH_LONG).setAction(action, listener).show();
     }
 }

@@ -55,14 +55,14 @@ public class AdapterWrap<T extends Entity> extends LuRecyclerViewAdapter {
 
     protected List<OnItemLongClickListener> itemLongClickListeners = new ArrayList<>();
 
-    public void addOnItemClickListener(OnItemClickListener onItemClickListener) {
-        if (!itemClickListeners.contains(onItemClickListener))
-            itemClickListeners.add(onItemClickListener);
+    public void addOnItemClickListener(OnItemClickListener listener) {
+        if (!itemClickListeners.contains(listener))
+            itemClickListeners.add(listener);
     }
 
-    public void addOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        if (!itemLongClickListeners.contains(onItemLongClickListener))
-            itemLongClickListeners.add(onItemLongClickListener);
+    public void addOnItemLongClickListener(OnItemLongClickListener listener) {
+        if (!itemLongClickListeners.contains(listener))
+            itemLongClickListeners.add(listener);
     }
 
     @Override

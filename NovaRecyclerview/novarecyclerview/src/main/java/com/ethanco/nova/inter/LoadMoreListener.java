@@ -5,6 +5,6 @@ package com.ethanco.nova.inter;
  * Created by EthanCo on 2016/9/30.
  */
 
-public interface IListLoad {
+public interface LoadMoreListener {
     void loadMore(int pageIndex, int pageSize);
 }

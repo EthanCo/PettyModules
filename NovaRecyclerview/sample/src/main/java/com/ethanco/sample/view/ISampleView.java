@@ -14,4 +14,6 @@ public interface ISampleView<M> {
     void onLoadMoreSuccess(Collection<M> collection);
 
     void onLoadMoreFailed(String error);
+
+    void setTotolCount(int totalCount);
 }

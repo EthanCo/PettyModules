@@ -33,6 +33,9 @@ public class SampleModel implements ISampleModel {
     public Observable<List<ItemModel>> loadDataFromNet(int pageIndex, int pageSize) {
         int start = pageIndex * pageSize;
         int end = (pageIndex + 1) * pageSize;
+        if (end > 64) { //模拟服务器最大的数据
+            end = 64;
+        }
         int count = end - start;
 
         return Observable.range(start, count)

@@ -108,24 +108,24 @@ public abstract class MRecyclerView extends LuRecyclerView {
     protected List<OnScrollStateChangedListener> onScrollStateChangeds = new ArrayList<>();
     protected List<OnScrollBottomListener> onScrollBottomListeners = new ArrayList<>();
 
-    public void addScrollListener(onScrollListener scrollListener) {
-        if (!scrollListeners.contains(scrollListener))
-            scrollListeners.add(scrollListener);
+    public void addScrollListener(onScrollListener listener) {
+        if (!scrollListeners.contains(listener))
+            scrollListeners.add(listener);
     }
 
-    public void addOnScrolledListener(OnScrolledListener onScrolledListener) {
-        if (!onScrolledListeners.contains(onScrolledListener))
-            onScrolledListeners.add(onScrolledListener);
+    public void addOnScrolledListener(OnScrolledListener listener) {
+        if (!onScrolledListeners.contains(listener))
+            onScrolledListeners.add(listener);
     }
 
-    public void addOnScrollStateChangedListener(OnScrollStateChangedListener onScrollStateChangedListener) {
-        if (!onScrollStateChangeds.contains(onScrollStateChangedListener))
-            onScrollStateChangeds.add(onScrollStateChangedListener);
+    public void addOnScrollStateChangedListener(OnScrollStateChangedListener listener) {
+        if (!onScrollStateChangeds.contains(listener))
+            onScrollStateChangeds.add(listener);
     }
 
-    public void addOnScrollBottomListener(OnScrollBottomListener onScrollBottomListener) {
-        if (!onScrollBottomListeners.contains(onScrollBottomListener)) {
-            onScrollBottomListeners.add(onScrollBottomListener);
+    public void addOnScrollBottomListener(OnScrollBottomListener listener) {
+        if (!onScrollBottomListeners.contains(listener)) {
+            onScrollBottomListeners.add(listener);
         }
 
     }

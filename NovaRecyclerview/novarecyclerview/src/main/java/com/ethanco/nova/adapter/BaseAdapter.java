@@ -53,6 +53,7 @@ public class BaseAdapter<T extends Entity> extends RecyclerView.Adapter {
         this.mDataList.clear();
         this.mDataList.addAll(list);
         notifyDataSetChanged();
+
     }
 
     public void remove(int position) {

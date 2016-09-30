@@ -127,7 +127,7 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     public void onRefreshSuccess(Collection collection) {
         adapterWrap.getAdapter().setNewData(collection);
         binding.swipeRefreshLayout.setRefreshing(false);
-        //supervisor.setFooterViewState(LoadingFooter.State.Normal);
+        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override

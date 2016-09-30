@@ -1,0 +1,5 @@
+int layout include_toolbar 0x47020000
+int id toolbar 0x47030000
+int id toolbar_head 0x47030001
+int id toolbar_footer 0x47030002
+int style toolbar_theme 0x47040000

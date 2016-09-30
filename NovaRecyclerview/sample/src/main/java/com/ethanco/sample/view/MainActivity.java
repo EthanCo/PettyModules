@@ -57,11 +57,12 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     private void initEvent() {
         binding.swipeRefreshLayout.setOnRefreshListener(this);
 
-        supervisor.setLoadMoreListener((pageIndex, pageSize) -> {
-            if (binding.swipeRefreshLayout.isRefreshing()) return;
+        supervisor.setLoadMoreListener((pageIndex, pageSize) -> mViewModel.loadMore(pageIndex, pageSize));
 
-            mViewModel.loadMore(pageIndex, pageSize);
-        });
+        //如果同时使用上拉刷新，请添加这个Listener，防止与下拉加载的冲突
+        supervisor.setRefreshStateListener(() -> binding.swipeRefreshLayout.isRefreshing());
+
+        supervisor.setErrorClickListener(view -> supervisor.loadMore());
 
         adapterWrap.addOnItemClickListener((v, position) -> T.show(binding.fab, "click:" + position));
 
@@ -126,7 +127,7 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     public void onRefreshSuccess(Collection collection) {
         adapterWrap.getAdapter().setNewData(collection);
         binding.swipeRefreshLayout.setRefreshing(false);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
+        //supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override

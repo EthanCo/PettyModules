@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.ethanco.nova.base.MRecyclerView;
 import com.ethanco.nova.inter.LoadMoreListener;
+import com.ethanco.nova.inter.RefreshStateListener;
 import com.github.jdsjlzx.recyclerview.LuRecyclerViewAdapter;
 import com.github.jdsjlzx.util.LuRecyclerViewStateUtils;
 import com.github.jdsjlzx.util.LuRecyclerViewUtils;
@@ -35,6 +36,16 @@ public class NovaSupervisor {
     private WeakReference<NovaRecyclerView> recyclerViewRef;
 
     private LoadMoreListener loadmoreListener;
+    private View.OnClickListener errorClickListener;
+    private RefreshStateListener refreshStateListener;
+
+    public void setRefreshStateListener(RefreshStateListener listener) {
+        this.refreshStateListener = listener;
+    }
+
+    public void setErrorClickListener(View.OnClickListener errorClickListener) {
+        this.errorClickListener = errorClickListener;
+    }
 
     public void setLoadMoreListener(LoadMoreListener Listener) {
         this.loadmoreListener = Listener;
@@ -59,32 +70,42 @@ public class NovaSupervisor {
         recyclerView.addOnScrollBottomListener(new MRecyclerView.OnScrollBottomListener() {
             @Override
             public void onBottom() {
-                RecyclerView recyclerView = recyclerViewRef.get();
-                if (recyclerView == null) return;
-
-                LoadingFooter.State state = LuRecyclerViewStateUtils.getFooterViewState(recyclerView);
-                if (state == LoadingFooter.State.Loading) {
-                    Log.d(TAG, "the state is Loading, just wait..");
-                    return;
-                }
-
-                int currCount = recyclerView.getAdapter().getItemCount();
-                if (currCount < totalCount) {
-                    //加载更多
-                    setFooterViewState(listPageSize, LoadingFooter.State.Loading, null);
-                    if (loadmoreListener != null) {
-                        loadmoreListener.loadMore(currCount / listPageSize, listPageSize);
-                    }
-                } else {
-                    //没有更多了
-                    setFooterViewState(listPageSize, LoadingFooter.State.TheEnd, null);
-
-                }
+                loadMore();
             }
         });
     }
 
-    public void setFooterViewState(int pageSize, LoadingFooter.State state, View.OnClickListener errorListener) {
+    public void loadMore() {
+        RecyclerView recyclerView = recyclerViewRef.get();
+        if (recyclerView == null) return;
+
+        LoadingFooter.State state = LuRecyclerViewStateUtils.getFooterViewState(recyclerView);
+        if (state == LoadingFooter.State.Loading) {
+            Log.d(TAG, "the state is Loading, just wait..");
+            return;
+        }
+
+        int currCount = recyclerView.getAdapter().getItemCount();
+        if (currCount < totalCount) {
+            if (isRefreshing()) return;
+            if (loadmoreListener == null) return;
+
+            //加载更多
+            setFooterViewState(listPageSize, LoadingFooter.State.Loading, null);
+            loadmoreListener.loadMore(currCount / listPageSize, listPageSize);
+        } else {
+            //没有更多了
+            setFooterViewState(listPageSize, LoadingFooter.State.TheEnd, null);
+        }
+    }
+
+    private boolean isRefreshing() {
+        if (refreshStateListener == null) return false;
+
+        return refreshStateListener.isRefreshing();
+    }
+
+    private void setFooterViewState(int pageSize, LoadingFooter.State state, View.OnClickListener errorListener) {
         NovaRecyclerView recyclerView = recyclerViewRef.get();
         if (recyclerView == null) return;
 
@@ -115,7 +136,11 @@ public class NovaSupervisor {
         NovaRecyclerView recyclerView = recyclerViewRef.get();
         if (recyclerView == null) return;
 
-        LuRecyclerViewStateUtils.setFooterViewState(recyclerView, state);
+        if (state == LoadingFooter.State.NetWorkError && errorClickListener != null) {
+            setFooterViewState(listPageSize, state, errorClickListener);
+        } else {
+            LuRecyclerViewStateUtils.setFooterViewState(recyclerView, state);
+        }
     }
 
     public void setHeaderView(View view) {

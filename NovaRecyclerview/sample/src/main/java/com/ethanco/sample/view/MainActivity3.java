@@ -17,7 +17,7 @@ import com.ethanco.sample.utils.T;
 import com.ethanco.sample.viewmodel.SampleViewModel;
 import com.ethanco.sample.widget.SampleHeader;
 
-public class Main3Activity extends ListActivity<ItemModel, SampleViewModel> implements SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity3 extends ListActivity<ItemModel, SampleViewModel> implements SwipeRefreshLayout.OnRefreshListener {
     private ActivityMainBinding binding;
 
     private AdapterWrap<ItemModel> adapterWrap;

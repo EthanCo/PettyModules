@@ -28,6 +28,30 @@ public abstract class BaseActivity<V, T extends BaseViewModel<V>> extends Toolba
         if (mViewModel != null) {
             mViewModel.attachView((V) this); //View与ViewModel建立关系
         }
+
+        initVarAndView(savedInstanceState);
+        midfield();
+        initEvent();
+        initDoing();
+    }
+
+
+    //创建ViewModel
+    protected abstract T createViewModel();
+
+    //初始化变量和界面
+    protected abstract void initVarAndView(Bundle savedInstanceState);
+
+    //用于继承自BaseActivity的基类 进行一些初始化，一般情况下，不用重写
+    protected void midfield() {
+    }
+
+    //初始化事件
+    protected abstract void initEvent();
+
+    //开始执行
+    protected void initDoing() {
+
     }
 
     @Override
@@ -72,11 +96,4 @@ public abstract class BaseActivity<V, T extends BaseViewModel<V>> extends Toolba
             mViewModel.detachView();
         }
     }
-
-    /**
-     * 创建ViewModel
-     *
-     * @return
-     */
-    protected abstract T createViewModel();
 }

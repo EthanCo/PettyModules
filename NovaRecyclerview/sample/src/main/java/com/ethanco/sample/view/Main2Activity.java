@@ -15,12 +15,11 @@ import com.ethanco.sample.databinding.ActivityMainBinding;
 import com.ethanco.sample.utils.T;
 import com.ethanco.sample.viewmodel.SampleViewModel;
 import com.ethanco.sample.widget.SampleHeader;
-import com.github.jdsjlzx.view.LoadingFooter;
 import com.lib.frame.view.BaseActivity;
 
 import java.util.Collection;
 
-public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleViewModel> implements ISampleView, SwipeRefreshLayout.OnRefreshListener {
+public class Main2Activity extends BaseActivity<ISampleView<ItemModel>, SampleViewModel> implements ISampleView<ItemModel>, SwipeRefreshLayout.OnRefreshListener {
     private ActivityMainBinding binding;
 
     private AdapterWrap<ItemModel> adapterWrap;
@@ -44,6 +43,7 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
         supervisor.setHeaderView(new SampleHeader(this));
         supervisor.openLoadMore();
     }
+
 
     @Override
     protected void initEvent() {
@@ -123,28 +123,26 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     }
 
     @Override
-    public void onRefreshSuccess(Collection collection) {
-        adapterWrap.getAdapter().setNewData(collection);
+    public void onRefreshSuccess(Collection<ItemModel> collection) {
+        supervisor.onRefreshSuccess(collection);
         binding.swipeRefreshLayout.setRefreshing(false);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override
     public void onRefreshFailed(String error) {
+        supervisor.onRefreshFailed(error);
         T.show(binding.fab, "刷新错误:" + error);
         binding.swipeRefreshLayout.setRefreshing(false);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
     }
 
     @Override
-    public void onLoadMoreSuccess(Collection collection) {
-        adapterWrap.getAdapter().addAll(collection);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
+    public void onLoadMoreSuccess(Collection<ItemModel> collection) {
+        supervisor.onLoadMoreSuccess(collection);
     }
 
     @Override
     public void onLoadMoreFailed(String error) {
-        supervisor.setFooterViewState(LoadingFooter.State.NetWorkError);
+        supervisor.onLoadMoreFailed(error);
         T.show(binding.fab, "加载错误:" + error);
     }
 

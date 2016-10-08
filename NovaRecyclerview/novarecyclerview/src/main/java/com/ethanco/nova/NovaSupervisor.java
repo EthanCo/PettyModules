@@ -13,6 +13,7 @@ import com.github.jdsjlzx.util.LuRecyclerViewUtils;
 import com.github.jdsjlzx.view.LoadingFooter;
 
 import java.lang.ref.WeakReference;
+import java.util.Collection;
 
 import static android.content.ContentValues.TAG;
 
@@ -62,9 +63,7 @@ public class NovaSupervisor {
 
     public void openLoadMore(LoadMoreListener _Listener) {
         NovaRecyclerView recyclerView = recyclerViewRef.get();
-        if (recyclerView == null) {
-            return;
-        }
+        if (recyclerView == null) return;
 
         this.loadmoreListener = _Listener;
         recyclerView.addOnScrollBottomListener(new MRecyclerView.OnScrollBottomListener() {
@@ -169,5 +168,31 @@ public class NovaSupervisor {
         if (recyclerView == null) return;
 
         LuRecyclerViewUtils.removeHeaderView(recyclerView);
+    }
+
+    public void onRefreshSuccess(Collection collection) {
+        NovaRecyclerView recyclerView = recyclerViewRef.get();
+        if (recyclerView == null) return;
+
+        AdapterWrap adapterWrap = (AdapterWrap) recyclerView.getAdapter();
+        adapterWrap.getAdapter().setNewData(collection);
+        setFooterViewState(LoadingFooter.State.Normal);
+    }
+
+    public void onRefreshFailed(String error) {
+        setFooterViewState(LoadingFooter.State.Normal);
+    }
+
+    public void onLoadMoreSuccess(Collection collection) {
+        NovaRecyclerView recyclerView = recyclerViewRef.get();
+        if (recyclerView == null) return;
+
+        AdapterWrap adapterWrap = (AdapterWrap) recyclerView.getAdapter();
+        adapterWrap.getAdapter().addAll(collection);
+        setFooterViewState(LoadingFooter.State.Normal);
+    }
+
+    public void onLoadMoreFailed(String error) {
+        setFooterViewState(LoadingFooter.State.NetWorkError);
     }
 }

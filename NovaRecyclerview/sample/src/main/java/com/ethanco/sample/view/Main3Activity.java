@@ -10,21 +10,17 @@ import com.ethanco.nova.NovaRecyclerView;
 import com.ethanco.nova.NovaSupervisor;
 import com.ethanco.sample.R;
 import com.ethanco.sample.adapter.DataAdapter;
+import com.ethanco.sample.base.ListActivity;
 import com.ethanco.sample.bean.ItemModel;
 import com.ethanco.sample.databinding.ActivityMainBinding;
 import com.ethanco.sample.utils.T;
 import com.ethanco.sample.viewmodel.SampleViewModel;
 import com.ethanco.sample.widget.SampleHeader;
-import com.github.jdsjlzx.view.LoadingFooter;
-import com.lib.frame.view.BaseActivity;
 
-import java.util.Collection;
-
-public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleViewModel> implements ISampleView, SwipeRefreshLayout.OnRefreshListener {
+public class Main3Activity extends ListActivity<ItemModel, SampleViewModel> implements SwipeRefreshLayout.OnRefreshListener {
     private ActivityMainBinding binding;
 
     private AdapterWrap<ItemModel> adapterWrap;
-    private NovaSupervisor supervisor;
 
     @Override
     protected SampleViewModel createViewModel() {
@@ -39,10 +35,6 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
         adapterWrap = new AdapterWrap(new DataAdapter(this));
         binding.list.setLayoutManager(new LinearLayoutManager(this));
         binding.list.setAdapter(adapterWrap);
-
-        supervisor = new NovaSupervisor(binding.list);
-        supervisor.setHeaderView(new SampleHeader(this));
-        supervisor.openLoadMore();
     }
 
     @Override
@@ -112,6 +104,19 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
         reload();
     }
 
+    @Override
+    protected NovaSupervisor createSupervisor() {
+        NovaSupervisor supervisor = new NovaSupervisor(binding.list);
+        supervisor.setHeaderView(new SampleHeader(this));
+        supervisor.openLoadMore();
+        return supervisor;
+    }
+
+    @Override
+    protected SwipeRefreshLayout getSwipeRefreshLayout() {
+        return binding.swipeRefreshLayout;
+    }
+
     private void reload() {
         binding.swipeRefreshLayout.setRefreshing(true);
         onRefresh();
@@ -120,36 +125,5 @@ public class MainActivity extends BaseActivity<ISampleView<ItemModel>, SampleVie
     @Override
     public void onRefresh() {
         mViewModel.refresh();
-    }
-
-    @Override
-    public void onRefreshSuccess(Collection collection) {
-        adapterWrap.getAdapter().setNewData(collection);
-        binding.swipeRefreshLayout.setRefreshing(false);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
-    }
-
-    @Override
-    public void onRefreshFailed(String error) {
-        T.show(binding.fab, "刷新错误:" + error);
-        binding.swipeRefreshLayout.setRefreshing(false);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
-    }
-
-    @Override
-    public void onLoadMoreSuccess(Collection collection) {
-        adapterWrap.getAdapter().addAll(collection);
-        supervisor.setFooterViewState(LoadingFooter.State.Normal);
-    }
-
-    @Override
-    public void onLoadMoreFailed(String error) {
-        supervisor.setFooterViewState(LoadingFooter.State.NetWorkError);
-        T.show(binding.fab, "加载错误:" + error);
-    }
-
-    @Override
-    public void setTotolCount(int totalCount) {
-        supervisor.setTotalCount(totalCount);
     }
 }

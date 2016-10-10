@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private void locateCityFromJuHe() {
         getOuterIP().flatMap(outerIp -> api2.locateCity(outerIp, Constants.KEY_JUHE_LOCATE_CITY))
                 .map(response -> response.getResult().getArea())
-                .map(area -> area.substring(area.indexOf("省") + 1, area.indexOf("市") + 1))
+                .map(area -> handlerArea(area))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(city -> Log.i(TAG, "locateCityFromJuHe city: " + city),
@@ -72,5 +72,20 @@ public class MainActivity extends AppCompatActivity {
     //获取外网IP
     private Observable<String> getOuterIP() {
         return Observable.just(null).map(o -> NetWorkUtil.getOuterNetFormCmyIP());
+    }
+
+    private String handlerArea(String area) {
+        int beginIndex = area.indexOf("省") + 1;
+        int endIndex = area.indexOf("市") + 1;
+
+        if (beginIndex < 0) {
+            beginIndex = 0;
+        }
+
+        if (endIndex < 0) {
+            endIndex = area.length();
+        }
+
+        return area.substring(beginIndex, endIndex);
     }
 }

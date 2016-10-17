@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+    defaultConfig {
+        applicationId "com.ethanco.gradletest"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        zhk {
+            //固定写死
+            //storeFile file("zhk_key.jks")
+            //storePassword "0159990320"
+            //keyAlias "EthanCo"
+            //keyPassword "0159990320"
+
+            //动态配置
+            storeFile file(project.property('keyStore'))
+            storePassword project.property('keyStorePassword')
+            keyAlias project.property('keyAlias')
+            keyPassword project.property('keyAliasPassword')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            //为不同版本添加不同代码
+            buildConfigField "boolean","testFlag","false"
+        }
+        zhk.initWith(buildTypes.release) //可继承
+
+        //通过Gradlew build生成
+        zhk {
+            //minifyEnabled false
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.zhk
+            applicationIdSuffix ".zhk"
+        }
+        debug{
+            buildConfigField "boolean", "testFlag", "true"
+        }
+    }
+    lintOptions {
+        //Lint代码检查 false时可提高编译速度
+        abortOnError false
+    }
+    //多渠道打包
+    productFlavors {
+        product1 {
+            //manifestPlaceholders = [CHANNEL_VALUE:"PRODUCT1"]
+        }
+        product2 {
+            //manifestPlaceholders = [CHANNEL_VALUE:"PRODUCT2"]
+        }
+        product3 {
+            //manifestPlaceholders = [CHANNEL_VALUE:"PRODUCT3"]
+        }
+        //可以集中处理
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+        }
+    }
+
+    //重命名
+    //此代码为 找出所有生成的apk包，并判断其文件是否是apk、是否是release版本
+	//如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
+    applicationVariants.all { variant ->
+		variant.outputs.each { output ->
+			if(output.outputFile!=null&&
+			output.outputFile.name.endsWith('.apk')&&
+			'release'.equals(variant.buildType.name)){
+			def apkFile = new File(output.outputFile.getParent(),
+			"XYSApp_${variant.flavorName}_ver${variant.versionName}.apk")
+			output.outputFile=apkFile
+			}
+		}
+	}
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    testCompile 'junit:junit:4.12'
+}

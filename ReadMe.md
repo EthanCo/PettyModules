@@ -58,3 +58,33 @@ Material disign 的底部导航栏
 
 ## ExpandableListViewTest ##
 可展开的列表Demo
+
+## BottomSheetDemo ##
+Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
+
+![BottomSheetDemo](/BottomSheetDemo/BottomSheetDemo.gif)  
+
+## NovaRecyclerview ##
+对LRecyclerview第三方库的二次封装  
+
+**[LRecyclerView](https://github.com/jdsjlzx/LRecyclerView)**
+  
+1. 下拉刷新、滑动到底部自动加载下页数据；  
+1. 可以方便添加Header和Footer；  
+1. 头部下拉样式可以自定义；  
+1. 具备item点击和长按事件；  
+1. 网络错误加载失败点击Footer重新请求数据；    
+1. 可以动态为FooterView赋予不同状态（加载中、加载失败、滑到最底等）；    
+
+**通过封装，使其代码更优雅，编写代码更小，接口更小，耦合更低，更适合于公司项目开发**  
+
+> 该项目后来单独列为一个Github 项目，[在此处](https://github.com/EthanCo/NovaRecyclerView)  
+
+## LocateCityAndWeather ##
+
+1. 通过外网IP定位城市
+2. 通过城市获取天气  
+
+**需注册账号后填写相关的key**  
+
+可以看我写的博文 [Android 通过外网IP定位城市](http://blog.csdn.net/ethanco/article/details/52777032)  

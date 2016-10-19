@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId "com.ethanco.gradletest"
         minSdkVersion 15
@@ -26,25 +26,32 @@ android {
             keyPassword project.property('keyAliasPassword')
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources true //精简资源 minifyEnabled需为true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             //为不同版本添加不同代码
-            buildConfigField "boolean","testFlag","false"
+            buildConfigField "boolean", "testFlag", "false"
+
+            rootProject.flag.isDebug = false;
         }
         zhk.initWith(buildTypes.release) //可继承
 
         //通过Gradlew build生成
+        //Gradlew build -profile //开启性能分析工具，会生成一个profile文件，显示了完整的Gradle编译过程的耗时
+        //Gradlew build -x lint //
         zhk {
             //minifyEnabled false
             //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.zhk
             applicationIdSuffix ".zhk"
         }
-        debug{
+        debug {
             buildConfigField "boolean", "testFlag", "true"
+            rootProject.flag.isDebug = true;
         }
     }
     lintOptions {
@@ -70,18 +77,30 @@ android {
 
     //重命名
     //此代码为 找出所有生成的apk包，并判断其文件是否是apk、是否是release版本
-	//如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
+    //如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
     applicationVariants.all { variant ->
-		variant.outputs.each { output ->
-			if(output.outputFile!=null&&
-			output.outputFile.name.endsWith('.apk')&&
-			'release'.equals(variant.buildType.name)){
-			def apkFile = new File(output.outputFile.getParent(),
-			"XYSApp_${variant.flavorName}_ver${variant.versionName}.apk")
-			output.outputFile=apkFile
-			}
-		}
-	}
+        variant.outputs.each { output ->
+            if (output.outputFile != null &&
+                    output.outputFile.name.endsWith('.apk') &&
+                    'release'.equals(variant.buildType.name)) {
+                def apkFile = new File(output.outputFile.getParent(),
+                        "XYSApp_${variant.flavorName}_ver${variant.versionName}.apk")
+                output.outputFile = apkFile
+            }
+        }
+    }
+    configurations.all {
+        //利用Gradle的检查周期进行check
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+    aaptOptions {
+        //提高AAPT的速度 FIXME 只在DEBUG版本使用
+        cruncherEnabled = getCruncher();
+    }
+}
+
+def getCruncher(){
+    return !rootProject.flag.isDebug;
 }
 
 dependencies {
@@ -89,7 +108,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile rootProject.ext.dependencies.supportv7
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
+
+    /*//aar依赖传递 主项目A依赖库项目B，库项目B依赖项目C和jar包D
+    compile 'com.xxx.xxxxx.xxxxxx:1.0.0-SNAPSHOT' //表示B项目及其依赖的所有项目 (即C和D)，也是一般引用库项目的标准写法
+    compile 'com.xxx.xxxxx.xxxxxx:1.0.0-SNAPSHOT@aar' //只依赖B项目
+	//排除指定的库
+    compile ('com.xxx.yyy:aaa:1.1.1'){
+		exclude module:'com.xxx.yyy.bbb:1.1.2'
+		exclude module:'com.xxx.yyy.ccc:1.1.3'
+	}*/
+
 }

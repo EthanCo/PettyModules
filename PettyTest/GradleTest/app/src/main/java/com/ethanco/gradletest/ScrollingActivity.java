@@ -28,6 +28,7 @@ public class ScrollingActivity extends AppCompatActivity {
         });
 
         boolean testFlag = BuildConfig.testFlag;
+
     }
 
     @Override

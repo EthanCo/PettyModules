@@ -1,0 +1,6 @@
+ext{
+    android=[compileSdkVersion:24,buildToolsVersion:'24.0.1']
+    dependencies=[supportv7:'com.android.support:appcompat-v7:24.2.1']
+
+    flag=[isDebug:false]
+}

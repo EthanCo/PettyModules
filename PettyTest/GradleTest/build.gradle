@@ -1,0 +1,31 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'config.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+//可以放到单独的配置文件中，比如自己新建一个config.gradle，
+//并在build.gradle中写上apply from:'config.gradle'，这样就可以在所有的子module中使用这些参数了
+/*ext{
+    android=[compileSdkVersion:24,buildToolsVersion:'24.0.1']
+    dependencies=[supportv7:'com.android.support:appcompat-v7:24.2.1']
+}*/
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

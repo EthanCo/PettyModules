@@ -54,6 +54,18 @@ android {
             rootProject.flag.isDebug = true;
         }
     }
+	sourceSets{
+		main{
+			//更改项目结构
+			//java.srcDirs=['src']
+			//java.srcDirs=['res']
+			//assets.srcDirs=['assets']
+			//jni.srcDirs=['jni']
+			//manifest.srcFile 'AndroidManifest.xml'
+			//renderscript.srcDirs=['src']
+			//aidl.srcDirs=['src']
+		}
+	}
     lintOptions {
         //Lint代码检查 false时可提高编译速度
         abortOnError false

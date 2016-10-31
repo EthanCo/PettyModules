@@ -91,4 +91,4 @@ Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
 
 ## AndroidAnnotationLibrary ##
 该Library包含一系列有用的元注解，帮助开发者在编译期间发现可能存在的Bug，可提高代码质量。  
-具体看[AndroidAnnotationLibrary](/PettyTest/AndroidAnnotationTest/Android Support Annotation Library 使用.md)
+具体看[AndroidAnnotationLibrary](http://blog.csdn.net/EthanCo/article/details/52931166)

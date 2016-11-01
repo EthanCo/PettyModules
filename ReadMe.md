@@ -88,3 +88,7 @@ Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
 **需注册账号后填写相关的key**  
 
 可以看我写的博文 [Android 通过外网IP定位城市](http://blog.csdn.net/ethanco/article/details/52777032)  
+
+## AndroidAnnotationLibrary ##
+该Library包含一系列有用的元注解，帮助开发者在编译期间发现可能存在的Bug，可提高代码质量。  
+具体看[AndroidAnnotationLibrary](http://blog.csdn.net/EthanCo/article/details/52931166)

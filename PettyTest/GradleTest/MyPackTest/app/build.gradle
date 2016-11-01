@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.ethanco.mypacktest"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            storeFile file(project.property('keyStore'))
+            storePassword project.property('keyStorePassword')
+            keyAlias project.property('keyAlias')
+            keyPassword project.property('keyAliasPassword')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        zhk.initWith(buildTypes.release)
+        zhk {
+
+        }
+    }
+    lintOptions {
+        //Lint代码检查 false时可提高编译速度
+        abortOnError false
+    }
+
+    //重命名
+    //此代码为 找出所有生成的apk包，并判断其文件是否是apk、是否是release版本
+    //如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            if (output.outputFile == null) return
+            if (!output.outputFile.name.endsWith('.apk')) return
+            if (true == variant.buildType.debuggable) return
+
+            println("Z-output.outputFile.name:" + output.outputFile.name + " variant.buildType.name:" + variant.buildType.name + " variant.buildType.debuggable:" + variant.buildType.debuggable)
+            println("Z-variant.flavorName:" + variant.flavorName + " variant.versionName:" + variant.versionName)
+            def apkFile = new File(output.outputFile.getParent(), "MyApp_v${variant.versionName}_${releaseTime()}_${variant.buildType.name}.apk")
+            output.outputFile = apkFile
+        }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.0.0'
+    testCompile 'junit:junit:4.12'
+}

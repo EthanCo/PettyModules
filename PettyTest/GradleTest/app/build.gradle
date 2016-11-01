@@ -80,15 +80,21 @@ android {
     //重命名
     //此代码为 找出所有生成的apk包，并判断其文件是否是apk、是否是release版本
     //如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
+    //variant.buildType.name 名称 zhk、release等
+    //variant.buildType.debuggable 是否是debug版本 true是 false不是
+    //output.outputFile.name 文件名
+    //variant.versionName    版本名
+    //variant.flavorName     未知，一般为空
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            if (output.outputFile != null &&
-                    output.outputFile.name.endsWith('.apk') &&
-                    'release'.equals(variant.buildType.name)) {
-                def apkFile = new File(output.outputFile.getParent(),
-                        "XYSApp_${variant.flavorName}_ver${variant.versionName}.apk")
-                output.outputFile = apkFile
-            }
+            if (output.outputFile == null) return
+            if (!output.outputFile.name.endsWith('.apk')) return
+            if (true == variant.buildType.debuggable) return
+
+            println("Z-output.outputFile.name:" + output.outputFile.name + " variant.buildType.name:" + variant.buildType.name + " variant.buildType.debuggable:" + variant.buildType.debuggable)
+            println("Z-variant.flavorName:" + variant.flavorName + " variant.versionName:" + variant.versionName)
+            def apkFile = new File(output.outputFile.getParent(), "MyApp_v${variant.versionName}_${variant.buildType.name}.apk")
+            output.outputFile = apkFile
         }
     }
     configurations.all {

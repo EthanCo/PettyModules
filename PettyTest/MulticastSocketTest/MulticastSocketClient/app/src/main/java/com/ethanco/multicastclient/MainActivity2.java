@@ -9,10 +9,11 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-//Android 组播 https://item.congci.com/-/content/android-multicastsocket-ip-zubo
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     private static final String TAG = "Z-Client";
+    private static final String SERVICE_IP_2 = "224.0.0.1";
+    private static int SERVICE_PORT_2 = 7305;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,12 @@ public class MainActivity extends AppCompatActivity {
          * 该数据报将被自动广播到加入该地址的所有MulticastSocket。MulticastSocket类既可以将数据报发送到多点广播地址，
          * 也可以接收其他主机的广播信息
          */
-        MulticastSocket socket = new MulticastSocket(8600);
+       /* MulticastSocket socket = new MulticastSocket(8600);
         //IP协议为多点广播提供了这批特殊的IP地址，这些IP地址的范围是224.0.0.0至239.255.255.255
-        InetAddress address = InetAddress.getByName("224.0.0.1");
+        InetAddress address = InetAddress.getByName("224.0.0.1");*/
+
+        MulticastSocket socket = new MulticastSocket(SERVICE_PORT_2);
+        InetAddress address = InetAddress.getByName(SERVICE_IP_2);
         /*
          * 创建一个MulticastSocket对象后，还需要将该MulticastSocket加入到指定的多点广播地址，
          * MulticastSocket使用jionGroup()方法来加入指定组；使用leaveGroup()方法脱离一个组。
@@ -58,8 +62,10 @@ public class MainActivity extends AppCompatActivity {
         DatagramPacket packet;
         //发送数据包
         Log.i(TAG, "send packet");
-        byte[] buf = "Hello I am MultiSocketA".getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, 8601);
+        //byte[] buf = "{\"gwID\":\"50294D10332D\",\"gwIP\":\"192.168.1.110\",\"gwPort\":\"7080\",\"cmd\":\"wlinkwulian\"}".getBytes();
+        byte[] buf = "{\"key\":\"wlinkwulian\",\"gwID\":\"50294D10332D\",\"gwIP\":\"192.168.1.110\",\"gwPort\":7080}".getBytes();
+        //packet = new DatagramPacket(buf, buf.length, address, 8601);
+        packet = new DatagramPacket(buf, buf.length, address, SERVICE_PORT_2);
         socket.send(packet);
 
         //接收数据

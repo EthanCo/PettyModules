@@ -105,7 +105,7 @@ android {
 
             println("Z-output.outputFile.name:" + output.outputFile.name + " variant.buildType.name:" + variant.buildType.name + " variant.buildType.debuggable:" + variant.buildType.debuggable)
             println("Z-variant.flavorName:" + variant.flavorName + " variant.versionName:" + variant.versionName)
-            def apkFile = new File(output.outputFile.getParent(), "MyApp_v${variant.versionName}_${variant.buildType.name}.apk")
+            def apkFile = new File(output.outputFile.getParent(), "MyApp_v${variant.versionName}_${releaseTime()}_${variant.buildType.name}.apk")
             output.outputFile = apkFile
         }
     }
@@ -121,6 +121,10 @@ android {
 
 def getCruncher(){
     return !rootProject.flag.isDebug;
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
 }
 
 dependencies {

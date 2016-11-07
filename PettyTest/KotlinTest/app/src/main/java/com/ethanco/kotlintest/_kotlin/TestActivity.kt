@@ -21,6 +21,9 @@ class TestActivity : AppCompatActivity() {
         val btnTest = findViewById(R.id.btn_test) as Button
         tvInfo = findViewById(R.id.tv_info) as TextView
 
-        btnTest.setOnClickListener { Toast.makeText(this@TestActivity, "Hello", Toast.LENGTH_SHORT).show() }
+        btnTest.setOnClickListener {
+            //Toast.makeText(this@TestActivity, "Hello", Toast.LENGTH_SHORT).show()
+            toast("Hello", Toast.LENGTH_SHORT)
+        }
     }
 }

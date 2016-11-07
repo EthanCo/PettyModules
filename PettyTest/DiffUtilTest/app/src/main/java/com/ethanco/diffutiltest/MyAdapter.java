@@ -48,24 +48,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHodler> {
     public void onBindViewHolder(ItemViewHodler holder, int position, List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
 
-        if (holder instanceof ItemViewHodler) {
-            ((ItemViewHodler) holder).bindData(data.get(position));
-        }
         if (payloads == null || payloads.isEmpty()) {
             return;
         }
-        Bundle o = (Bundle) payloads.get(0);
-        for (String key : o.keySet()) {
-            switch (key) {
-                case KEY_TITLE:
-                    ((ItemViewHodler) holder).updateTitle(o.getString(KEY_TITLE));
-                    break;
-                case KEY_CONTENT:
-                    ((ItemViewHodler) holder).updateContent(o.getString(KEY_CONTENT));
-                    break;
-                case KEY_FOOTER:
-                    ((ItemViewHodler) holder).updateFooter(o.getString(KEY_FOOTER));
-                    break;
+
+        if (holder instanceof ItemViewHodler) {
+            ItemViewHodler itemViewHodler = ((ItemViewHodler) holder);
+            itemViewHodler.bindData(data.get(position));
+            Bundle o = (Bundle) payloads.get(0);
+            for (String key : o.keySet()) {
+                switch (key) {
+                    case KEY_TITLE:
+                        itemViewHodler.updateTitle(o.getString(KEY_TITLE));
+                        break;
+                    case KEY_CONTENT:
+                        itemViewHodler.updateContent(o.getString(KEY_CONTENT));
+                        break;
+                    case KEY_FOOTER:
+                        itemViewHodler.updateFooter(o.getString(KEY_FOOTER));
+                        break;
+                }
             }
         }
     }

@@ -1,26 +1,27 @@
-package com.ethanco.kotlintest._kotlin
+package com.ethanco.kotlintest
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import com.ethanco.kotlintest.R
+import com.ethanco.kotlintest._java.JavaBean
 
-/**
- * Created by Zhk on 2016/11/7.
- */
-
-class MainActivity : AppCompatActivity() {
+class KotlinActivity : AppCompatActivity() {
     private var tvInfo: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnTest = findViewById(R.id.btn_test) as Button
+        var btnTest = findViewById(R.id.btn_test) as Button
         tvInfo = findViewById(R.id.tv_info) as TextView
 
-        btnTest.setOnClickListener { Toast.makeText(this@MainActivity, "Hello", Toast.LENGTH_SHORT).show() }
+        btnTest.setOnClickListener {
+            var bean = JavaBean()
+            bean.id = 123
+            bean.name = "EthanCo"
+            Toast.makeText(this@KotlinActivity, bean.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 }

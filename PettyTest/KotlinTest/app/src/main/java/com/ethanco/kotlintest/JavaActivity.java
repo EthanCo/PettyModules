@@ -1,4 +1,4 @@
-package com.ethanco.kotlintest._java;
+package com.ethanco.kotlintest;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ethanco.kotlintest.R;
+import com.ethanco.kotlintest._kotlin.KotlinBean;
 
 /**
  * Created by Zhk on 2016/11/7.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class JavaActivity extends AppCompatActivity {
     private TextView tvInfo;
 
     @Override
@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                KotlinBean bean = new KotlinBean();
+                bean.setId(123);
+                bean.setName("is my name");
+                Toast.makeText(JavaActivity.this, bean.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

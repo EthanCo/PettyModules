@@ -13,8 +13,6 @@ import com.ethanco.diffutiltest.databinding.ItemBinding;
 import java.util.List;
 
 /**
- * 最核心类，不要被命名困惑，它不像你日常所使用的回调。可以将它理解成 比较新老数据集时的规则
- * 通过覆盖特定方法给出数据比较逻辑
  * Created by EthanCo on 2016/9/5.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ItemViewHodler> {

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Design Library</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="please_choice">请选择</string>
+
+    <string name="txt_toolbar">Toolbar</string>
+    <string name="txt_floating_action_button">FloatActionButton</string>
+    <string name="txt_navigation_view">NavigationView</string>
+    <string name="txt_other">Other</string>
+    <string name="txt_yo_yo">Yo Yo</string>
+    <string name="title_activity_code_lab">CodeLabActivity</string>
+
+    <string name="str1">Tab1</string>
+    <string name="str2">Tab2</string>
+    <string name="str3">Tab3</string>
+</resources>

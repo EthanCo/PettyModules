@@ -13,6 +13,7 @@ import com.tencent.bugly.beta.download.DownloadTask;
  * @Description 更新Activity (透明)
  * Created by EthanCo on 2016/11/9.
  */
+@Deprecated
 public class UpdateActivity extends Activity {
 
     public static final String LINE_BREAK = "\n";
@@ -92,7 +93,7 @@ public class UpdateActivity extends Activity {
         super.onDestroy();
 
             /*注销下载监听*/
-        Beta.unregisterDownloadListener();
+        //Beta.unregisterDownloadListener();
     }
 
 

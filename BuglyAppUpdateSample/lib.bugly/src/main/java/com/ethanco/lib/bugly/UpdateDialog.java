@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 
 
 /**
@@ -31,29 +30,5 @@ public class UpdateDialog {
     @NonNull
     private static AlertDialog.Builder generateBuilder(Context context) {
         return new AlertDialog.Builder(context);
-    }
-
-    public static void show(Context context, CharSequence title, CharSequence message,
-                            DialogInterface.OnClickListener positiveListener,
-                            DialogInterface.OnClickListener negativeListener) {
-        show(context, title, message,
-                context.getString(R.string.update), positiveListener,
-                context.getString(R.string.another_time), negativeListener);
-    }
-
-    public static void show(Context context, @StringRes int title, @StringRes int message,
-                            @StringRes int positiveText, DialogInterface.OnClickListener positiveListener,
-                            @StringRes int negativeText, DialogInterface.OnClickListener negativeListener) {
-        show(context, context.getString(title), context.getString(message),
-                context.getString(positiveText), positiveListener,
-                context.getString(negativeText), negativeListener);
-    }
-
-    public static void show(Context context, @StringRes int title, @StringRes int message,
-                            DialogInterface.OnClickListener positiveListener,
-                            DialogInterface.OnClickListener negativeListener) {
-        show(context, context.getString(title), context.getString(message),
-                context.getString(R.string.update), positiveListener,
-                context.getString(R.string.another_time), negativeListener);
     }
 }

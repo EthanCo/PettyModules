@@ -1,0 +1,40 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title">18sp</dimen>
+    <dimen name="dialog_padding">24dp</dimen>
+
+    <!--超大号字体-->
+    <dimen name="textSize_large_V32">32dp</dimen>
+    <dimen name="textSize_large_V45">45dp</dimen>
+    <dimen name="textSize_large_V56">56dp</dimen>
+    <dimen name="textSize_large_V112">112dp</dimen>
+
+    <!--大标题-->
+    <dimen name="textSize_mainHead_V24">24dp</dimen>
+    <dimen name="textSize_mainHead_V22">22dp</dimen>
+
+    <!--appbar文字-->
+    <dimen name="textSize_appBar_V20">20dp</dimen>
+
+    <!--小标题-->
+    <dimen name="textSize_subHead_V18">18dp</dimen>
+    <dimen name="textSize_subHead_V16">16dp</dimen>
+
+    <!--正文/按钮文字-->
+    <dimen name="textSize_body_V14">14dp</dimen>
+
+    <!--小号提示-->
+    <dimen name="textSize_tip_V12">12dp</dimen>
+
+    <dimen name="space_1">5dp</dimen>
+    <dimen name="space_2">16dp</dimen>
+    <dimen name="dialog_horizontal_margin">24dp</dimen>
+    <dimen name="space_0_5">2dp</dimen>
+    <dimen name="space_1_5">9dp</dimen>
+    <!--dialog 圆角-->
+    <dimen name="dialog_radius">2dp</dimen>
+
+    <dimen name="dialog_max_width">200dp</dimen>
+</resources>

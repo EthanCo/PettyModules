@@ -1,6 +1,7 @@
 package com.ethanco.myapplication;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnTestCrash;
     private Button btnCheckVersion;
+
+    private RateControler rateControler = new RateControler(1000 * 100);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,31 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /**
                  * 参数1：isManual 用户手动点击检查，非用户点击操作请传false
-                   参数2：isSilence 是否显示弹窗等交互，[true:没有弹窗和toast] [false:有弹窗或toast]
+                 参数2：isSilence 是否显示弹窗等交互，[true:没有弹窗和toast] [false:有弹窗或toast]
                  */
-                Beta.checkUpgrade();
+                new Thread() {
+                    @Override
+                    public void run() {
+                        Beta.checkUpgrade();
+                    }
+                }.start();
+
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (!rateControler.isFastDoubleClick()) {
+            new Thread() {
+                @Override
+                public void run() {
+                    SystemClock.sleep(1000 * 2);
+                    Beta.checkUpgrade(false, false);
+                }
+            }.start();
+        }
     }
 }

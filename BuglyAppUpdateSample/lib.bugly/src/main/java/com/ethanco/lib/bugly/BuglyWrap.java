@@ -21,8 +21,12 @@ public class BuglyWrap {
      *                每一条Crash都会被立即上报；
      *                自定义日志将会在Logcat中输出。
      *                建议在测试阶段建议设置成true，发布时设置为false。
+     * @param icon    状态栏、通知栏的图标
      */
-    public static void init(Context context, String apiID, boolean isDebug) {
+    public static void init(final Context context, String apiID, boolean isDebug, int icon) {
+        Beta.largeIconId = icon;
+        Beta.smallIconId = icon;
+        
         Bugly.init(context, apiID, isDebug);
     }
 
@@ -36,8 +40,9 @@ public class BuglyWrap {
      *                每一条Crash都会被立即上报；
      *                自定义日志将会在Logcat中输出。
      *                建议在测试阶段建议设置成true，发布时设置为false。
+     * @param icon    状态栏、通知栏的图标
      */
-    public static void initAndCustomDialog(Context context, String apiID, boolean isDebug) {
+    public static void initAndCustomDialog(Context context, String apiID, boolean isDebug, int icon) {
         /**
          *  设置自定义升级对话框UI布局
          *  注意：因为要保持接口统一，需要用户在指定控件按照以下方式设置tag，否则会影响您的正常使用：
@@ -60,6 +65,6 @@ public class BuglyWrap {
          *  详见layout/tips_dialog.xml
          */
         Beta.tipsDialogLayoutId = R.layout.custom_tip_dialog;
-        init(context, apiID, isDebug);
+        init(context, apiID, isDebug, icon);
     }
 }

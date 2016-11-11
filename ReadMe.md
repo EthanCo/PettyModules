@@ -92,3 +92,35 @@ Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
 ## AndroidAnnotationLibrary ##
 该Library包含一系列有用的元注解，帮助开发者在编译期间发现可能存在的Bug，可提高代码质量。  
 具体看[AndroidAnnotationLibrary](http://blog.csdn.net/EthanCo/article/details/52931166)
+
+## BuglyAppUpdate ##
+对腾讯Bugly封装的Lib，支持Crash上报、应用升级。  
+
+### 使用 ###
+引用lib.bugly  
+
+修改lib.bugly.AndroidManifest的TODO部分  
+
+然后  
+
+在Application#onCreate()中初始化，这会初始化Bulgy并自动进行应用更新的检查  
+
+	//使用自定义对话框	
+	BuglyWrap.initAndCustomDialog(getApplicationContext(), "7f525d2734", false, R.mipmap.ic_launcher);  
+
+如果不使用自定义的对话框，则可使用BuglyWrap.init();  
+
+**设置渠道号**  
+
+可根据渠道号进行应用升级的推送  
+
+	CrashReport.setAppChannel(this, "Test");   
+
+**手动检查**
+
+	Beta.checkUpgrade();
+
+  
+
+
+

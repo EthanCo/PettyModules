@@ -1,0 +1,38 @@
+<resources>
+
+    <style name="AppThemeDefault" parent="AppThemeBase" />
+
+    <!-- Base application theme. -->
+    <style name="AppThemeBase" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorLink">#0b9a27</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryText</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="editTextColor">@color/colorSecondaryText</item>
+        <item name="actionBarSize">@dimen/actionbar_height</item>
+    </style>
+
+    <!--阴影Text Style-->
+    <style name="TextShadowTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:shadowColor">#88096dae</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="FullAppThemeBase" parent="AppThemeBase">
+        <!--<item name="android:windowFullscreen">true</item>-->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="FullAppTheme" parent="FullAppThemeBase" />
+</resources>

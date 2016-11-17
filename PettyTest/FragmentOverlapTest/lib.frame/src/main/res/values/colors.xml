@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--NovaRecyclerView 颜色-->
+    <color name="l_color1">@color/colorPrimary</color>
+    <color name="l_color2">@color/colorPrimaryDark</color>
+    <color name="l_color3">@color/colorAccent</color>
+</resources>

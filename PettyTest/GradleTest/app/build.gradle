@@ -9,7 +9,12 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        //multiDexEnabled true 64K时启用
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //指定需要的os平台
+            abiFilters //'x86','armeabi', 'x86_64', 'arm64-v8a'
+        }
     }
     signingConfigs {
         zhk {

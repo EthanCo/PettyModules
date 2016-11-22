@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SwipeBackSample.iml" filepath="$PROJECT_DIR$/SwipeBackSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ActivityBackAminSample.iml" filepath="$PROJECT_DIR$/ActivityBackAminSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

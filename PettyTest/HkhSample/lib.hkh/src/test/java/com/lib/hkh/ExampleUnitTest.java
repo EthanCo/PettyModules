@@ -16,11 +16,13 @@ public class ExampleUnitTest {
 
     @Test
     public void encrypt() throws Exception {
-        String appSecret = Hkh.PREFIX + "1a92aeaef8c3fbb96dd0e78a1a19067b";
-        String str = AES.Encrypt(appSecret, Hkh.AES_KEY);
+        String prefix = Hkh.PREFIX;
+        String appSecret = "1a92aeaef8c3fbb96dd0e78a1a19067b"; //TODO 替换为真实的appSecret
+        String appSecretStr = prefix + appSecret;
+        String str = AES.Encrypt(appSecretStr, Hkh.AES_KEY);
         System.out.println(str);
         String newAppSecret = AES.Decrypt(str, Hkh.AES_KEY);
         System.out.println(newAppSecret);
-        assertEquals(newAppSecret, appSecret);
+        assertEquals(newAppSecret, appSecretStr);
     }
 }

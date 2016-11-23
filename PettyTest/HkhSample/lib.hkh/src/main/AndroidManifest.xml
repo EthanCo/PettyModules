@@ -6,7 +6,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <!--TODO 喜马拉雅 apk_key 和 pack_id-->
+        <!--TODO 喜马拉雅 apk_key 和 pack_id、appsecret -->
         <meta-data
             android:name="app_key"
             android:value="a5bfe294d122784f7ff3b29282b86a45" />
@@ -14,9 +14,10 @@
             android:name="pack_id"
             android:value="com.ethanco.hkhsample" />
         <!--appSecret 此处的为Base64加密后的-->
+        <!--TODO apppsecret需先在com.lib.hkh.ExampleUnitTest#encrypt中将appSecret替换为真实的appSecret后运行获取加密后的字符串，填入meta-data的appsecret value中-->
         <meta-data
             android:name="appsecret"
-            android:value="KEaSzJodskLnu52qsjbrxsaoaCM5zxfjKwVtSS6meyWgevMpz/dTcW6TlJpPfDTc" />
+            android:value="i8xsZ6jv0Fo7+dj9mlv4udUuhnREBzvhv3cwfU2OYJVN7JMLCuwLRnFNkZr+AAuP8zrjpeqXglYoL/fQS6l3rg==" />
     </application>
 
 </manifest>

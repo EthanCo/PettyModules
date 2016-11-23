@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_red"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:background="@android:color/holo_red_light"
+        android:gravity="center"
+        android:text="红色方块"
+        android:textSize="16sp"
+        app:layout_aspectRatio="100%" />
+
+    <TextView
+        android:id="@+id/iv_green"
+        android:layout_width="200dp"
+        android:layout_height="0dp"
+        android:layout_below="@id/tv_red"
+        android:background="@android:color/holo_green_dark"
+        android:gravity="center"
+        android:text="红色方块"
+        android:textSize="16sp"
+        app:layout_aspectRatio="100%" />
+
+</android.support.percent.PercentRelativeLayout>

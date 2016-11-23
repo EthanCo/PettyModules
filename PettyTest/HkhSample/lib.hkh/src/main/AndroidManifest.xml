@@ -1,0 +1,22 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lib.hkh">
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!--TODO 喜马拉雅 apk_key 和 pack_id-->
+        <meta-data
+            android:name="app_key"
+            android:value="a5bfe294d122784f7ff3b29282b86a45" />
+        <meta-data
+            android:name="pack_id"
+            android:value="com.ethanco.hkhsample" />
+        <!--appSecret 此处的为Base64加密后的-->
+        <meta-data
+            android:name="appsecret"
+            android:value="KEaSzJodskLnu52qsjbrxsaoaCM5zxfjKwVtSS6meyWgevMpz/dTcW6TlJpPfDTc" />
+    </application>
+
+</manifest>

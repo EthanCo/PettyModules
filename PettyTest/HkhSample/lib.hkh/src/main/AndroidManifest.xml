@@ -1,0 +1,29 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lib.hkh">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <!--TODO 喜马拉雅 apk_key 和 pack_id、appsecret -->
+        <meta-data
+            android:name="app_key"
+            android:value="a5bfe294d122784f7ff3b29282b86a45" />
+        <meta-data
+            android:name="pack_id"
+            android:value="com.ethanco.hkhsample" />
+        <!--appSecret 此处的为加密后的-->
+        <!--TODO apppsecret需先在com.lib.hkh.ExampleUnitTest#encrypt中将appSecret替换为真实的appSecret后运行获取加密后的字符串，填入meta-data的appsecret value中-->
+        <meta-data
+            android:name="appsecret"
+            android:value="i8xsZ6jv0Fo7+dj9mlv4udUuhnREBzvhv3cwfU2OYJVN7JMLCuwLRnFNkZr+AAuP8zrjpeqXglYoL/fQS6l3rg==" />
+    </application>
+
+</manifest>

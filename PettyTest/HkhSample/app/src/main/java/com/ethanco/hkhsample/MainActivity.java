@@ -8,6 +8,10 @@ import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.category.Category;
 import com.ximalaya.ting.android.opensdk.model.category.CategoryList;
+import com.ximalaya.ting.android.opensdk.model.live.radio.Radio;
+import com.ximalaya.ting.android.opensdk.model.live.radio.RadioCategory;
+import com.ximalaya.ting.android.opensdk.model.live.radio.RadioCategoryList;
+import com.ximalaya.ting.android.opensdk.model.live.radio.RadioList;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
 
@@ -22,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        method_3_2_1();
-        method_3_2_2(1);
+        //method_3_2_1();
+        //method_3_2_2(1);
+        //getRankRadios();
+        //getRadios();
+        getRadiosCategory();
     }
 
     //3.2.1 获取喜马拉雅内容分类
@@ -73,8 +80,81 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onError(int code, String s) {
+                L.e(s);
+            }
+        });
+    }
+
+    /**
+     * 获取电台排行榜
+     */
+    private void getRankRadios() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put(DTransferConstants.RADIO_COUNT, String.valueOf(9));
+        CommonRequest.getRankRadios(map, new IDataCallBack<RadioList>() {
+            @Override
+            public void onSuccess(RadioList radioList) {
+                List<Radio> radios = radioList.getRadios();
+                StringBuilder sb = new StringBuilder();
+                for (Radio radio : radios) {
+                    sb.append(radio.getRadioName());
+                    sb.append(",");
+                }
+
+                L.i(sb.toString());
+            }
+
+            @Override
+            public void onError(int code, String s) {
+                L.e(s);
+            }
+        });
+    }
+
+    private void getRadios() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put(DTransferConstants.RADIOTYPE, String.valueOf(3));
+        map.put(DTransferConstants.PROVINCECODE, String.valueOf(310000));
+        map.put(DTransferConstants.PAGE, String.valueOf(1));
+        CommonRequest.getRadios(map, new IDataCallBack<RadioList>() {
+            @Override
+            public void onSuccess(RadioList radioList) {
+                List<Radio> radios = radioList.getRadios();
+                StringBuilder sb = new StringBuilder();
+                for (Radio radio : radios) {
+                    sb.append(radio.getRadioName());
+                    sb.append(",");
+                }
+
+                L.i(sb.toString());
+            }
+
+            @Override
             public void onError(int i, String s) {
                 L.e(s);
+            }
+        });
+    }
+
+    private void getRadiosCategory() {
+        Map<String, String> map = new HashMap<String, String>();
+        CommonRequest.getRadioCategory(map, new IDataCallBack<RadioCategoryList>() {
+            @Override
+            public void onSuccess(RadioCategoryList categoryList) {
+                List<RadioCategory> radioCategories = categoryList.getRadioCategories();
+                StringBuilder sb = new StringBuilder();
+                for (RadioCategory radioCategory : radioCategories) {
+                    sb.append(radioCategory.getRadioCategoryName());
+                    radioCategory
+                    sb.append(",");
+                }
+                L.i(sb.toString());
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                L.e(message);
             }
         });
     }

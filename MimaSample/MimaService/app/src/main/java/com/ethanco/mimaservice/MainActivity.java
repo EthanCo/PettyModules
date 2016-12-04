@@ -15,6 +15,7 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 import java.net.InetSocketAddress;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,16 +35,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //创建一个IoAcceptor
         IoAcceptor acceptor = new NioSocketAcceptor();
         //得到Mima为我们提供的默认的日志过滤器
-        acceptor.getFilterChain().addLast("Logger",new LoggingFilter());
+        acceptor.getFilterChain().addLast("Logger", new LoggingFilter());
         //添加Codec过滤器
-        acceptor.getFilterChain().addLast("codec",new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
+        acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new ObjectSerializationCodecFactory()));
         //设置事件处理Handler
         acceptor.setHandler(new DemoServerhandler());
         //设置读缓存区大小
         acceptor.getSessionConfig().setReadBufferSize(2048);
         //设置空闲时间 10后没有任何读写，回到空闲状态
         //IdleStatus.BOTH_IDLE 读和写 IdleStatus.READER_IDLE 读 IdleStatus.WRITER_IDLE 写
-        acceptor.getSessionConfig().setIdleTime(IdleStatus.WRITER_IDLE,10);
+        acceptor.getSessionConfig().setIdleTime(IdleStatus.WRITER_IDLE, 10);
         //开始监听客户端的连接 端口为9123
         try {
             acceptor.bind(new InetSocketAddress(9123));
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //负责session对象的创建监听以及消息发送和接收的监听
-    private static class DemoServerhandler extends IoHandlerAdapter{
+    private static class DemoServerhandler extends IoHandlerAdapter {
         //会话(session)创建之后，回调该方法
         @Override
         public void sessionCreated(IoSession session) throws Exception {
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void messageReceived(IoSession session, Object message) throws Exception {
             super.messageReceived(session, message);
+            String result = message.toString();
+            Date date = new Date();
+            session.write(date.toString());
+            System.out.println("接收到的数据:"+result);
         }
 
         //发送数据是回调这个方法

@@ -8,6 +8,7 @@ import android.widget.Button;
 import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
+import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.serialization.ObjectSerializationCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
@@ -51,8 +52,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //负责session对象的创建监听以及小学发送的接收监听
+    //负责session对象的创建监听以及消息发送和接收的监听
     private static class DemoServerhandler extends IoHandlerAdapter{
+        //会话(session)创建之后，回调该方法
+        @Override
+        public void sessionCreated(IoSession session) throws Exception {
+            super.sessionCreated(session);
+        }
 
+        //会话(session)打开之后，回调该方法
+        @Override
+        public void sessionOpened(IoSession session) throws Exception {
+            super.sessionOpened(session);
+        }
+
+        //接收到消息时回调这个方法
+        @Override
+        public void messageReceived(IoSession session, Object message) throws Exception {
+            super.messageReceived(session, message);
+        }
+
+        //发送数据是回调这个方法
+        @Override
+        public void messageSent(IoSession session, Object message) throws Exception {
+            super.messageSent(session, message);
+        }
+
+        //会话(session)关闭后，回调该方法
+        @Override
+        public void sessionClosed(IoSession session) throws Exception {
+            super.sessionClosed(session);
+        }
     }
 }

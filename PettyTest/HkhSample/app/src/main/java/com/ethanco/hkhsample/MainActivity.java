@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         //method_3_2_1();
         //method_3_2_2(1);
         //getRankRadios();
-        //getRadios();
-        getRadiosCategory();
+        getRadios();
+        //getRadiosCategory();
     }
 
     //3.2.1 获取喜马拉雅内容分类
@@ -146,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
                 StringBuilder sb = new StringBuilder();
                 for (RadioCategory radioCategory : radioCategories) {
                     sb.append(radioCategory.getRadioCategoryName());
-                    radioCategory
                     sb.append(",");
                 }
                 L.i(sb.toString());

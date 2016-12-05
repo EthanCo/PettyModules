@@ -15,3 +15,20 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn okio.**
+-keep class okio.** { *;}
+
+-dontwarn com.squareup.okhttp.**
+-keep class com.squareup.okhttp.** { *;}
+
+-dontwarn com.ximalaya.ting.android.player.**
+-keep class com.ximalaya.ting.android.player.** { *;}
+
+-dontwarn com.google.gson.**
+-keep class com.google.gson.** { *;}
+
+-dontwarn android.support.**
+-keep class android.support.** { *;}
+
+-keep interface com.ximalaya.ting.android.opensdk.** {*;}
+-keep class com.ximalaya.ting.android.opensdk.** { *; }

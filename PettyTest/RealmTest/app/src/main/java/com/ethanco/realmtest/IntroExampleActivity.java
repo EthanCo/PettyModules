@@ -50,7 +50,7 @@ public class IntroExampleActivity extends Activity {
         //这些操作通常都足够小,我们可以安全地在UI线程上运行它们。
 
         //创建 Realm 配置
-        realmConfig = new RealmConfiguration.Builder(this).build();
+        realmConfig = new RealmConfiguration.Builder().build();
         //在UI线程打开Realm
         realm = Realm.getInstance(realmConfig);
 

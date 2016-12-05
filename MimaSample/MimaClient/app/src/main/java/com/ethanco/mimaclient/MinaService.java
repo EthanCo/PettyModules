@@ -52,11 +52,13 @@ public class MinaService extends Service {
             super(name);
 
             ConnectionConfig config = new ConnectionConfig.Builder(context)
-                    .setIp("192.168.1.1")
+                    .setIp("192.168.1.105")
                     .setPort(9123)
-                    .setConnectionTimeout(5)
+                    .setConnectionTimeout(10000)
                     .setReadBufferSize(2048)
                     .builder();
+
+            mManager = new ConnectionManager(config);
         }
 
         //相当于run方法

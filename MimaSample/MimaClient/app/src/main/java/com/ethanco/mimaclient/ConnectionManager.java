@@ -21,8 +21,8 @@ import java.net.InetSocketAddress;
  */
 
 public class ConnectionManager {
-    private static final String BROADCAST_ACTION = "com.ethanco.minaclient.mina";
-    private static final String MESSAGE = "message";
+    public static final String BROADCAST_ACTION = "com.ethanco.minaclient.mina";
+    public static final String MESSAGE = "message";
     private ConnectionConfig mConfig;
     private WeakReference<Context> mContextRef;
     private NioSocketConnector mConnection;
@@ -39,13 +39,16 @@ public class ConnectionManager {
         Context context = mContextRef.get();
         if (context == null) return;
 
-        mAddress = new InetSocketAddress(mConfig.getIp(), mConfig.getPort());
+        String ip = mConfig.getIp();
+        int port = mConfig.getPort();
+        mAddress = new InetSocketAddress(ip, port);
         mConnection = new NioSocketConnector();
+        mConnection.setDefaultRemoteAddress(mAddress);
         mConnection.getSessionConfig().setReadBufferSize(mConfig.getReadBufferSize());
         mConnection.getFilterChain().addLast("logging", new LoggingFilter());
         mConnection.getFilterChain().addLast("codec", new ProtocolCodecFilter(
                 new ObjectSerializationCodecFactory()));
-        mConnection.setHandler(new Defaulthandler(mContextRef.get()));
+        mConnection.setHandler(new Defaulthandler(context));
     }
 
     /**
@@ -58,6 +61,8 @@ public class ConnectionManager {
             ConnectFuture future = mConnection.connect();
             future.awaitUninterruptibly();//一直等到它连接为止
             mSession = future.getSession();
+            //保存Session
+            SessionManager.getInstance().setSession(mSession);
         } catch (Exception e) {
             return false;
         }

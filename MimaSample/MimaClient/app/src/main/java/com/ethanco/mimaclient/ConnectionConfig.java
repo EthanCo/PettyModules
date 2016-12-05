@@ -37,7 +37,7 @@ public class ConnectionConfig {
     public static class Builder {
         private Context context;
         private String ip = "192.168.1.1";
-        private int port = 912;
+        private int port = 9123;
         private int readBufferSize = 10240;
         private long connectionTimeout = 10000;
 

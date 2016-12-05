@@ -15,7 +15,6 @@ import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 
 import java.net.InetSocketAddress;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             acceptor.bind(new InetSocketAddress(9123));
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -72,9 +71,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void messageReceived(IoSession session, Object message) throws Exception {
             super.messageReceived(session, message);
             String result = message.toString();
-            Date date = new Date();
-            session.write(date.toString());
-            System.out.println("接收到的数据:"+result);
+            session.write("返回的数据......");
+            System.out.println("接收到的数据:" + result);
         }
 
         //发送数据是回调这个方法

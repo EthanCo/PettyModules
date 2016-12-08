@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private AudioManager audioManager;
     private MediaPlayer mediaPlayer;
     private static final String TAG = "Z-Main";
-    private static final String URL = "http://cdn.sinacloud.net/leisurealarmclock/%E5%A5%BD%E5%90%AC%E7%9A%84/Morrie%20-%20La%20La%20La.mp3?KID=sina,2nq6ps3pIljbsxP2SfXV&Expires=1481185940&ssig=3jWMHRFLk0";
+    //TODO URL可能失效，如果失效了，要用其他的URL
+    private static final String URL = "http://cdn.sinacloud.net/leisurealarmclock/%E5%A5%BD%E5%90%AC%E7%9A%84/Morrie%20-%20La%20La%20La.mp3?KID=sina,2nq6ps3pIljbsxP2SfXV&Expires=1481192344&ssig=OUftLHNJHi";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

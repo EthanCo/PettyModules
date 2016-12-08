@@ -19,6 +19,7 @@ public class MainActivity2 extends AppCompatActivity {
     private AudioManager audioManager;
     private MediaPlayer mediaPlayer2;
     private static final String TAG = "Z-Main";
+    //TODO URL可能失效，如果失效了，要用其他的URL
     private static final String URL = "http://cdn.sinacloud.net/leisurealarmclock/%E5%A5%BD%E5%90%AC%E7%9A%84/V.A.%20-%20%E3%81%8A%E3%81%97%E3%81%A8%E3%82%84%E3%81%8B%E3%81%AB.mp3?KID=sina,2nq6ps3pIljbsxP2SfXV&Expires=1481189593&ssig=eF1YXc50V%2B";
 
     @Override

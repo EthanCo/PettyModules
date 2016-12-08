@@ -1,8 +1,11 @@
 package com.ethanco.hkhsample;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
+import com.ethanco.hkhsample.databinding.ActivityMainBinding;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
@@ -12,8 +15,10 @@ import com.ximalaya.ting.android.opensdk.model.live.radio.Radio;
 import com.ximalaya.ting.android.opensdk.model.live.radio.RadioCategory;
 import com.ximalaya.ting.android.opensdk.model.live.radio.RadioCategoryList;
 import com.ximalaya.ting.android.opensdk.model.live.radio.RadioList;
+import com.ximalaya.ting.android.opensdk.model.live.radio.RadioListByCategory;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
+import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,16 +26,42 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
+    private List<Radio> radios;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        //method_3_2_1();
-        //method_3_2_2(1);
-        //getRankRadios();
+        method_3_2_1();
+        method_3_2_2(1);
+        getRankRadios();
         getRadios();
-        //getRadiosCategory();
+        getRadiosCategory();
+        getRadiosByCategory();
+
+        XmPlayerManager.getInstance(MainActivity.this).init();
+
+        binding.btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        XmPlayerManager.getInstance(MainActivity.this).playRadio(radios.get(3));
+                    }
+                }.start();
+            }
+        });
+
+        binding.btnPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                XmPlayerManager.getInstance(MainActivity.this).pause();
+            }
+        });
     }
 
     //3.2.1 获取喜马拉雅内容分类
@@ -95,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         CommonRequest.getRankRadios(map, new IDataCallBack<RadioList>() {
             @Override
             public void onSuccess(RadioList radioList) {
-                List<Radio> radios = radioList.getRadios();
+                radios = radioList.getRadios();
                 StringBuilder sb = new StringBuilder();
                 for (Radio radio : radios) {
                     sb.append(radio.getRadioName());
@@ -145,9 +176,34 @@ public class MainActivity extends AppCompatActivity {
                 List<RadioCategory> radioCategories = categoryList.getRadioCategories();
                 StringBuilder sb = new StringBuilder();
                 for (RadioCategory radioCategory : radioCategories) {
+                    sb.append(radioCategory.getId() + ".");
                     sb.append(radioCategory.getRadioCategoryName());
                     sb.append(",");
                 }
+                L.i(sb.toString());
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                L.e(message);
+            }
+        });
+    }
+
+    private void getRadiosByCategory() {
+        Map<String, String> maps = new HashMap<String, String>();
+        maps.put(DTransferConstants.RADIO_CATEGORY_ID, "1");
+        maps.put(DTransferConstants.PAGE, String.valueOf(1));
+        CommonRequest.getRadiosByCategory(maps, new IDataCallBack<RadioListByCategory>() {
+            @Override
+            public void onSuccess(RadioListByCategory object) {
+                List<Radio> radios = object.getRadios();
+                StringBuilder sb = new StringBuilder();
+                for (Radio radio : radios) {
+                    sb.append(radio.getRadioName());
+                    sb.append(",");
+                }
+
                 L.i(sb.toString());
             }
 

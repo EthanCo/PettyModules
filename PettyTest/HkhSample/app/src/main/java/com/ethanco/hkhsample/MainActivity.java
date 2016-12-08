@@ -1,7 +1,17 @@
 package com.ethanco.hkhsample;
 
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.session.MediaSession;
+import android.media.session.PlaybackState;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -9,6 +19,7 @@ import com.ethanco.hkhsample.databinding.ActivityMainBinding;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
+import com.ximalaya.ting.android.opensdk.model.PlayableModel;
 import com.ximalaya.ting.android.opensdk.model.category.Category;
 import com.ximalaya.ting.android.opensdk.model.category.CategoryList;
 import com.ximalaya.ting.android.opensdk.model.live.radio.Radio;
@@ -19,6 +30,9 @@ import com.ximalaya.ting.android.opensdk.model.live.radio.RadioListByCategory;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
 import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
+import com.ximalaya.ting.android.opensdk.player.receive.WireControlReceiver;
+import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
+import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private List<Radio> radios;
+    private XmPlayerManager xmPlayerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,25 +56,98 @@ public class MainActivity extends AppCompatActivity {
         getRadiosCategory();
         getRadiosByCategory();
 
-        XmPlayerManager.getInstance(MainActivity.this).init();
+        xmPlayerManager = XmPlayerManager.getInstance(getApplication());
+        xmPlayerManager.addPlayerStatusListener(new IXmPlayerStatusListener() {
+            @Override
+            public void onPlayStart() {
+                L.i("开始播放");
+            }
+
+            @Override
+            public void onPlayPause() {
+                L.i("暂停播放");
+            }
+
+            @Override
+            public void onPlayStop() {
+                L.i("停止播放");
+            }
+
+            @Override
+            public void onSoundPlayComplete() {
+                L.i("播放完成");
+            }
+
+            @Override
+            public void onSoundPrepared() {
+                L.i("声音已准备好");
+            }
+
+            @Override
+            public void onSoundSwitch(PlayableModel playableModel, PlayableModel playableModel1) {
+                String originKind = "null";
+                if (playableModel != null) {
+                    originKind = playableModel.getKind();
+                }
+                String expectKind = "null";
+                if (playableModel1 != null) {
+                    expectKind = playableModel1.getKind();
+                }
+                L.i("切换了声音 原来:" + playableModel + " 切换至: " + expectKind);
+            }
+
+            @Override
+            public void onBufferingStart() {
+                L.i("开始缓存");
+            }
+
+            @Override
+            public void onBufferingStop() {
+                L.i("缓存停止");
+            }
+
+            @Override
+            public void onBufferProgress(int i) {
+                L.i("缓存ing:" + i);
+            }
+
+            @Override
+            public void onPlayProgress(int i, int i1) {
+                L.i("播放进度 i:" + i + " i1:" + i1);
+            }
+
+            @Override
+            public boolean onError(XmPlayerException e) {
+                L.i("出现错误:" + e.getMessage());
+                return false;
+            }
+        });
 
         binding.btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(){
-                    @Override
-                    public void run() {
-                        super.run();
-                        XmPlayerManager.getInstance(MainActivity.this).playRadio(radios.get(3));
-                    }
-                }.start();
+                xmPlayerManager.playRadio(radios.get(3));
             }
         });
 
         binding.btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                XmPlayerManager.getInstance(MainActivity.this).pause();
+                xmPlayerManager.pause();
+            }
+        });
+
+        binding.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                xmPlayerManager.playNext();
+            }
+        });
+
+        binding.btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                xmPlayerManager.playPre();
             }
         });
     }
@@ -212,5 +300,53 @@ public class MainActivity extends AppCompatActivity {
                 L.e(message);
             }
         });
+    }
+
+    private void iiii(final Context context) {
+        final MediaButtonReceiver wireControlReceiver = new MediaButtonReceiver();
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            MediaSession mSession = new MediaSession(context, "MusicService");
+            mSession.setCallback(new MediaSession.Callback() {
+                @Override
+                public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
+                    wireControlReceiver.onReceive(context, mediaButtonIntent);
+                    return super.onMediaButtonEvent(mediaButtonIntent);
+                }
+            });
+            mSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS
+                    | MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
+
+            Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+            ComponentName mediaButtonReceiverComponent = new ComponentName(context, WireControlReceiver.class);
+            mediaButtonIntent.setComponent(mediaButtonReceiverComponent);
+            PendingIntent mediaPendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, mediaButtonIntent, 0);
+            mSession.setMediaButtonReceiver(mediaPendingIntent);
+
+            AudioAttributes.Builder audioAttributesBuilder = new AudioAttributes.Builder();
+            audioAttributesBuilder.setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC);
+            mSession.setPlaybackToLocal(audioAttributesBuilder.build());
+
+            mSession.setActive(true);
+
+            PlaybackState state = new PlaybackState.Builder()
+                    .setActions(
+                            PlaybackState.ACTION_PLAY
+                                    | PlaybackState.ACTION_PLAY_PAUSE
+                                    | PlaybackState.ACTION_PLAY_FROM_MEDIA_ID
+                                    | PlaybackState.ACTION_PAUSE
+                                    | PlaybackState.ACTION_SKIP_TO_NEXT
+                                    | PlaybackState.ACTION_SKIP_TO_PREVIOUS)
+                    .setState(PlaybackState.STATE_PLAYING, 0, 1,
+                            SystemClock.elapsedRealtime()).build();
+
+            mSession.setPlaybackState(state);
+        } else {
+            //获得AudioManager对象
+            AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            ComponentName mbCN = new ComponentName(getPackageName(), MediaButtonReceiver.class.getName());
+            mAudioManager.registerMediaButtonEventReceiver(mbCN);
+        }
     }
 }

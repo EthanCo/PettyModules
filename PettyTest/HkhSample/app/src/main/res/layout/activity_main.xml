@@ -24,6 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="暂停" />
+
+        <Button
+            android:id="@+id/btn_prev"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="上一首" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下一首" />
     </LinearLayout>
 
 </layout>

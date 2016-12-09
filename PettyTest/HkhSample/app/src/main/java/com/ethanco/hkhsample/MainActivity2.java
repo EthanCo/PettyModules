@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ethanco.hkhsample.databinding.ActivityMainBinding;
+import com.lib.hkh.Hkh;
+import com.lib.hkh.IHkhPlayer;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
@@ -35,7 +37,6 @@ import com.ximalaya.ting.android.opensdk.model.live.radio.RadioListByCategory;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
 import com.ximalaya.ting.android.opensdk.model.track.CommonTrackList;
-import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 import com.ximalaya.ting.android.opensdk.player.receive.WireControlReceiver;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
@@ -46,13 +47,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private List<Radio> radios;
-    private XmPlayerManager xmPlayerManager;
     private List<Program> programs;
     int index = 5;
+    private IHkhPlayer xmPlayerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         getProvinces();
         getProgram();
 
-        xmPlayerManager = XmPlayerManager.getInstance(getApplication());
+        xmPlayerManager = Hkh.getPlayer();
         xmPlayerManager.addPlayerStatusListener(new IXmPlayerStatusListener() {
             @Override
             public void onPlayStart() {
@@ -145,12 +146,9 @@ public class MainActivity extends AppCompatActivity {
                     trackList.add(ModelUtil.radioToTrack(radio, false));
                 }
                 commonTrackList.setTracks(trackList);
-                commonTrackList.setTotalCount(trackList.size());
+                commonTrackList.setTotalCount(1);
                 commonTrackList.setTotalPage(1);
                 xmPlayerManager.playList(commonTrackList, index);
-//                xmPlayerManager.playRadio(radios.get(3));
-//                Radio radio = new Radio();
-//                xmPlayerManager.playActivityRadio((Radio) programs);
             }
         });
 
@@ -166,10 +164,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (xmPlayerManager.hasNextSound()) {
                     L.i("下一首" + (++index));
-                    xmPlayerManager.play(index);
-                    //xmPlayerManager.playNext();
+                    xmPlayerManager.playNext();
                 } else {
-                    Toast.makeText(MainActivity.this, "已到最后", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "已到最后", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -179,10 +176,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (xmPlayerManager.hasPreSound()) {
                     L.i("上一首" + (--index));
-                    xmPlayerManager.play(index);
-                    //xmPlayerManager.playPre();
+                    xmPlayerManager.playPre();
                 } else {
-                    Toast.makeText(MainActivity.this, "已到最前", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "已到最前", Toast.LENGTH_SHORT).show();
                 }
             }
         });

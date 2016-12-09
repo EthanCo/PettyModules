@@ -8,7 +8,6 @@ import android.text.TextUtils;
 
 import com.lib.hkh.security.AES;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
-import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 
 /**
  * 门面
@@ -20,10 +19,11 @@ import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 public class Hkh {
     public static final String PREFIX = "/'|][prefix*0--====";
     public static final String AES_KEY = "M0Tf/1Va#Gamjxjy";
+    private static RadioPlayer player;
 
     public static void init(@NonNull Context context) {
         try {
-            ApplicationInfo appInfo  = context.getPackageManager()
+            ApplicationInfo appInfo = context.getPackageManager()
                     .getApplicationInfo(context.getPackageName(),
                             PackageManager.GET_META_DATA);
             String appSecret = appInfo.metaData.getString("appsecret");
@@ -36,11 +36,15 @@ public class Hkh {
             CommonRequest.getInstanse().init(context, appSecretDec);
 
             //播放器初始化
-            XmPlayerManager.getInstance(context).init();
+            player = new RadioPlayer(context);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static IHkhPlayer getPlayer() {
+        return player;
     }
 }

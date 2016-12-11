@@ -19,18 +19,32 @@ import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 public class Hkh {
     public static final String PREFIX = "/'|][prefix*0--====";
     public static final String AES_KEY = "M0Tf/1Va#Gamjxjy";
+    private static RadioPlayer player;
 
-    public static void init(@NonNull Context context) throws Exception {
-        ApplicationInfo appInfo = context.getPackageManager()
-                .getApplicationInfo(context.getPackageName(),
-                        PackageManager.GET_META_DATA);
-        String appSecret = appInfo.metaData.getString("appsecret");
-        if (TextUtils.isEmpty(appSecret)) {
-            throw new IllegalArgumentException("metaData appsecret 为空，请在AndroidManifest中填写metaData");
+    public static void init(@NonNull Context context) {
+        try {
+            ApplicationInfo appInfo = context.getPackageManager()
+                    .getApplicationInfo(context.getPackageName(),
+                            PackageManager.GET_META_DATA);
+            String appSecret = appInfo.metaData.getString("appsecret");
+            if (TextUtils.isEmpty(appSecret)) {
+                throw new IllegalArgumentException("metaData appsecret 为空，请在AndroidManifest中填写metaData");
+            }
+            String appSecretDec = AES.Decrypt(appSecret, AES_KEY);
+            appSecretDec = appSecretDec.replace(PREFIX, "");
+
+            CommonRequest.getInstanse().init(context, appSecretDec);
+
+            //播放器初始化
+            player = new RadioPlayer(context);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String appSecretDec = AES.Decrypt(appSecret, AES_KEY);
-        appSecretDec = appSecretDec.replace(PREFIX, "");
+    }
 
-        CommonRequest.getInstanse().init(context, appSecretDec);
+    public static IHkhPlayer getPlayer() {
+        return player;
     }
 }

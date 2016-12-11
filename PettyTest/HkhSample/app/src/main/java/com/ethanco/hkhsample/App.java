@@ -14,10 +14,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        try {
-            Hkh.init(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Hkh.init(this);
     }
 }

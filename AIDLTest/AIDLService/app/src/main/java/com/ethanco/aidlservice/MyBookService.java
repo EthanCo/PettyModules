@@ -54,6 +54,7 @@ public class MyBookService extends Service {
         @Override
         public void addBook(Book book) throws RemoteException {
             books.add(book);
+            //beginBroadcast和finishBroadcast必须成对出现，哪怕是获取RemoteCallbackList里的个数
             final int N = onNewBookArrivedListeners.beginBroadcast();
             for (int i = 0; i < N; i++) {
                 IOnNewBookArrivedListener onNewBookArrivedListener = onNewBookArrivedListeners.getBroadcastItem(i);

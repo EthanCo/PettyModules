@@ -1,8 +1,10 @@
 package com.ethanco.aidlservice;
 
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.Parcel;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
@@ -12,10 +14,9 @@ import com.ethanco.aidlservice.bean.Book;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static android.content.ContentValues.TAG;
-
 public class MyBookService extends Service {
 
+    public static final String TAG = "Z-MyBookService";
     //CopyOnWriteArrayList支持并发读/写    (类似的还有ConcurrentHashMap)
     //AIDL方法是在服务端的Binder线程池中执行的，因此当多个客户端同时连接时，会存在多个线程同时访问的情形，所以我们要在AIDL方法中处理线程同步，而我们这里直接使用CopyOnWriteArrayList来进行自动的线程同步
     private CopyOnWriteArrayList<Book> books = new CopyOnWriteArrayList<>();
@@ -62,11 +63,14 @@ public class MyBookService extends Service {
                     try {
                         onNewBookArrivedListener.onNewBookArrived(book);
                     } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
+                        Log.e(ContentValues.TAG, e.getMessage());
                     }
                 }
             }
             onNewBookArrivedListeners.finishBroadcast();
+
+            throw new RuntimeException("xxxx format");
+            //throw new IllegalArgumentException("xxxx format");
             /*new Thread() {
                 @Override
                 public void run() {
@@ -86,6 +90,18 @@ public class MyBookService extends Service {
         public void unregisterListener(IOnNewBookArrivedListener listener) throws RemoteException {
             //onNewBookArrivedListeners.remove(listener);
             onNewBookArrivedListeners.unregister(listener);
+        }
+
+        @Override
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+            //此处可进行权限检查
+            String[] packages = getPackageManager().getPackagesForUid(getCallingUid());
+            String packageName = null;
+            if (packages != null && packages.length > 0) {
+                packageName = packages[0];
+            }
+            Log.i(TAG, "packageName:" + packageName);
+            return super.onTransact(code, data, reply, flags);
         }
     }
 }

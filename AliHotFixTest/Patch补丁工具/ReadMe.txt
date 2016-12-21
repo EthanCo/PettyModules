@@ -1,0 +1,1 @@
+java -jar BCFixPatchTools-1.3.0.jar -c patch -s ./old/app1.apk -f ./old/app2.apk -w patch -out -k zhk_key.jks -p 0159990320 -a EthanCo -e 0159990320

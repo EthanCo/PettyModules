@@ -1,11 +1,14 @@
 package com.ethanco.bottomsheettest;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         Adapter adapter = new Adapter();
         recyclerView.setAdapter(adapter);
 
+        //解决在横屏的情况下，初始高度太小的问题
+        resetInitialHeight(recyclerView);
+
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(recyclerView);
         dialog.show();
@@ -50,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    private void resetInitialHeight( View contentView) {
+        View parent = (View) contentView.getParent();
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(parent);
+        contentView.measure(0, 0);
+        int initialHeight = Math.min(contentView.getMeasuredHeight(), (int) (DeviceUtil.getHeight(getApplication()) * 0.7));
+        behavior.setPeekHeight(initialHeight);
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) parent.getLayoutParams();
+        params.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
+        parent.setLayoutParams(params);
     }
 
     static class Adapter extends RecyclerView.Adapter<Adapter.Holder> {

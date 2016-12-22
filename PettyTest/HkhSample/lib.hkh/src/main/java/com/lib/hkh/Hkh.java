@@ -8,6 +8,14 @@ import android.text.TextUtils;
 
 import com.lib.hkh.security.AES;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+import com.ximalaya.ting.android.opensdk.model.live.radio.Radio;
+import com.ximalaya.ting.android.opensdk.model.track.CommonTrackList;
+import com.ximalaya.ting.android.opensdk.model.track.Track;
+import com.ximalaya.ting.android.opensdk.model.track.TrackList;
+import com.ximalaya.ting.android.opensdk.util.ModelUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 门面
@@ -46,5 +54,34 @@ public class Hkh {
 
     public static IHkhPlayer getPlayer() {
         return player;
+    }
+
+    //Radio列表转换为TrackList
+    public static TrackList radioToTrack(List<Radio> radios) {
+        TrackList trackList = new TrackList();
+        ArrayList tracks = new ArrayList();
+        for (Radio radio : radios) {
+            tracks.add(radioToTrack(radio, false));
+        }
+        trackList.setTracks(tracks);
+        return trackList;
+    }
+
+    //Radio列表转换为CommonTrackList
+    public static CommonTrackList radioToCommonTrack(List<Radio> radios) {
+        CommonTrackList commonTrackList = new CommonTrackList();
+        ArrayList trackList = new ArrayList();
+        for (Radio radio : radios) {
+            trackList.add(radioToTrack(radio, false));
+        }
+        commonTrackList.setTracks(trackList);
+        commonTrackList.setTotalCount(1);
+        commonTrackList.setTotalPage(1);
+        return commonTrackList;
+    }
+
+    //Radio转化为Track
+    public static Track radioToTrack(Radio radio, boolean isActivity) {
+        return ModelUtil.radioToTrack(radio, isActivity);
     }
 }

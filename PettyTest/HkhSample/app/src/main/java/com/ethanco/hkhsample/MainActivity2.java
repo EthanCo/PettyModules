@@ -36,13 +36,10 @@ import com.ximalaya.ting.android.opensdk.model.live.radio.RadioList;
 import com.ximalaya.ting.android.opensdk.model.live.radio.RadioListByCategory;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
-import com.ximalaya.ting.android.opensdk.model.track.CommonTrackList;
 import com.ximalaya.ting.android.opensdk.player.receive.WireControlReceiver;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
-import com.ximalaya.ting.android.opensdk.util.ModelUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
     private ActivityMainBinding binding;
     private List<Radio> radios;
     private List<Program> programs;
-    int index = 5;
+    int index = 0;
     private IHkhPlayer xmPlayerManager;
 
     @Override
@@ -140,15 +137,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 L.i("radios.size:" + radios.size());
-                CommonTrackList commonTrackList = new CommonTrackList();
-                ArrayList trackList = new ArrayList();
-                for (Radio radio : radios) {
-                    trackList.add(ModelUtil.radioToTrack(radio, false));
-                }
-                commonTrackList.setTracks(trackList);
-                commonTrackList.setTotalCount(1);
-                commonTrackList.setTotalPage(1);
-                xmPlayerManager.playList(commonTrackList, index);
+                xmPlayerManager.playList(Hkh.radioToTrack(radios), index);
             }
         });
 

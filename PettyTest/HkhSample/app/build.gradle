@@ -45,4 +45,5 @@ dependencies {
     compile rootProject.ext.dependencies.supportv4
     testCompile 'junit:junit:4.12'
     compile project(':lib.hkh')
+    compile 'com.google.code.gson:gson:2.8.0'
 }

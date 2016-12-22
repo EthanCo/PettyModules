@@ -4,10 +4,13 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.ximalaya.ting.android.opensdk.model.track.CommonTrackList;
+import com.ximalaya.ting.android.opensdk.model.live.radio.Radio;
+import com.ximalaya.ting.android.opensdk.model.track.Track;
 import com.ximalaya.ting.android.opensdk.model.track.TrackList;
 import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
+
+import java.util.List;
 
 /**
  * 喜马拉雅 电台播放器
@@ -49,6 +52,12 @@ public class RadioPlayer implements IHkhPlayer {
     }
 
     @Override
+    public void playRadio(Radio radio) {
+        this.index = 0;
+        playerManager.playRadio(radio);
+    }
+
+    @Override
     public void pause() {
         playerManager.pause();
     }
@@ -75,9 +84,18 @@ public class RadioPlayer implements IHkhPlayer {
     }
 
     @Override
-    public void playList(@Nullable CommonTrackList list, int start) {
-        this.index = start;
-        playerManager.playList(list, start);
+    public int getCurrPlayType() {
+        return playerManager.getCurrPlayType();
+    }
+
+    @Override
+    public int getPlayCurrPositon() {
+        return index;
+    }
+
+    @Override
+    public List<Track> getPlayList() {
+        return playerManager.getPlayList();
     }
 
     @Override
@@ -104,7 +122,7 @@ public class RadioPlayer implements IHkhPlayer {
     @Override
     public boolean hasNextSound() {
         int nextIndex = index + 1;
-        int size = playerManager.getPlayList().size();
+        int size = getPlayList().size();
         boolean result = nextIndex <= size - 1;
         Log.i(TAG, "hasNextSound size:" + size + " nextIndex=" + nextIndex + " result:" + result);
         return result;
@@ -113,7 +131,7 @@ public class RadioPlayer implements IHkhPlayer {
     @Override
     public boolean hasPreSound() {
         int preIndex = index - 1;
-        int size = playerManager.getPlayList().size();
+        int size = getPlayList().size();
         Log.i(TAG, "hasPreSound size:" + size + " preIndex=" + preIndex);
         if (size == 0) {
             return false;

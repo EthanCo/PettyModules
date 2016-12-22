@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.ethanco.hkhsample.databinding.ActivityMainBinding;
+import com.google.gson.Gson;
+import com.lib.hkh.Hkh;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
@@ -34,14 +36,11 @@ import com.ximalaya.ting.android.opensdk.model.live.radio.RadioList;
 import com.ximalaya.ting.android.opensdk.model.live.radio.RadioListByCategory;
 import com.ximalaya.ting.android.opensdk.model.tag.Tag;
 import com.ximalaya.ting.android.opensdk.model.tag.TagList;
-import com.ximalaya.ting.android.opensdk.model.track.CommonTrackList;
 import com.ximalaya.ting.android.opensdk.player.XmPlayerManager;
 import com.ximalaya.ting.android.opensdk.player.receive.WireControlReceiver;
 import com.ximalaya.ting.android.opensdk.player.service.IXmPlayerStatusListener;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayerException;
-import com.ximalaya.ting.android.opensdk.util.ModelUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,18 +138,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 L.i("radios.size:" + radios.size());
-                CommonTrackList commonTrackList = new CommonTrackList();
-                ArrayList trackList = new ArrayList();
-                for (Radio radio : radios) {
-                    trackList.add(ModelUtil.radioToTrack(radio, false));
-                }
-                commonTrackList.setTracks(trackList);
-                commonTrackList.setTotalCount(trackList.size());
-                commonTrackList.setTotalPage(1);
-                xmPlayerManager.playList(commonTrackList, index);
-//                xmPlayerManager.playRadio(radios.get(3));
-//                Radio radio = new Radio();
-//                xmPlayerManager.playActivityRadio((Radio) programs);
+                xmPlayerManager.playList(Hkh.radioToTrack(radios), index);
             }
         });
 
@@ -351,6 +339,7 @@ public class MainActivity extends AppCompatActivity {
                     sb.append(",");
                 }
                 L.i(sb.toString());
+                L.i(new Gson().toJson(provinces));
             }
 
             @Override

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MimaClient.iml" filepath="$PROJECT_DIR$/MimaClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MinaClient.iml" filepath="$PROJECT_DIR$/MinaClient.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

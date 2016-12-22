@@ -106,7 +106,7 @@ android {
         variant.outputs.each { output ->
             if (output.outputFile == null) return
             if (!output.outputFile.name.endsWith('.apk')) return
-            if (true == variant.buildType.debuggable) return
+            if (variant.buildType.debuggable) return
 
             println("Z-output.outputFile.name:" + output.outputFile.name + " variant.buildType.name:" + variant.buildType.name + " variant.buildType.debuggable:" + variant.buildType.debuggable)
             println("Z-variant.flavorName:" + variant.flavorName + " variant.versionName:" + variant.versionName)

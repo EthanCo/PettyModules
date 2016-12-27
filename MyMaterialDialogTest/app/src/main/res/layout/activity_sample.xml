@@ -35,4 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="多选对话框" />
+
+    <Button
+        android:id="@+id/btnPercent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进度条对话框" />
+
 </LinearLayout>

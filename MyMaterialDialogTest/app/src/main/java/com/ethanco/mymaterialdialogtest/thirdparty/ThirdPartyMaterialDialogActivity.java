@@ -1,6 +1,7 @@
 package com.ethanco.mymaterialdialogtest.thirdparty;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ArrayList<Object> list;
+    int progress = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         findViewById(R.id.btnWait).setOnClickListener(this);
         findViewById(R.id.btnSingleChoice).setOnClickListener(this);
         findViewById(R.id.btnMultiChoice).setOnClickListener(this);
+        findViewById(R.id.btnPercent).setOnClickListener(this);
     }
 
     @Override
@@ -94,6 +97,31 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         })//.alwaysCallMultiChoiceCallback()//设置该选项每次点击都会触发itemsCallbackMultiChoice
                         .positiveText("确定")
                         .show();
+                break;
+            case R.id.btnPercent:
+                progress = 0;
+                final MaterialDialog progressDialog = new MaterialDialog.Builder(this)
+                        .title("进度条对话框")
+                        .progress(false, 100)
+                        .show();
+
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        while (progress < 100) {
+                            SystemClock.sleep(100);
+                            progress++;
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressDialog.setProgress(progress);
+                                }
+                            });
+                        }
+                        progressDialog.dismiss();
+                    }
+                }.start();
                 break;
             default:
         }

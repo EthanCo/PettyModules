@@ -1,0 +1,81 @@
+ext{
+    android=[
+            compileSdkVersion:25,
+            buildToolsVersion:'25.0.0',
+            applicationId:'cn.nbhope.threepartprotocol',
+            minSdkVersion:15,
+            targetSdkVersion:25,
+            versionCode:10309,
+            versionName:'1.3.9',
+            ndk:[
+                    abiFilters:'armeabi-v7a' //'x86','armeabi', 'x86_64', 'arm64-v8a'
+            ],
+            targetCompatibility:1.8,
+            sourceCompatibility:1.8
+    ]
+    versions=[
+            buildTools:android.buildToolsVersion,
+            junit:4.12,
+            leakcanary:1.5
+    ]
+    dependencies=[
+            //===================== testCompile ===============================
+            junit:'junit:junit:'+versions.junit,
+            mockito_all:'org.mockito:mockito-all:2.0.2-beta',
+            robolectric:'org.robolectric:robolectric:3.1.2',
+            opengl_api:'org.khronos:opengl-api:gl1.1-android-2.1_r1',
+            hamcrest_all:'org.hamcrest:hamcrest-all:1.3',
+            httpclient:'org.robolectric:shadows-httpclient:3.0',
+            mockwebserver:'com.squareup.okhttp3:mockwebserver:3.4.1',
+
+            //===================== androidTestCompile =========================
+            espresso_core:'com.android.support.test.espresso:espresso-core:2.2.2',
+            //mockito_all:'org.mockito:mockito-all:2.0.2-beta',
+
+            //===================== Compile ====================================
+            supportv7:'com.android.support:appcompat-v7:'+versions.buildTools,
+            supportv4:'com.android.support:support-v4:'+versions.buildTools,
+            cardviewv7:'com.android.support:cardview-v7:'+versions.buildTools,
+            design:'com.android.support:design:'+versions.buildTools,
+            percent:"com.android.support:percent:"+versions.buildTools,
+            //LeakCanary
+            leakcanary:'com.squareup.leakcanary:leakcanary-android:'+versions.leakcanary,
+            leakcanary_no_op:'com.squareup.leakcanary:leakcanary-android-no-op:'+versions.leakcanary,
+
+            material_dialogs:'com.afollestad.material-dialogs:core:0.9.1.0',
+            //retrofit
+            retrofit_converters:'com.squareup.retrofit2:retrofit-converters:2.1.0',
+            retrofit_converter_gson:'com.squareup.retrofit2:converter-gson:2.1.0',
+            retrofit_adapter_rxjava:'com.squareup.retrofit2:adapter-rxjava:2.1.0',
+            okhttp3:'com.squareup.okhttp3:okhttp:3.4.1',
+            okhttp3_logging_interceptor:'com.squareup.okhttp3:logging-interceptor:3.4.1',
+            //FileDownloader 文件下载 基于Okhttp
+            filedownloader:'com.liulishuo.filedownloader:library:1.3.0',
+            //rxjava
+            rxjava:'io.reactivex:rxjava:1.1.9',
+            rxandroid:'io.reactivex:rxandroid:1.2.0',
+            //seekbarcompart
+            seekbar_compat:'com.minimize.library:seekbar-compat:0.2.5',
+            //Gson
+            gson:'com.google.code.gson:gson:2.7',
+            //bugly crashreport和crashreport_upgrade 二选一
+            crashreport:'com.tencent.bugly:crashreport:latest.release',//只有bug上报
+            crashreport_upgrade:'com.tencent.bugly:crashreport_upgrade:latest.release', //bug上报和app更新
+            nativecrashreport:'com.tencent.bugly:nativecrashreport:latest.release', //native bug上报
+
+            //gitHub
+            ZAnno:'com.github.EthanCo:ZAnno:1.0.2',
+            TraceLog:'com.github.EthanCo:TraceLog:1.0.2',
+            ImageProxy:'com.github.EthanCo:ImageProxy:1.0.0-Glide-sol',
+            NovaRecyclerView:'com.github.EthanCo:NovaRecyclerView:1.1.9',
+            SlideUnlock:'com.github.EthanCo:SlideUnlock:1.0.2',
+            ClockfaceView:'com.github.EthanCo:ClockfaceView:1.0.2',
+            LockScreen:'com.github.EthanCo:LockScreen:v1.0.2',
+            ParasitiferView:'com.github.EthanCo:ParasitiferView:1.0.0',
+            BindingImageView:'com.github.EthanCo:BindingImageView:1.0.3',
+            VaryButtonLayout:'com.github.EthanCo:VaryButtonLayout:1.2.5',
+            SpiralGroup:'com.github.EthanCo:SpiralGroup:1.0.0',
+    ]
+
+    flag=[isRelease:false]
+}

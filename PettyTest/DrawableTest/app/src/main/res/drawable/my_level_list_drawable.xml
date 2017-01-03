@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--LevelListDrawable 表示一个Drawable集合，集合中每个Drawable都有一个等级(level)的概念，根据不同的等级，LevelListDrawable会切换为对应的Drawable-->
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/head1"
+        android:maxLevel="0"/>
+
+    <item
+        android:drawable="@drawable/head2"
+        android:maxLevel="1" />
+</level-list>

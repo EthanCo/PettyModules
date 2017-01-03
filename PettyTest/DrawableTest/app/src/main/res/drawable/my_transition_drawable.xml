@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--TransitionDrawable 用于实现两个Drawable之间的淡入淡出效果-->
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/head1" />
+    <item android:drawable="@drawable/head2" />
+</transition>

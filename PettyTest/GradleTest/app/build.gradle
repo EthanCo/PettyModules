@@ -35,7 +35,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            shrinkResources true //精简资源 minifyEnabled需为true
+            //shrinkResources true //精简资源 minifyEnabled需为true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             //为不同版本添加不同代码
@@ -94,6 +94,13 @@ android {
         }
     }
 
+    def bakPath = file("${buildDir}/bakApk/")
+    List<String> flavors = new ArrayList<>();
+    project.android.productFlavors.each {flavor ->
+        flavors.add(flavor.name)
+    }
+    boolean hasFlavors = flavors.size() > 0
+
     //重命名
     //此代码为 找出所有生成的apk包，并判断其文件是否是apk、是否是release版本
     //如果是，则重新将其命名为"XYSApp_渠道号_ver 版本号.apk"
@@ -112,6 +119,42 @@ android {
             println("Z-variant.flavorName:" + variant.flavorName + " variant.versionName:" + variant.versionName)
             def apkFile = new File(output.outputFile.getParent(), "MyApp_v${variant.versionName}_${releaseTime()}_${variant.buildType.name}.apk")
             output.outputFile = apkFile
+        }
+
+
+        def taskName = variant.name
+        def date = new Date().format("MMdd-HH-mm-ss")
+        //复制apk到指定目录
+        tasks.all {
+            if ("assemble${taskName.capitalize()}".equalsIgnoreCase(it.name)) {
+
+                it.doLast {
+                    copy {
+                        //def fileNamePrefix = "${project.name}-${variant.baseName}"
+                        //def newFileNamePrefix = hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
+
+                        //def destPath = hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath
+                        def destPath = bakPath
+                        from variant.outputs.outputFile
+                        into destPath
+                        /*rename { String fileName ->
+                            fileName.replace("${fileNamePrefix}.apk", "${newFileNamePrefix}.apk")
+                        }*/
+
+                        /*from "${buildDir}/outputs/mapping/${variant.dirName}/mapping.txt"
+                        into destPath
+                        rename { String fileName ->
+                            fileName.replace("mapping.txt", "${newFileNamePrefix}-mapping.txt")
+                        }*/
+
+                        /*from "${buildDir}/intermediates/symbols/${variant.dirName}/R.txt"
+                        into destPath
+                        rename { String fileName ->
+                            fileName.replace("R.txt", "${newFileNamePrefix}-R.txt")
+                        }*/
+                    }
+                }
+            }
         }
     }
     configurations.all {

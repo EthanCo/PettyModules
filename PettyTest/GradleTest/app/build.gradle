@@ -59,18 +59,18 @@ android {
             rootProject.flag.isDebug = true;
         }
     }
-	sourceSets{
-		main{
-			//更改项目结构
-			//java.srcDirs=['src']
-			//java.srcDirs=['res']
-			//assets.srcDirs=['assets']
-			//jni.srcDirs=['jni']
-			//manifest.srcFile 'AndroidManifest.xml'
-			//renderscript.srcDirs=['src']
-			//aidl.srcDirs=['src']
-		}
-	}
+    sourceSets {
+        main {
+            //更改项目结构
+            //java.srcDirs=['src']
+            //java.srcDirs=['res']
+            //assets.srcDirs=['assets']
+            //jni.srcDirs=['jni']
+            //manifest.srcFile 'AndroidManifest.xml'
+            //renderscript.srcDirs=['src']
+            //aidl.srcDirs=['src']
+        }
+    }
     lintOptions {
         //Lint代码检查 false时可提高编译速度
         abortOnError false
@@ -95,8 +95,9 @@ android {
     }
 
     def bakPath = file("${buildDir}/bakApk/")
+    //def bakPath = file("${rootDir}/bakApk/")
     List<String> flavors = new ArrayList<>();
-    project.android.productFlavors.each {flavor ->
+    project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
     boolean hasFlavors = flavors.size() > 0
@@ -126,7 +127,7 @@ android {
         def date = new Date().format("MMdd-HH-mm-ss")
         //复制apk到指定目录
         tasks.all {
-            if ("assemble${taskName.capitalize()}".equalsIgnoreCase(it.name)) {
+            if ("assemble${taskName.capitalize()}".equalsIgnoreCase(it.name) || it.name.contains("build")) {
 
                 it.doLast {
                     copy {
@@ -167,7 +168,7 @@ android {
     }
 }
 
-def getCruncher(){
+def getCruncher() {
     return !rootProject.flag.isDebug;
 }
 

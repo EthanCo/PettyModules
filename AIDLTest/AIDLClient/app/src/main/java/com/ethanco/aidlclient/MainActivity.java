@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,11 +21,13 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "Z-MainActivity";
     private IBookManager bookManager;
     private IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() {
 
         @Override
         public void binderDied() {
+            Log.i(TAG, "binderDied "+Thread.currentThread().getName());
             if (bookManager == null) {
                 return;
             }
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Log.i(TAG, "onServiceConnected " + Thread.currentThread().getName());
             bookManager = IBookManager.Stub.asInterface(iBinder);
             try {
                 iBinder.linkToDeath(deathRecipient, 0); //0: 标记为，传0即可
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
+            Log.i(TAG, "onServiceDisconnected " + Thread.currentThread().getName());
             bookManager = null;
         }
     };

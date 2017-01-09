@@ -74,8 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        "192.168.2.255", PORT));
 //                IoFuture connFuture = connector.connect(new InetSocketAddress(
 //                        "192.168.2.255", PORT));
+//                IoFuture connFuture = connector.connect(new InetSocketAddress(
+//                        "224.0.0.1", PORT));
                 IoFuture connFuture = connector.connect(new InetSocketAddress(
-                        "224.0.0.1", PORT));
+                        "192.168.1.103", PORT));
                 connFuture.awaitUninterruptibly();
                 connFuture.addListener(new IoFutureListener() {
                     public void operationComplete(IoFuture future) {

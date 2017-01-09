@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
          * 该数据报将被自动广播到加入该地址的所有MulticastSocket。MulticastSocket类既可以将数据报发送到多点广播地址，
          * 也可以接收其他主机的广播信息
          */
-        MulticastSocket socket = new MulticastSocket(8600);
+        MulticastSocket socket = new MulticastSocket(18600);
         //IP协议为多点广播提供了这批特殊的IP地址，这些IP地址的范围是224.0.0.0至239.255.255.255
         InetAddress address = InetAddress.getByName("224.0.0.1");
         /*
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         //发送数据包
         Log.i(TAG, "send packet");
         byte[] buf = "Hello I am MultiSocketA".getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, 8601);
+        packet = new DatagramPacket(buf, buf.length, address, 18601);
         socket.send(packet);
 
         //接收数据

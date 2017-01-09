@@ -4,7 +4,7 @@
  */
 package com.ethanco.aidlservice;
 
-//继承了IInterface接口(所有可以在Bunder中传输的接口都需要继承IInterface接口)
+//继承了IInterface接口(所有可以在Binder中传输的接口都需要继承IInterface接口)
 //同时自己也还是一个接口。这个接口的核心实现是它的内部类Stub和Stub的内部代理类Proxy
 public interface IBookManager extends android.os.IInterface {
     /**

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         WifiManager manager = (WifiManager) this
                 .getSystemService(Context.WIFI_SERVICE);
-        lock= manager.createMulticastLock("test wifi");
+        lock = manager.createMulticastLock("test wifi");
     }
 
     @Override
@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DatagramSessionConfig dcfg = acceptor.getSessionConfig();
                 dcfg.setReuseAddress(true);
                 try {
+                    String lanIP = Utils.getLANIP(getApplication());
+                    Log.i(TAG, "服务器启动 serverIP:" + lanIP + " port:" + PORT);
                     acceptor.bind(new InetSocketAddress(PORT));
                 } catch (IOException e) {
                     e.printStackTrace();

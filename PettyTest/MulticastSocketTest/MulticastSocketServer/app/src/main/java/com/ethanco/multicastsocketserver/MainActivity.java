@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void receiveMultiBroadcast() throws IOException {
         Log.v(TAG, "receiveMultiBroadcast...");
-        MulticastSocket socket = new MulticastSocket(8601);
+        MulticastSocket socket = new MulticastSocket(18601);
         InetAddress address = InetAddress.getByName("224.0.0.1");
         socket.joinGroup(address);
 
@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
         packet = new DatagramPacket(rev, rev.length);
         socket.receive(packet);
         String receiver = new String(packet.getData()).trim();  //不加trim，则会打印出512个byte，后面是乱码
-        Log.v(TAG, "get data = " + receiver);
+        Log.v(TAG, "get data = " + receiver + " address:" + packet.getAddress().getHostAddress());
 
         //发送数据包
         Log.v(TAG, "send packet");
         String process_receiver = "I am MultiSocketB, I got " + receiver;
         byte[] buf = process_receiver.getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, 8600);
+        packet = new DatagramPacket(buf, buf.length, address, 18600);
         socket.send(packet);
 
         //退出组播

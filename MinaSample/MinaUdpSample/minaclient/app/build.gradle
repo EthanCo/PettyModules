@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        applicationId "com.minaclient.activity"
+        minSdkVersion 8
+        targetSdkVersion 8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+dependencies {
+    compile files('lib/gson-2.1.jar')
+    compile files('lib/mina-core-2.0.0-RC1.jar')
+    compile files('lib/mina-example-2.0.0-RC1.jar')
+    compile files('lib/slf4j-api-1.5.11.jar')
+    compile files('lib/slf4j-nop-1.5.11.jar')
+}

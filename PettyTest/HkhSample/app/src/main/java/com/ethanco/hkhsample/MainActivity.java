@@ -288,10 +288,11 @@ public class MainActivity extends AppCompatActivity {
                 List<RadioCategory> radioCategories = categoryList.getRadioCategories();
                 StringBuilder sb = new StringBuilder();
                 for (RadioCategory radioCategory : radioCategories) {
-                    sb.append(radioCategory.getId() + ".");
-                    sb.append(radioCategory.getRadioCategoryName());
-                    sb.append(",");
+//                    sb.append(radioCategory.getId() + ".");
+//                    sb.append(radioCategory.getRadioCategoryName());
+//                    sb.append(",");
                 }
+                sb.append(new Gson().toJson(radioCategories));
                 L.i(sb.toString());
             }
 

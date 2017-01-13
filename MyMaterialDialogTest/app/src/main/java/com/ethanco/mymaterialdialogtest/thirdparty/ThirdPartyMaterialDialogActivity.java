@@ -51,7 +51,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         .content("写点什么东西吧")
                         //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
                         //InputType.TYPE_TEXT_VARIATION_PASSWORD 密码框
-                        .input("hint", "预先装载的", new MaterialDialog.InputCallback() {
+                        .input("hint", "预先装载的",false, new MaterialDialog.InputCallback() { //false: allowEmptyInput 输入框为空时是否能点击确定，默认为true
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
                                 Toast.makeText(getApplication(), input, Toast.LENGTH_SHORT).show();

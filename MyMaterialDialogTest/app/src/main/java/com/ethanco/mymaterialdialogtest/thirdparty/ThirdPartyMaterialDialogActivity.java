@@ -2,10 +2,12 @@ package com.ethanco.mymaterialdialogtest.thirdparty;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ethanco.mymaterialdialogtest.R;
 
@@ -43,10 +45,22 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         .content("Content")
                         .positiveText("确定")
                         .negativeText("取消")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Toast.makeText(getApplicationContext(), "点击确定", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Toast.makeText(getApplicationContext(), "点击取消", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .show();
                 break;
             case R.id.btnInput: //输入框
-                new MaterialDialog.Builder(this)
+                /*new MaterialDialog.Builder(this)
                         .title("请输入")
                         .content("写点什么东西吧")
                         //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
@@ -56,7 +70,27 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                             public void onInput(MaterialDialog dialog, CharSequence input) {
                                 Toast.makeText(getApplication(), input, Toast.LENGTH_SHORT).show();
                             }
-                        }).show();
+                        }).show();*/
+
+                new MaterialDialog.Builder(this)
+                        .title("请输入")
+                        .content("写点什么东西吧")
+                        //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
+                        //InputType.TYPE_TEXT_VARIATION_PASSWORD 密码框
+                        .alwaysCallInputCallback()
+                        .input("hint", "预先装载的",false, new MaterialDialog.InputCallback() { //false: allowEmptyInput 输入框为空时是否能点击确定，默认为true
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                Toast.makeText(getApplication(), input, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Toast.makeText(ThirdPartyMaterialDialogActivity.this, dialog.getInputEditText().getText().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
                 break;
             case R.id.btnWait: //等待对话框
                 LoadingDialog.show(this);

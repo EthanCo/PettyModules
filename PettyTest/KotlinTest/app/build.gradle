@@ -25,6 +25,11 @@ android {
     }
 }
 
+//TODO 当同时使用DataBinding时，需要添加这个
+//kapt {
+//    generateStubs = true
+//}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

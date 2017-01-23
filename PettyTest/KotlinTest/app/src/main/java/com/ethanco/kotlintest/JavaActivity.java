@@ -28,6 +28,7 @@ public class JavaActivity extends AppCompatActivity {
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //JavaBean bean = new JavaBean();
                 KotlinBean bean = new KotlinBean();
                 bean.setId(123);
                 bean.setName("is my name");

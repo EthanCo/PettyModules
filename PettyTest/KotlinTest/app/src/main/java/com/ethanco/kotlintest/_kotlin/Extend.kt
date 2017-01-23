@@ -12,3 +12,7 @@ fun AppCompatActivity.toast(message: CharSequence, duration: Int = Toast.LENGTH_
     Toast.makeText(this, message, duration).show()
 }
 
+fun KotlinBean.sum(arg1: Int, arg2: Int): Int {
+    return arg1 + arg2
+}
+

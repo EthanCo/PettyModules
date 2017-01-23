@@ -2,7 +2,7 @@
 
 buildscript {
     //TODO 需要复制的地方
-    ext.kotlin_version = '1.0.4'
+    ext.kotlin_version = '1.0.6'
     repositories {
         jcenter()
     }

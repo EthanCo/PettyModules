@@ -25,10 +25,8 @@ android {
     }
 }
 
-//TODO 当同时使用DataBinding时，需要添加这个
-//kapt {
-//    generateStubs = true
-//}
+//TODO 当同时使用DataBinding时，会引起冲突，解决办法请看
+//http://blog.csdn.net/ethanco/article/details/54693140
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

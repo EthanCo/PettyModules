@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+//TODO 需要复制的地方
 apply plugin: 'kotlin-android'
 
 android {
@@ -18,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    //TODO 需要复制的地方
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
@@ -30,6 +32,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
+    //TODO 需要复制的地方
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {

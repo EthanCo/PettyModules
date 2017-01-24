@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import com.ethanco.kotlintest._kotlin.KotlinBean
-import com.ethanco.kotlintest._kotlin.sum
+import com.ethanco.kotlintest._kotlin.dec
 import com.ethanco.kotlintest._kotlin.toast
 
 class KotlinActivity : AppCompatActivity() {
@@ -23,7 +23,9 @@ class KotlinActivity : AppCompatActivity() {
             var bean = KotlinBean()
             bean.id = 123
             bean.name = "EthanCo"
-            var result = bean.sum(5, 6)
+            bean.age = 18
+            var result = bean.dec(5,6)
+            //var result = bean.sum(5, 6)
             //Toast.makeText(this@KotlinActivity, bean.toString(), Toast.LENGTH_SHORT).show()
             toast(bean.toString() + " sum:" + result)
         }

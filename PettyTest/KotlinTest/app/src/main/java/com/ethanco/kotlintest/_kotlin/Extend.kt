@@ -16,3 +16,5 @@ fun KotlinBean.sum(arg1: Int, arg2: Int): Int {
     return arg1 + arg2
 }
 
+fun KotlinBean.dec(arg1: Int, arg2: Int): Int = arg1 + arg2
+

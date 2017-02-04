@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 //TODO 需要复制的地方
 apply plugin: 'kotlin-android'
+//TODO 额外的 -> 使用这个再也不用findViewById了
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 24

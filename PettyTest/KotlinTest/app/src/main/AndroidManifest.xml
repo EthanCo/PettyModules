@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".JavaActivity"></activity>
         <activity android:name=".KotlinActivity"></activity>
+        <activity android:name=".KotlinExtraActivity"></activity>
     </application>
 
 </manifest>

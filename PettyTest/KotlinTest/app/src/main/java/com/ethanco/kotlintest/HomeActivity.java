@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
         btnKotlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, KotlinActivity.class);
+                Intent intent = new Intent(HomeActivity.this, KotlinExtraActivity.class);
                 startActivity(intent);
             }
         });

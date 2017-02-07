@@ -34,6 +34,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         findViewById(R.id.btnSingleChoice).setOnClickListener(this);
         findViewById(R.id.btnMultiChoice).setOnClickListener(this);
         findViewById(R.id.btnPercent).setOnClickListener(this);
+        findViewById(R.id.btnPercent2).setOnClickListener(this);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         //.inputType(InputType.TYPE_CLASS_TEXT) //默认，可以不加
                         //InputType.TYPE_TEXT_VARIATION_PASSWORD 密码框
                         .alwaysCallInputCallback()
-                        .input("hint", "预先装载的",false, new MaterialDialog.InputCallback() { //false: allowEmptyInput 输入框为空时是否能点击确定，默认为true
+                        .input("hint", "预先装载的", false, new MaterialDialog.InputCallback() { //false: allowEmptyInput 输入框为空时是否能点击确定，默认为true
                             @Override
                             public void onInput(MaterialDialog dialog, CharSequence input) {
                                 Toast.makeText(getApplication(), input, Toast.LENGTH_SHORT).show();
@@ -136,26 +137,25 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                 progress = 0;
                 final MaterialDialog progressDialog = new MaterialDialog.Builder(this)
                         .title("进度条对话框")
-                        .progress(false, 100)
+                        .progress(false, 100) //参数三:是否显示最大最小值 0/100
                         .show();
 
                 new Thread() {
                     @Override
                     public void run() {
-                        super.run();
-                        while (progress < 100) {
-                            SystemClock.sleep(100);
-                            progress++;
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressDialog.setProgress(progress);
-                                }
-                            });
+
+                        while (progressDialog.getCurrentProgress() != progressDialog.getMaxProgress()) {
+                            if (progressDialog.isCancelled()) break;
+                            SystemClock.sleep(50);
+                            progressDialog.incrementProgress(1); //值+1
                         }
+
                         progressDialog.dismiss();
                     }
                 }.start();
+                break;
+            case R.id.btnPercent2:
+
                 break;
             default:
         }

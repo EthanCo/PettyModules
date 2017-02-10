@@ -28,11 +28,13 @@ public class Hkh {
     public static final String PREFIX = "/'|][prefix*0--====";
     public static final String AES_KEY = "M0Tf/1Va#Gamjxjy";
     private static RadioPlayer player;
+    private static Context context;
 
-    public static void init(@NonNull Context context) {
+    public static void init(@NonNull Context _context) {
+        context = _context;
         try {
-            ApplicationInfo appInfo = context.getPackageManager()
-                    .getApplicationInfo(context.getPackageName(),
+            ApplicationInfo appInfo = _context.getPackageManager()
+                    .getApplicationInfo(_context.getPackageName(),
                             PackageManager.GET_META_DATA);
             String appSecret = appInfo.metaData.getString("appsecret");
             if (TextUtils.isEmpty(appSecret)) {
@@ -41,15 +43,19 @@ public class Hkh {
             String appSecretDec = AES.Decrypt(appSecret, AES_KEY);
             appSecretDec = appSecretDec.replace(PREFIX, "");
 
-            CommonRequest.getInstanse().init(context, appSecretDec);
+            CommonRequest.getInstanse().init(_context, appSecretDec);
 
             //播放器初始化
-            player = new RadioPlayer(context);
+            player = new RadioPlayer(_context);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static IHkhPlayer getPlayer() {

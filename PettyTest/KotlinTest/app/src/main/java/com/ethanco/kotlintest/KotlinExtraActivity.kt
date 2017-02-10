@@ -20,10 +20,18 @@ class KotlinExtraActivity : AppCompatActivity() {
             bean.name = "EthanCo"
             bean.age = 18
             var result = bean.dec(5, 6)
+            //bean.test1 { m -> toast(m, 1) }
             //var result = bean.sum(5, 6)
             //Toast.makeText(this@KotlinActivity, bean.toString(), Toast.LENGTH_SHORT).show()
             toast(bean.toString() + " sum:" + result)
         }
 
+        btn_callback.setOnClickListener {
+            var bean = KotlinBean()
+            bean.testcallback1 { m -> toast(m) }
+
+            val result = bean.testcallback2(1, 2, { value1, value2 -> value1 + value2 })
+            toast("计算结果" + result.toString())
+        }
     }
 }

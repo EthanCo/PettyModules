@@ -8,7 +8,7 @@ import android.widget.Toast
  * 函数是一级公民
  * Created by Zhk on 2016/11/7.
  */
-fun AppCompatActivity.toast(message: CharSequence, duration: Int = Toast.LENGTH_LONG) {
+fun AppCompatActivity.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, message, duration).show()
 }
 

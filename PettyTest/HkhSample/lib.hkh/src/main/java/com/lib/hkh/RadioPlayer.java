@@ -49,6 +49,8 @@ public class RadioPlayer implements IHkhPlayer {
     public void play(int index) {
         this.index = index;
         playerManager.play(index);
+        //AudioManager am = (AudioManager) Hkh.getContext().getSystemService(Service.AUDIO_SERVICE);
+        //playerManager.setVolume(am.getStreamVolume(AudioManager.STREAM_SYSTEM), am.getStreamVolume(AudioManager.STREAM_SYSTEM));
     }
 
     @Override

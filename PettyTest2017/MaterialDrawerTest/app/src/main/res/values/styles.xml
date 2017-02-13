@@ -1,0 +1,16 @@
+<resources>
+
+    <!--parent 可设置为 MaterialDrawerTheme-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="subtitleTextColor">@android:color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
+    </style>
+
+</resources>

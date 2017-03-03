@@ -13,6 +13,11 @@ import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.ethanco.aroutertest.testservice.HelloService;
 
+/**
+ * ARouter
+ * http://www.hdtoy.net/a/shenghuo/20170110/43964.html
+ * https://github.com/alibaba/ARouter/blob/master/README_CN.md
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final int REQUEST_CODE = 666;
@@ -55,7 +60,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .navigation();
                 break;
             case R.id.btn_by_name:
-                ((HelloService) router.build("/service/hello").navigation()).sayHello("EthanCo");
+                HelloService service = ((HelloService) router.build("/service/hello").navigation());
+                service.sayHello("EthanCo");
                 break;
             case R.id.btn_by_type:
                 //推荐使用ByName方式获取Service，ByType这种方式写起来比较方便，

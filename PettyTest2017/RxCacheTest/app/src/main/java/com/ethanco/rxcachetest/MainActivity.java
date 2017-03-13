@@ -17,6 +17,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
+//https://github.com/sungerk/RxCache/blob/master/README_ZH.md
 public class MainActivity extends AppCompatActivity {
 
     private CacheProviders cacheProviders;

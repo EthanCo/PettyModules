@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RxJava2Test.iml" filepath="$PROJECT_DIR$/RxJava2Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OOMTest_compressor.iml" filepath="$PROJECT_DIR$/OOMTest_compressor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rxjava2interop/rxjava2interop.iml" filepath="$PROJECT_DIR$/rxjava2interop/rxjava2interop.iml" />
     </modules>
   </component>
 </project>

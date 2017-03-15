@@ -7,11 +7,20 @@ import android.util.Log;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.BackpressureStrategy;
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.Maybe;
+import io.reactivex.MaybeObserver;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -19,14 +28,13 @@ import io.reactivex.functions.Function;
 /**
  * RxJava 2.0 最核心的是Publisher和Subscriber。Publisher可以发出一系列的事件，而Subscriber负责和处理这些事件。
  * 平常用得最多的Publisher是Flowabled，支持背压
- *
+ * <p>
  * http://blog.csdn.net/qq_35064774/article/details/53057332
  * http://blog.csdn.net/qq_35064774/article/category/6505258
- *
+ * <p>
  * 背压的理解
  * http://www.cnblogs.com/iceTing/p/6238207.html
  * http://blog.csdn.net/jdsjlzx/article/details/52717636
- *
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -103,6 +111,59 @@ public class MainActivity extends AppCompatActivity {
 
         //如果不实现OnError，在调用过程的抛出的异常不会进行集中捕获(就是说和普通代码一样抛出异常)
 
+        //FIXME:观察者不再接收null作为数据源
+        //Flowable.just(null);
+
+        //其他观察者模式
+        Single.just("hello")
+                .subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+
+        Completable.timer(5, TimeUnit.SECONDS)
+                .subscribe(new Action() {
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+                });
+
+        //Maybe可以说是前两者的复合体
+        Maybe.just("hello")
+                .subscribe(new MaybeObserver<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 }

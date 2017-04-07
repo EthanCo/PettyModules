@@ -12,7 +12,6 @@ import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.DatagramSessionConfig;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStartServer = (Button) findViewById(R.id.btn_start_server);
         btnStartServer.setOnClickListener(this);
 
-        WifiManager manager = (WifiManager) this
+        WifiManager manager = (WifiManager) getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
         lock = manager.createMulticastLock("test wifi");
     }
@@ -57,8 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 DefaultIoFilterChainBuilder chain = acceptor.getFilterChain();
                 chain.addLast("logger", new LoggingFilter());
                 chain.addLast("codec", new ProtocolCodecFilter(
+                        new TextLineCodecFactory(Charset.forName("UTF-8"))));
+                /*//没有任何换号标记
+                chain.addLast("codec", new ProtocolCodecFilter(
                         new TextLineCodecFactory(Charset.forName("UTF-8"),
-                                LineDelimiter.NUL, LineDelimiter.NUL)));
+                                LineDelimiter.NUL, LineDelimiter.NUL)));*/
                 DatagramSessionConfig dcfg = acceptor.getSessionConfig();
                 dcfg.setReuseAddress(true);
                 try {
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void messageReceived(IoSession session, Object message) throws Exception {
             super.messageReceived(session, message);
             Log.i(TAG, "messageReceived:" + message);
+            session.write("hello world");
         }
 
         //发送数据是回调这个方法

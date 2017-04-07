@@ -23,7 +23,7 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 //http://mina.apache.org/mina-project/userguide/ch2-basics/sample-udp-client.html
-public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
+public class OtherActivity02 extends AppCompatActivity implements View.OnClickListener {
 
     private static final int PORT = 9123;
     public static final String TAG = "Z-MinaUdpClient";

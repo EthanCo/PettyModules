@@ -17,7 +17,9 @@
 package com.ethanco.realmtest.model;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Dog extends RealmObject {
+    @PrimaryKey()
     public String name;
 }

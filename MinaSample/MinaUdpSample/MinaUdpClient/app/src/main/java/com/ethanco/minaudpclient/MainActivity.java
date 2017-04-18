@@ -17,6 +17,7 @@ import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
 import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.transport.socket.DatagramSessionConfig;
 import org.apache.mina.transport.socket.nio.NioDatagramConnector;
 
 import java.net.InetSocketAddress;
@@ -42,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         System.setProperty("java.net.preferIPv6Addresses", "false");
 
         btnConn = (Button) findViewById(R.id.btn_conn);
-        btnSendData = (Button)findViewById(R.id.btn_send_data);
+        btnSendData = (Button) findViewById(R.id.btn_send_data);
         btnConn.setOnClickListener(this);
         btnSendData.setOnClickListener(this);
 
         WifiManager manager = (WifiManager) getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
-        lock= manager.createMulticastLock("test wifi");
+        lock = manager.createMulticastLock("test wifi");
     }
 
     @Override
@@ -70,31 +71,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         chain.addLast("codec", new ProtocolCodecFilter(
                                 new TextLineCodecFactory(Charset.forName("UTF-8"),
                                         LineDelimiter.NUL, LineDelimiter.NUL)));*/
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "192.168.2.18", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "192.168.2.155", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "255.255.255.255", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "192.168.255.255", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "192.168.2.255", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "192.168.2.255", PORT));
-//                IoFuture connFuture = connector.connect(new InetSocketAddress(
-//                        "224.0.0.1", PORT));
+                        DatagramSessionConfig dcfg = connector.getSessionConfig();
+                        dcfg.setReuseAddress(true);
+                        dcfg.setBroadcast(true);
                         lock.acquire();
-                        connFuture = connector.connect(new InetSocketAddress(
-                                "192.168.39.100", PORT));
+
+
+                        String targetIP = "192.168.39.100"; //可以
+                        //String targetIP = "192.168.39.255"; //不可以
+                        //String targetIP = "255.255.255.255"; 不可以
+                        //String targetIP= "127.0.0.1"; //不可以
+                        //String targetIP= "localhost"; //不可以
+
+                        connFuture = connector.connect(new InetSocketAddress(targetIP, PORT));
+                        Log.i(TAG, "targetIP:" + targetIP);
                         connFuture.awaitUninterruptibly();
-                        realSendData();
+                        connFuture.addListener(new IoFutureListener() {
+                            public void operationComplete(IoFuture future) {
+                                ConnectFuture connFuture = (ConnectFuture) future;
+                                Log.i(TAG, "connFuture.isConnected():" + connFuture.isConnected());
+                                if (connFuture.isConnected()) {
+                                    session = future.getSession();
+                                    try {
+                                        sendData();
+                                    } catch (InterruptedException e) {
+                                        Log.e(TAG, e.getMessage());
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    Log.e(TAG, "Not connected...exiting");
+                                }
+                            }
+                        });
                         lock.release();
                     }
                 }.start();
                 break;
             case R.id.btn_send_data:
-                new Thread(){
+                new Thread() {
                     @Override
                     public void run() {
                         try {
@@ -109,24 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
         }
-    }
-
-    private void realSendData() {
-        connFuture.addListener(new IoFutureListener() {
-            public void operationComplete(IoFuture future) {
-                ConnectFuture connFuture = (ConnectFuture) future;
-                if (connFuture.isConnected()) {
-                    session = future.getSession();
-                    try {
-                        sendData();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Log.e(TAG, "Not connected...exiting");
-                }
-            }
-        });
     }
 
     private void sendData() throws InterruptedException {

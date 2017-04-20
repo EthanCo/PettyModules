@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Lib.utils</string>
+
+    <!--LoadingDialog-->
+    <string name="dialog_loading">正在加载</string>
+    <string name="dialog_please_wait">请稍等...</string>
+    <string name="dialog_please_wait_title">请稍等</string>
+
+    <!--MessageDialog-->
+    <string name="sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="reminder">提示</string>
+    <string name="delete_confirm">确认删除?</string>
+    <string name="next">下一个</string>
+</resources>

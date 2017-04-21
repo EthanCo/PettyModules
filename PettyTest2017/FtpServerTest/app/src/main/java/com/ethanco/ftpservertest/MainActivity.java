@@ -4,23 +4,23 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.lib.ftpserver.FtpUtil;
+import com.lib.ftpserver.FtpDirector;
 
 public class MainActivity extends Activity {
-    private FtpUtil ftpUtil;
+    private FtpDirector ftpDirector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ftpUtil = App.getInstance().getFtpUtil();
+        ftpDirector = App.getInstance().getFtpDirector();
     }
 
     public void onStartServer(View view) {
-        ftpUtil.startServer();
+        ftpDirector.startServer();
     }
 
     public void onStopServer(View view) {
-        ftpUtil.stopServer();
+        ftpDirector.stopServer();
     }
 }

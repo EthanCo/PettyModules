@@ -2,8 +2,8 @@ package com.ethanco.ftpservertest;
 
 import android.app.Application;
 
-import com.lib.ftpserver.FtpUtil;
-import com.lib.ftpserver.Utility;
+import com.lib.ftpserver.FtpDirector;
+import com.lib.ftpserver.Util;
 
 /**
  * Application
@@ -13,10 +13,10 @@ import com.lib.ftpserver.Utility;
  */
 public class App extends Application {
     private static App instance;
-    private FtpUtil ftpUtil;
+    private FtpDirector ftpDirector;
 
-    public FtpUtil getFtpUtil() {
-        return ftpUtil;
+    public FtpDirector getFtpDirector() {
+        return ftpDirector;
     }
 
     public static App getInstance() {
@@ -28,10 +28,9 @@ public class App extends Application {
         super.onCreate();
 
         instance = this;
-        //ftpUtil = new FtpUtil(this, 2224, Utility.getCustomDir(this, "mmm"));
-        //ftpUtil = new FtpUtil(this, 15673, Utility.getCustomDir(this, "gsb"));
-        //ftpUtil = new FtpUtil(this, 15672);
-        //ftpUtil = new FtpUtil(this, 15674, Utility.getCustomDir(this, "ccm"),Utility.getCustomDir(this, "bbconfig"));
-        ftpUtil = new FtpUtil(this, 15675, Utility.getCustomDir(this, "HopeLauncher", ".nomedia"), Utility.getCustomDir(this, "FtpConfig"));
+        //ftpUtil = new FtpUtil(this, 2224, Utility.getCustomDir(this, "ftp"));
+        String ftpDir = Util.getCustomDir(this, "HopeLauncher", ".nomedia");
+        String configDir = Util.getCustomDir(this, "FtpConfig");
+        ftpDirector = new FtpDirector(this, 15675, ftpDir, configDir);
     }
 }

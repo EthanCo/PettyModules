@@ -20,7 +20,7 @@ import java.io.IOException;
  * @since 2017/4/21
  */
 
-public class FtpUtil {
+public class FtpDirector {
 
     private static final String TAG = "FtpServerService";
     private Context context;
@@ -32,8 +32,8 @@ public class FtpUtil {
     private FtpServer mFtpServer = null;
 
 
-    public FtpUtil(Context context, int port) {
-        this(context, port, Utility.getCustomDir(context, "ftp"), Utility.getCustomDir(context, "ftp"));
+    public FtpDirector(Context context, int port) {
+        this(context, port, Util.getCustomDir(context, "ftp"), Util.getCustomDir(context, "ftp"));
     }
 
     /**
@@ -42,7 +42,7 @@ public class FtpUtil {
      * @param ftpDir    ftp文件夹路径
      * @param configDir 配置文件夹路径
      */
-    public FtpUtil(Context context, int port, String ftpDir, String configDir) {
+    public FtpDirector(Context context, int port, String ftpDir, String configDir) {
         this.context = context;
         this.port = port;
         this.ftpDir = ftpDir;
@@ -135,7 +135,7 @@ public class FtpUtil {
         new Thread() {
             @Override
             public void run() {
-                hostIP = Utility.getLocalIPString();
+                hostIP = Util.getLocalIPString();
                 Log.d(TAG, "获取本机IP = " + hostIP);
                 startFtpServer(hostIP);
             }

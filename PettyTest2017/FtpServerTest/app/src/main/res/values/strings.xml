@@ -2,9 +2,6 @@
     <string name="app_name">FtpServerTest</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="start">开启服务器</string>
-
-    <!--userpassword:密码 writepermission:写的权限-->
-    <!--admin 用户 anonymous:匿名用户-->
-    <string name="user">ftpserver.user.admin.userpassword=12345678\r\nftpserver.user.admin.homedirectory=/mnt/sdcard/ftp/\r\nftpserver.user.admin.enableflag=true\r\nftpserver.user.admin.writepermission=true\r\nftpserver.user.admin.maxloginnumber=20\r\nftpserver.user.admin.maxloginperip=20\r\nftpserver.user.admin.idletime=0\r\nftpserver.user.admin.uploadrate=0\r\nftpserver.user.admin.downloadrate=0\r\nftpserver.user.anonymous.userpassword=anonymous\r\nftpserver.user.anonymous.homedirectory=/mnt/sdcard/ftp/\r\nftpserver.user.anonymous.enableflag=true\r\nftpserver.user.anonymous.writepermission=false\r\nftpserver.user.anonymous.maxloginnumber=20\r\nftpserver.user.anonymous.maxloginperip=2\r\nftpserver.user.anonymous.idletime=300\r\nftpserver.user.anonymous.uploadrate=480000\r\nftpserver.user.anonymous.downloadrate=480000\r\n</string>
+    <string name="start">开启FTP服务器</string>
+    <string name="stop">停止FTP服务器</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.lib.ftpserver;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
@@ -21,19 +20,17 @@ import java.io.IOException;
  */
 
 public class FtpDirector {
-
-    private static final String TAG = "FtpServerService";
     private Context context;
     private String hostIP;
     private int port;
-    private String ftpDir = "";
+    private String ftpDir;
     // ftp服务器配置文件路径
     private String configPath;
     private FtpServer mFtpServer = null;
 
 
     public FtpDirector(Context context, int port) {
-        this(context, port, Util.getCustomDir(context, "ftp"), Util.getCustomDir(context, "ftp"));
+        this(context, port, FtpUtil.getCustomDir(context, "ftp"), FtpUtil.getCustomDir(context, "ftp"));
     }
 
     /**
@@ -47,7 +44,7 @@ public class FtpDirector {
         this.port = port;
         this.ftpDir = ftpDir;
         this.configPath = configDir + "/users.properties";
-        Log.i(TAG, "ftpDir:" + ftpDir + " configPath:" + configPath);
+        LogUtil.i("ftpDir:" + ftpDir + " configPath:" + configPath);
         createServerConfigFile();
     }
 
@@ -111,7 +108,7 @@ public class FtpDirector {
         mFtpServer = serverFactory.createServer();
         try {
             mFtpServer.start();
-            Log.d(TAG, "开启了FTP服务器  ip = " + hostIP);
+            LogUtil.d("开启了FTP服务器  ip = " + hostIP);
         } catch (FtpException e) {
             System.out.println(e);
         }
@@ -124,7 +121,7 @@ public class FtpDirector {
         if (mFtpServer != null) {
             mFtpServer.stop();
             mFtpServer = null;
-            Log.d(TAG, "关闭了FTP服务器 ip = " + hostIP);
+            LogUtil.d("关闭了FTP服务器 ip = " + hostIP);
         }
     }
 
@@ -135,8 +132,8 @@ public class FtpDirector {
         new Thread() {
             @Override
             public void run() {
-                hostIP = Util.getLocalIPString();
-                Log.d(TAG, "获取本机IP = " + hostIP);
+                hostIP = FtpUtil.getLocalIPString();
+                LogUtil.d("获取本机IP = " + hostIP);
                 startFtpServer(hostIP);
             }
         }.start();

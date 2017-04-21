@@ -14,7 +14,7 @@ import java.util.Enumeration;
  * Created by hult on 2016/5/5.
  * 工具类
  */
-public class Util {
+class FtpUtil {
 
     /**
      * byte 转 int

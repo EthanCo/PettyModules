@@ -31,6 +31,6 @@ public class App extends Application {
         //ftpUtil = new FtpUtil(this, 2224, Utility.getCustomDir(this, "ftp"));
         String ftpDir = FtpUtil.getCustomDir(this, "HopeLauncher", ".nomedia");
         String configDir = FtpUtil.getCustomDir(this, "FtpConfig");
-        ftpDirector = new FtpDirector(this, 15675, ftpDir, configDir);
+        ftpDirector = new FtpDirector(this, 15676, ftpDir, configDir);
     }
 }

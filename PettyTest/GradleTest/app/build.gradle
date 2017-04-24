@@ -166,6 +166,7 @@ android {
         //提高AAPT的速度 FIXME 只在DEBUG版本使用
         cruncherEnabled = getCruncher();
     }
+    buildToolsVersion '25.0.0'
 }
 
 def getCruncher() {
@@ -187,6 +188,9 @@ dependencies {
     /*//aar依赖传递 主项目A依赖库项目B，库项目B依赖项目C和jar包D
         compile 'com.xxx.xxxxx.xxxxxx:1.0.0-SNAPSHOT' //表示B项目及其依赖的所有项目 (即C和D)，也是一般引用库项目的标准写法
         compile 'com.xxx.xxxxx.xxxxxx:1.0.0-SNAPSHOT@aar' //只依赖B项目
+        compile ('com.xxx.xxxxx.xxxxxx:1.0.0-SNAPSHOT'){ //只依赖B项目
+            transitive = false //关闭依赖传递特性
+        }
         //排除指定的库
         compile ('com.xxx.yyy:aaa:1.1.1'){
             exclude module:'com.xxx.yyy.bbb:1.1.2'

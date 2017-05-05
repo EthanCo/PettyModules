@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.lib.meteorplayer.MeteorPlayer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnPause;
     private EditText etFileName;
     private MeteorPlayer meteorPlayer;
+    private String TAG = "Z-NoMedia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_play:
-                String path = NomediaUtil.getNomedia(this).getPath() + File.separator + etFileName.getText().toString();
+                String path = NoMediaUtil.getNomedia(this).getPath() + File.separator + etFileName.getText().toString();
                 File music = new File(path);
                 if (music.exists()) {
                     Toast.makeText(getApplicationContext(), "开始播放", Toast.LENGTH_SHORT).show();
@@ -45,6 +48,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     meteorPlayer.play(music.getPath());
                 } else {
                     Toast.makeText(MainActivity.this, "文件不存在", Toast.LENGTH_SHORT).show();
+                }
+
+                List<String> specialSongs = new ArrayList<>();
+                String noMediaDir = NoMediaUtil.getNomedia(this).getPath();
+                File noMediaFile = new File(noMediaDir);
+                if (noMediaFile.isDirectory()) {
+                    File[] files = noMediaFile.listFiles();
+                    for (File music1 : files) {
+                        if (music1 == null) continue;
+                        if (meteorPlayer.isSupportGenre(music1)) {
+                            specialSongs.add(music1.getName());
+                        }
+                    }
                 }
                 break;
             case R.id.btn_pause:

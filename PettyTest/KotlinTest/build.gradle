@@ -2,12 +2,12 @@
 
 buildscript {
     //TODO 需要复制的地方
-    ext.kotlin_version = '1.0.6'
+    ext.kotlin_version = '1.1.0'
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.1'
         //TODO 需要复制的地方
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 

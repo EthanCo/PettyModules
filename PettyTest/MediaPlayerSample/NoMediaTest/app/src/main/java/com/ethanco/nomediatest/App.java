@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Application
@@ -25,9 +27,9 @@ public class App extends Application {
 
         instance = this;
 
-        File nomedia = NomediaUtil.getNomedia(this);
+        File nomedia = NoMediaUtil.getNomedia(this);
         Log.i(TAG, "file.path:" + nomedia.getPath());
-        Boolean success = NomediaUtil.makeDirs(nomedia.getPath());
+        Boolean success = NoMediaUtil.makeDirs(nomedia.getPath());
         Log.i(TAG, "mkDirs result:" + success);
     }
 }

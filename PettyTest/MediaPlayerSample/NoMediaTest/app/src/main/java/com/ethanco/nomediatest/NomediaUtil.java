@@ -13,7 +13,7 @@ import java.io.File;
  * @since 2017/4/20
  */
 
-public class NomediaUtil {
+public class NoMediaUtil {
     private static File nomedia;
 
     public static File getNomedia(Context context) {

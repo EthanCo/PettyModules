@@ -104,7 +104,7 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
         }
     }
 
-    private boolean isSupportGenre(File file) {
+    public boolean isSupportGenre(File file) {
         String fileName = file.getName().toLowerCase();
         return fileName.endsWith(".mp3") ||
                 fileName.endsWith(".wma") ||

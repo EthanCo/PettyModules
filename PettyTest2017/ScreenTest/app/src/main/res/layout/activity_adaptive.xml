@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10px">
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+            <View
+                android:layout_width="99dp"
+                android:layout_height="10px" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="10px"
+                android:background="#000000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="10px">
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+            <View
+                android:layout_width="99px"
+                android:layout_height="10px"/>
+
+            <View
+                android:background="#F00"
+                android:layout_width="1px"
+                android:layout_height="10px"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_music" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adaptive_tip"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

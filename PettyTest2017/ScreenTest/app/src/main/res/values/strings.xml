@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">屏幕信息</string>
+    <string name="adaptive_tip">
+        显示效果:\r\n
+        drawable-mdpi 蓝\r\n
+        drawable-hdpi 绿\r\n
+        drawable-xhdpi黄\r\n
+        drawable-xxhdpi红\r\n
+        drawable-xxxhdpi 黑\r\n
+    </string>
+</resources>

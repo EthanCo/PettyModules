@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ethanco.mytest.MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="屏幕适配" />
+
+            <TextView
+                android:id="@+id/tvScreenInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下图mdpi 宽94px，高61px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/switch_o_mdpi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下图hdpi 宽94px，高61px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/switch_o_hdpi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下图xhdpi 宽94px，高61px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/switch_o_xhdpi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下图xxhdpi 宽94px，高61px" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/switch_o_xxhdpi" />
+
+            <TextView
+                android:layout_width="94px"
+                android:layout_height="100px"
+                android:background="@android:color/holo_red_dark"
+                android:text="宽94px"></TextView>
+
+            <TextView
+                android:layout_width="94dp"
+                android:layout_height="100dp"
+                android:background="@android:color/holo_green_dark"
+                android:text="宽94dp"></TextView>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:background="@android:color/holo_blue_dark"
+                android:text="宽200dp，高100dp"></TextView>
+
+            <TextView
+                android:layout_width="200px"
+                android:layout_height="100px"
+                android:background="@android:color/holo_orange_dark"
+                android:text="宽200px\n高100px"></TextView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_2" />
+        </LinearLayout>
+    </ScrollView>
+</layout>
+

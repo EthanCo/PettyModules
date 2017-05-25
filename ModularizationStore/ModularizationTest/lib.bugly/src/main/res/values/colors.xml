@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="divider">#999999</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#727272</color>
+    <color name="btn_bg_p">#CCCCCC</color>
+    <color name="btn_bg">#00000000</color>
+    <color name="dialog_background">#FFFFFF</color>
+    <color name="dialog_out_background">#99000000</color>
+</resources>

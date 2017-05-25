@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Lib.style</string>
+
+    <!--LoadingDialog-->
+    <string name="dialog_loading">正在加载</string>
+    <string name="dialog_please_wait">请稍等...</string>
+    <string name="dialog_please_wait_title">请稍等</string>
+</resources>

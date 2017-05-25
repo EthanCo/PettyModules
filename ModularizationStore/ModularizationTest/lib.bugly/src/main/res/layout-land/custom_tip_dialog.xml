@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dialog_out_background">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_max_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dialog_horizontal_margin"
+        android:background="@drawable/shape_dialog_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dialog_padding"
+            android:paddingLeft="@dimen/dialog_padding"
+            android:paddingRight="@dimen/dialog_padding"
+            android:paddingTop="@dimen/space_2">
+
+            <TextView
+                style="@style/DialogPrimaryTextStyle"
+                android:tag="beta_title" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="@dimen/space_2"
+                android:layout_marginTop="@dimen/space_1_5"
+                android:background="@color/divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/space_1"
+                android:paddingRight="@dimen/space_1">
+
+                <TextView
+                    style="@style/DialogSecondTextStyle"
+                    android:tag="beta_tip_message" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DialogTextButtonStyle"
+                android:tag="beta_cancel_button" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/divider" />
+
+            <TextView
+                style="@style/DialogTextButtonStyle"
+                android:tag="beta_confirm_button" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

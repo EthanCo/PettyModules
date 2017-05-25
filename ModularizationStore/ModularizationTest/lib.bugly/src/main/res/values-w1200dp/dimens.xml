@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="activity_horizontal_margin">96dp</dimen>
+    <dimen name="dialog_horizontal_margin">96dp</dimen>
+
+    <dimen name="dialog_max_width">600dp</dimen>
+</resources>

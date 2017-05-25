@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="AppThemeDefault" parent="AppThemeDefaultV19" />
+
+    <style name="AppThemeDefaultV19" parent="AppThemeBase">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+
+    <style name="FullAppTheme" parent="AppThemeDefault" >
+    </style>
+
+    <style name="Theme.AppStartLoadTranslucent" parent="FullAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

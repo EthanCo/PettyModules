@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile(rootProject.ext.dependencies.espresso_core, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile rootProject.ext.dependencies.design
+    compile rootProject.ext.dependencies.supportv7
+    testCompile rootProject.ext.dependencies.junit
+    compile project(':lib.style')
+
+    compile rootProject.ext.dependencies.material_dialogs
+
+    compile rootProject.ext.dependencies.SlideUnlock
+    compile rootProject.ext.dependencies.ClockfaceView
+    compile rootProject.ext.dependencies.LockScreen
+    compile rootProject.ext.dependencies.ParasitiferView
+    compile rootProject.ext.dependencies.BindingImageView
+    compile rootProject.ext.dependencies.VaryButtonLayout
+    compile rootProject.ext.dependencies.SpiralGroup
+    compile rootProject.ext.dependencies.SubItemBar
+    compile rootProject.ext.dependencies.glide_transformations
+}

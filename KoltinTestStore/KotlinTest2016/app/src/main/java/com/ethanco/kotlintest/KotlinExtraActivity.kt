@@ -1,5 +1,6 @@
 package com.ethanco.kotlintest
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
@@ -9,6 +10,12 @@ import com.ethanco.kotlintest._kotlin.dec
 import com.ethanco.kotlintest._kotlin.toast
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * data关键字，是显示声明该类是作为数据类使用，这一点在系统生成的toString()方法中比较容易有对比。没有使用data的，toString()默认打印对象的内存地址；使用data关键字的，默认按照一定规则打印相关属性。
+ * object关键字，语义是声明一个对象，这个对象是类级别的，对比于java来说，定义这个类相当于定义了一个全局的单例对象。
+ *
+ * http://blog.csdn.net/cysion1989/article/details/72648052
+ */
 class KotlinExtraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +86,18 @@ class KotlinExtraActivity : AppCompatActivity() {
         { x: Int, y: Int ->
             println("${x + y}")
         }(1, 3)
+
+
+        btn_start_activity.setOnClickListener {
+            var intent = Intent(this, JavaActivity::class.java)
+            startActivity(intent)
+        }
+
+        //使用with，{}内可以不用加前缀，直接可以调用KotlinBean类的属性
+        with(KotlinBean()){
+            println(id)
+            println(name)
+        }
 
 
     }

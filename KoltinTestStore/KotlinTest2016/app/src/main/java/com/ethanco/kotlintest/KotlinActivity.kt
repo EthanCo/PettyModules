@@ -7,6 +7,7 @@ import android.widget.TextView
 import com.ethanco.kotlintest._kotlin.KotlinBean
 import com.ethanco.kotlintest._kotlin.dec
 import com.ethanco.kotlintest._kotlin.toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class KotlinActivity : AppCompatActivity() {
     private var tvInfo: TextView? = null

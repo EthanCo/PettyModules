@@ -11,7 +11,7 @@
         android:id="@+id/et_filename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Asphyxia.mp3" />
+        android:text="002_SSS.mp3" />
 
     <Button
         android:id="@+id/btn_play"
@@ -20,9 +20,21 @@
         android:text="播放" />
 
     <Button
+        android:id="@+id/btn_play2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="播放(不从上一次开始播放)" />
+
+    <Button
         android:id="@+id/btn_pause"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="暂停" />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="停止" />
 
 </LinearLayout>

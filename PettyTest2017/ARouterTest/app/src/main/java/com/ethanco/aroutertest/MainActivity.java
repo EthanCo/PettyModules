@@ -84,6 +84,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onLost(Postcard postcard) {
                         Toast.makeText(MainActivity.this, "没有找到:" + postcard.getPath(), Toast.LENGTH_SHORT).show();
                     }
+
+                    @Override
+                    public void onArrival(Postcard postcard) {
+
+                    }
+
+                    @Override
+                    public void onInterrupt(Postcard postcard) {
+
+                    }
                 });
                 break;
             case R.id.btn_degrade_global:

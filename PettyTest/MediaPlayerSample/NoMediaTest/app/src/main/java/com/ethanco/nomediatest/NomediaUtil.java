@@ -27,7 +27,7 @@ public class NoMediaUtil {
      * @param filePath 路径
      * @return 是否创建成功
      */
-    public static boolean makeDirs(String filePath) {
+    public static boolean   makeDirs(String filePath) {
         File folder = new File(filePath);
         return (folder.exists() && folder.isDirectory())
                 ? true

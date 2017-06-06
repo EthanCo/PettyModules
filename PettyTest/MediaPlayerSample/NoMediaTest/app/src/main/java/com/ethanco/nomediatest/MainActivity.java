@@ -10,13 +10,13 @@ import android.widget.Toast;
 import com.lib.meteorplayer.MeteorPlayer;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnPlay;
+    private Button btnPlay2;
     private Button btnPause;
+    private Button btnStop;
     private EditText etFileName;
     private MeteorPlayer meteorPlayer;
     private String TAG = "Z-NoMedia";
@@ -28,29 +28,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         etFileName = (EditText) findViewById(R.id.et_filename);
         btnPlay = (Button) findViewById(R.id.btn_play);
+        btnPlay2 = (Button)findViewById(R.id.btn_play2);
         btnPause = (Button) findViewById(R.id.btn_pause);
+        btnStop = (Button) findViewById(R.id.btn_stop);
 
         btnPlay.setOnClickListener(this);
+        btnPlay2.setOnClickListener(this);
         btnPause.setOnClickListener(this);
+        btnStop.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_play:
-                String path = NoMediaUtil.getNomedia(this).getPath() + File.separator + etFileName.getText().toString();
-                File music = new File(path);
-                if (music.exists()) {
-                    Toast.makeText(getApplicationContext(), "开始播放", Toast.LENGTH_SHORT).show();
-                    if (meteorPlayer == null) { //懒加载
-                        meteorPlayer = new MeteorPlayer(this);
-                    }
-                    meteorPlayer.play(music.getPath());
-                } else {
-                    Toast.makeText(MainActivity.this, "文件不存在", Toast.LENGTH_SHORT).show();
-                }
+                play(true);
 
-                List<String> specialSongs = new ArrayList<>();
+                /*List<String> specialSongs = new ArrayList<>();
                 String noMediaDir = NoMediaUtil.getNomedia(this).getPath();
                 File noMediaFile = new File(noMediaDir);
                 if (noMediaFile.isDirectory()) {
@@ -61,14 +55,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             specialSongs.add(music1.getName());
                         }
                     }
-                }
+                }*/
+                break;
+            case R.id.btn_play2:
+                play(false);
                 break;
             case R.id.btn_pause:
                 if (meteorPlayer != null) {
                     meteorPlayer.pause();
                 }
                 break;
+            case R.id.btn_stop:
+                if (meteorPlayer != null) {
+                    meteorPlayer.stop();
+                }
             default:
+        }
+    }
+
+    private void play(boolean recordLast) {
+        String path = NoMediaUtil.getNomedia(this).getPath() + File.separator + etFileName.getText().toString();
+        File music = new File(path);
+        if (music.exists()) {
+            Toast.makeText(getApplicationContext(), "开始播放", Toast.LENGTH_SHORT).show();
+            if (meteorPlayer == null) { //懒加载
+                meteorPlayer = new MeteorPlayer(this);
+            }
+            meteorPlayer.play(music.getPath(), recordLast);
+        } else {
+            Toast.makeText(MainActivity.this, "文件不存在", Toast.LENGTH_SHORT).show();
         }
     }
 }

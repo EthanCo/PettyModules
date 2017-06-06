@@ -3,6 +3,7 @@ package com.lib.meteorplayer;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.SystemClock;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,13 +37,37 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 public void onPrepared(MediaPlayer mediaPlayer) {
+                    LogUtil.i("onPrepared");
                     isPrepared = true;
                     play();
+                }
+            });
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(final MediaPlayer mediaPlayer) {
+                    LogUtil.i("onCompletion" + mediaPlayer.isPlaying());
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            SystemClock.sleep(1000);
+                            if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
+                                LogUtil.i("onCompletion  SystemClock.sleep(1000)");
+                                abandonFocus();
+                            }
+                        }
+                    }.start();
                 }
             });
         }
         if (audioFocus == null) {
             audioFocus = new AudioFocus(this, context);
+        }
+    }
+
+    private void abandonFocus() {
+        if (audioFocus != null) {
+            audioFocus.abandonFocus();
         }
     }
 
@@ -55,11 +80,16 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
         return true;
     }
 
-    public boolean play(String filePath) {
-        return play(new File(filePath));
+    /**
+     * @param filePath
+     * @param recordLast 是否继续上次的播放 (如果播放的歌曲一样的话)
+     * @return
+     */
+    public boolean play(String filePath, boolean recordLast) {
+        return play(new File(filePath), recordLast);
     }
 
-    public boolean play(File file) {
+    public boolean play(File file, boolean recordLast) {
         if (!file.exists()) {
             LogUtil.w("文件不存在");
             return false;
@@ -72,7 +102,7 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
         inspectInit();
 
         String filePath = file.getPath();
-        if (isPaused && recordSongPath.equals(filePath)) {
+        if (isPaused && recordSongPath.equals(filePath) && recordLast) {
             return play();
         }
 
@@ -94,13 +124,23 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
 
     public void pause() {
         if (mediaPlayer == null) return;
-        if (audioFocus != null) {
-            audioFocus.abandonFocus();
-        }
+        abandonFocus();
 
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             isPaused = true;
+        }
+    }
+
+    public void stop() {
+        if (mediaPlayer == null) return;
+        abandonFocus();
+
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            recordSongPath = "";
+            isPrepared = false;
+            mediaPlayer = null;
         }
     }
 

@@ -94,12 +94,19 @@ class KotlinExtraActivity : AppCompatActivity() {
         }
 
         //使用with，{}内可以不用加前缀，直接可以调用KotlinBean类的属性
-        with(KotlinBean()){
+        with(KotlinBean()) {
             println(id)
             println(name)
         }
 
-
+        //Kotlin原生支持很多操作符
+        var wifiPassword = "?"
+        val a = arrayOf("0", "1", "2", "6", "7", "h", "j")
+        wifiPassword = arrayOf(5, 9, 6, 8, 2, 7, 0, 1, 4, 0, 3)
+                .filter { it in 0 until a.size }
+                .map { a[it] }
+                .reduce { s1, s2 -> "$s1$s2" }
+        print(wifiPassword)
     }
 
     //Nothing 表示永远不存在的值

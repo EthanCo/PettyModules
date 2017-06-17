@@ -40,7 +40,8 @@ dependencies {
     compile rootProject.ext.dependencies.arouter_api
     annotationProcessor rootProject.ext.dependencies.arouter_compiler
 
-    compile project(':app.music')
-    compile project(':app.news')
-
+    if (!rootProject.ext.is_build_module) {
+        compile project(':app.music')
+        compile project(':app.news')
+    }
 }

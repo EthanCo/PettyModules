@@ -9,6 +9,7 @@ import com.ethanco.kotlintest._kotlin.KotlinBean
 import com.ethanco.kotlintest._kotlin.dec
 import com.ethanco.kotlintest._kotlin.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.properties.Delegates
 
 /**
  * data关键字，是显示声明该类是作为数据类使用，这一点在系统生成的toString()方法中比较容易有对比。没有使用data的，toString()默认打印对象的内存地址；使用data关键字的，默认按照一定规则打印相关属性。
@@ -18,9 +19,21 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class KotlinExtraActivity : AppCompatActivity() {
 
+    private lateinit var value1: String
+    //lateinit 不支持基础类型，可以这样
+    private var mNumber: Int by Delegates.notNull<Int>()
+    private var mPhotoUrl: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        value1 = "hello world!"
+        mNumber = 123
+        //如果不为空，执行某操作
+        mPhotoUrl?.let {
+            //do something
+        }
 
         btn_test.setOnClickListener {
             //var bean = JavaBean()

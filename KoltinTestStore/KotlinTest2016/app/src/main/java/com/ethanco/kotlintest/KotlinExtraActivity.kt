@@ -16,6 +16,9 @@ import kotlin.properties.Delegates
  * object关键字，语义是声明一个对象，这个对象是类级别的，对比于java来说，定义这个类相当于定义了一个全局的单例对象。
  *
  * http://blog.csdn.net/cysion1989/article/details/72648052
+ *
+ * Kotlin 博文
+ * https://zhuanlan.zhihu.com/p/27285806
  */
 class KotlinExtraActivity : AppCompatActivity() {
 
@@ -27,6 +30,10 @@ class KotlinExtraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //自定义崩溃信息
+        //requireNotNull() //如果为null，抛出IllegalArgumentException
+        //checkNotNull() //如果为null，抛出IllegalStateException
 
         value1 = "hello world!"
         mNumber = 123
@@ -136,5 +143,10 @@ class KotlinExtraActivity : AppCompatActivity() {
             if (int >= 5) theFunctionInside(int - 1)
         }
         theFunctionInside()
+    }
+
+    //如果PhotoUrl为null，则返回Anonymous，否则返回mPhotoUrl
+    fun getPhotoUrl(): String {
+        return mPhotoUrl ?: "Anonymous"
     }
 }

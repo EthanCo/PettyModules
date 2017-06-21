@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_play_assets:
                 String fileName = etAssetsFileName.getText().toString();
+                //String fileName = "alarms/Platinum.ogg"; //多级目录也支持
                 initMeteorPlayer();
                 meteorPlayer.playAssets(fileName, false);
                 break;

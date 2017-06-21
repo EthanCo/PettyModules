@@ -97,22 +97,25 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
      * @return
      */
     public boolean playAssets(String fileName, boolean recordLast) {
-        String path = context.getExternalCacheDir() + File.separator + "MeteorPlayer";
+        String path = context.getExternalCacheDir() + File.separator + "MeteorPlayer" + File.separator + fileName;
+        int index = path.lastIndexOf(File.separator);
+        String targetFileName = path.substring(index + 1);
+        path = path.substring(0, index);
         File pathFile = new File(path);
         if (!pathFile.exists()) {
             pathFile.mkdirs();
         }
 
-        File bell = new File(path, fileName);
+        File bell = new File(path, targetFileName);
         return playAssetsAndCache(fileName, bell, recordLast);
     }
 
-    private boolean playAssetsAndCache(String fileName, File bell, boolean recordLast) {
+    private boolean playAssetsAndCache(String assetsFileName, File bell, boolean recordLast) {
         if (bell.exists()) {
             return play(bell, recordLast);
         } else {
             try {
-                MeteorPlayerUtil.copeAssetsFileToSdcard(context, fileName, bell);
+                MeteorPlayerUtil.copeAssetsFileToSdcard(context, assetsFileName, bell);
                 return play(bell, recordLast);
             } catch (IOException e) {
                 e.printStackTrace();

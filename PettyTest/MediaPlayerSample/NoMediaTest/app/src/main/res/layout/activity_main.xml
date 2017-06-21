@@ -25,6 +25,18 @@
         android:layout_height="wrap_content"
         android:text="播放(不从上一次开始播放)" />
 
+    <EditText
+        android:id="@+id/et_assets_filename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Umbriel.ogg" />
+
+    <Button
+        android:id="@+id/btn_play_assets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="播放Assets文件" />
+
     <Button
         android:id="@+id/btn_pause"
         android:layout_width="match_parent"

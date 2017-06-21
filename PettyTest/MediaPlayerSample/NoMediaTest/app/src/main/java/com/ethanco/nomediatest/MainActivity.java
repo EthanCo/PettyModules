@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnStop;
     private EditText etFileName;
     private MeteorPlayer meteorPlayer;
+    private Button btnPlayAssets;
+    private EditText etAssetsFileName;
     private String TAG = "Z-NoMedia";
 
     @Override
@@ -27,13 +29,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         etFileName = (EditText) findViewById(R.id.et_filename);
+        etAssetsFileName = (EditText) findViewById(R.id.et_assets_filename);
         btnPlay = (Button) findViewById(R.id.btn_play);
-        btnPlay2 = (Button)findViewById(R.id.btn_play2);
+        btnPlay2 = (Button) findViewById(R.id.btn_play2);
+        btnPlayAssets = (Button) findViewById(R.id.btn_play_assets);
         btnPause = (Button) findViewById(R.id.btn_pause);
         btnStop = (Button) findViewById(R.id.btn_stop);
 
         btnPlay.setOnClickListener(this);
         btnPlay2.setOnClickListener(this);
+        btnPlayAssets.setOnClickListener(this);
         btnPause.setOnClickListener(this);
         btnStop.setOnClickListener(this);
     }
@@ -60,6 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_play2:
                 play(false);
                 break;
+            case R.id.btn_play_assets:
+                String fileName = etAssetsFileName.getText().toString();
+                initMeteorPlayer();
+                meteorPlayer.playAssets(fileName, false);
+                break;
             case R.id.btn_pause:
                 if (meteorPlayer != null) {
                     meteorPlayer.pause();
@@ -78,12 +88,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         File music = new File(path);
         if (music.exists()) {
             Toast.makeText(getApplicationContext(), "开始播放", Toast.LENGTH_SHORT).show();
-            if (meteorPlayer == null) { //懒加载
-                meteorPlayer = new MeteorPlayer(this);
-            }
+            initMeteorPlayer();
             meteorPlayer.play(music.getPath(), recordLast);
         } else {
             Toast.makeText(MainActivity.this, "文件不存在", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void initMeteorPlayer() {
+        if (meteorPlayer == null) { //懒加载
+            meteorPlayer = new MeteorPlayer(this);
         }
     }
 }

@@ -89,6 +89,38 @@ public class MeteorPlayer implements AudioManager.OnAudioFocusChangeListener {
         return play(new File(filePath), recordLast);
     }
 
+    /**
+     * 播放 Assets的音乐
+     *
+     * @param fileName   在Assets文件下的相对路径
+     * @param recordLast 是否继续上次的播放 (如果播放的歌曲一样的话)
+     * @return
+     */
+    public boolean playAssets(String fileName, boolean recordLast) {
+        String path = context.getExternalCacheDir() + File.separator + "MeteorPlayer";
+        File pathFile = new File(path);
+        if (!pathFile.exists()) {
+            pathFile.mkdirs();
+        }
+
+        File bell = new File(path, fileName);
+        return playAssetsAndCache(fileName, bell, recordLast);
+    }
+
+    private boolean playAssetsAndCache(String fileName, File bell, boolean recordLast) {
+        if (bell.exists()) {
+            return play(bell, recordLast);
+        } else {
+            try {
+                MeteorPlayerUtil.copeAssetsFileToSdcard(context, fileName, bell);
+                return play(bell, recordLast);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
     public boolean play(File file, boolean recordLast) {
         if (!file.exists()) {
             LogUtil.w("文件不存在");

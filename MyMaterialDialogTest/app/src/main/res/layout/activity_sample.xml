@@ -43,8 +43,9 @@
         android:text="进度条对话框" />
 
     <Button
-        android:id="@+id/btnPercent2"
+        android:id="@+id/btnCustom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="自定义对话框" />
 
 </LinearLayout>

@@ -34,7 +34,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         findViewById(R.id.btnSingleChoice).setOnClickListener(this);
         findViewById(R.id.btnMultiChoice).setOnClickListener(this);
         findViewById(R.id.btnPercent).setOnClickListener(this);
-        findViewById(R.id.btnPercent2).setOnClickListener(this);
+        findViewById(R.id.btnCustom).setOnClickListener(this);
     }
 
     @Override
@@ -120,10 +120,13 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         .show();
                 break;
             case R.id.btnMultiChoice: //多选
+                Integer[] defChoices = new Integer[2];
+                defChoices[0] = 1;
+                defChoices[1] = 2;
                 new MaterialDialog.Builder(this)
-                        .title("多选对话框")
+                        .title("自定义")
                         .items(list)
-                        .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
+                        .itemsCallbackMultiChoice(defChoices, new MaterialDialog.ListCallbackMultiChoice() {
                             @Override
                             public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                                 Toast.makeText(getApplication(), "选择了" + which.length + "项", Toast.LENGTH_SHORT).show();
@@ -154,8 +157,13 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                     }
                 }.start();
                 break;
-            case R.id.btnPercent2:
-
+            case R.id.btnCustom:
+                boolean wrapInScrollView = true;
+                new MaterialDialog.Builder(this)
+                        .title("自定义对话框")
+                        .customView(R.layout.custom_view, wrapInScrollView)
+                        .positiveText("确定")
+                        .show();
                 break;
             default:
         }

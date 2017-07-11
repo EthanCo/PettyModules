@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import com.ethanco.kotlintest._kotlin.KotlinBean
 import com.ethanco.kotlintest._kotlin.dec
 import com.ethanco.kotlintest._kotlin.toast
+import com.nbhope.hopelauncher.smart.view.dialog.showSeekBarDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.properties.Delegates
 
@@ -127,6 +128,13 @@ class KotlinExtraActivity : AppCompatActivity() {
                 .map { a[it] }
                 .reduce { s1, s2 -> "$s1$s2" }
         print(wifiPassword)
+
+        btn_show_seekbar_dialog.setOnClickListener {
+            showSeekBarDialog(this, 10, 100, R.layout.layout_number_progressbar, {
+                progress ->
+                toast(progress.toString())
+            })
+        }
     }
 
     //Nothing 表示永远不存在的值

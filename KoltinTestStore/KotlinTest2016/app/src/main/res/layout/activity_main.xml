@@ -32,5 +32,12 @@
     <Button
         android:id="@+id/btn_start_activity"
         android:layout_width="match_parent"
+        android:text="start activity"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_show_seekbar_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show seekbar dialog" />
 </LinearLayout>

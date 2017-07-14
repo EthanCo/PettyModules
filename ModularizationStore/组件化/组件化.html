@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>组件化</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h3>Router框架</h3>
+<pre><code>Intent intent = new Intent(mContext, XxxActivity.class);
+intent.putExtra(&quot;key&quot;,&quot;value&quot;); 
+startActivity(intent); 
+</code></pre>
+
+<p>在Android开发中，是最常用的功能就是页面的跳转，先排除从浏览器或者其他App跳转到自己App中页面的需求，仅仅是简简单单的页面跳转，随着时间的推移，也会遇到一些问题：</p>
+<ul>
+<li>
+<strong>集中式的URL管理</strong>
+<ul>
+<li>谈到集中式的管理，总是比较蛋疼，多人协同开发的时候，大家都去AndroidManifest.xml中定义各种IntentFilter，使用隐式Intent,最终发现AndroidManifest.xml中充斥着各种Schame，各种Path，需要经常解决Path重叠覆盖、过多的Activity被导出，引发安全风险等问题</li>
+</ul>
+</li>
+<li>
+<strong>可配置性较差</strong>
+<ul>
+<li>Manifest限制于xml格式，书写麻烦，配置复杂，可以自定义的东西也较少</li>
+</ul>
+</li>
+<li>
+<strong>跳转过程中无法插手</strong>
+<ul>
+<li>直接通过Intent的方式跳转，跳转过程开发者无法干预，一些面向切面的事情难以实施，比方说登录、埋点这种非常通用的逻辑，在每个子页面中判断又很不合理，毕竟activity已经实例化了</li>
+</ul>
+</li>
+<li>
+<strong>跨模块无法显式依赖</strong>
+<ul>
+<li>在App小有规模的时候，我们会对App做水平拆分，按照业务拆分成多个子模块，之间完全解耦，通过打包流程控制App功能，这样方便应对大团队多人协作，互相逻辑不干扰，这时候只能依赖隐式Intent跳转，书写麻烦，成功与否难以控制。  
+</li>
+</ul>
+</li>
+</ul>
+<p>而Router框架很好地解决了以上问题，比如ARouter。</p>
+<h3>ARouter路由框架</h3>
+<ul>
+<li>支持通过URL进行跳转，并自动注入参数到目标页面</li>
+<li>支持多模块工程使用</li>
+<li>支持添加多个拦截器，自定义拦截顺序</li>
+<li>支持依赖注入，可单独作为依赖注入框架使用</li>
+<li>等等...</li>
+</ul>
+<p>详见 <a href="https://github.com/alibaba/ARouter">传送门</a></p>
+<h3>组件化</h3>
+<p>随着时间的推移，项目变得越来越臃肿，随便修改一些东西，重新编译一次，也要几分钟，极大影响开发效率。  </p>
+<p>使用组件化可实现</p>
+<ul>
+<li>模块间进一步解耦，所有的基础公共库按需进行依赖，各个项目可共用</li>
+<li>开发阶段仅对单个模块进行运行和调试，提高开发效率</li>
+<li>减少协同开发中的冲突，提高开发效率</li>
+<li>可自由选择开发姿势（MVC/MVP/MVVM等)</li>
+<li>可进行针对性的的测试(仅需对修改过的模块进行测试)</li>
+<li>实现各模块的配置和组装，当一个功能不需要的时候，随时可去掉，当又需要该功能的时候，随时又可加上。</li>
+</ul>
+<p>而使用Router框架是实现组件化的一个很好的方式。    </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/142377-d295b9e88a2c3322?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" /></p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

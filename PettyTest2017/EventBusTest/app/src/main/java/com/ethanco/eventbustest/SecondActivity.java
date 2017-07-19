@@ -38,7 +38,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        MessageEvent message = new MessageEvent(EventBusWhat.WAHT_TEST);
+        MessageEvent message = new MessageEvent(What.TEST);
         message.setStr1("Say Hello");
         EventBus.getDefault().post(message);
     }

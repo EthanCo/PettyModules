@@ -14,6 +14,7 @@ import org.greenrobot.eventbus.ThreadMode;
 public class MainActivity extends AppCompatActivity {
     private TextView tvInfo;
     private Button btnSecond;
+    private Button btnSticky;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,18 @@ public class MainActivity extends AppCompatActivity {
 
         tvInfo = (TextView) findViewById(R.id.tv_info);
         btnSecond = (Button) findViewById(R.id.button_second);
+        btnSticky = (Button) findViewById(R.id.btn_sticky);
         btnSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnSticky.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, StickyActivity.class);
                 startActivity(intent);
             }
         });
@@ -34,18 +43,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
+
         EventBus.getDefault().unregister(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        if (event.getWhat() == EventBusWhat.WAHT_TEST) {
+        if (event.getWhat() == What.TEST) {
             tvInfo.setText(event.getStr1());
         }
     }

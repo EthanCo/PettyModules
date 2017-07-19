@@ -5,22 +5,22 @@ package com.ethanco.eventbustest;
  */
 
 public class MessageEvent {
-    private EventBusWhat what;
+    private int what;
     private int arg1;
     private int arg2;
     private String str1;
     private String str2;
     private Object obj1;
 
-    public MessageEvent(EventBusWhat what) {
+    public MessageEvent(int what) {
         this.what = what;
     }
 
-    public EventBusWhat getWhat() {
+    public int getWhat() {
         return what;
     }
 
-    public void setWhat(EventBusWhat what) {
+    public void setWhat(int what) {
         this.what = what;
     }
 

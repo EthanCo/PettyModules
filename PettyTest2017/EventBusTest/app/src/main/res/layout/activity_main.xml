@@ -23,9 +23,23 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:text="start second activity"
         app:layout_constraintLeft_toLeftOf="@+id/tv_info"
         app:layout_constraintRight_toRightOf="@+id/tv_info"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_info"
+        app:layout_constraintHorizontal_bias="0.491" />
+
+    <Button
+        android:id="@+id/btn_sticky"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:text="Start Sticky Activity"
+        app:layout_constraintLeft_toLeftOf="@+id/button_second"
+        app:layout_constraintRight_toRightOf="@+id/button_second"
+        app:layout_constraintHorizontal_bias="0.857"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button_second" />
 
 </android.support.constraint.ConstraintLayout>

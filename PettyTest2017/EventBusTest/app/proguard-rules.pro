@@ -23,3 +23,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-keep class de.greenrobot.** {*;}
+-keepclassmembers class * {
+    @de.greenrobot.event.Subscribe <methods>;
+}

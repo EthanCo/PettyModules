@@ -1,6 +1,8 @@
 package com.ethanco.lib.baidu;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
@@ -18,6 +20,7 @@ public class BaiduFacede {
     private static LocationClient mLocationClient = null;
     private static BaiduLocationListener baiduLocationListener = null;
     private static BDLocation location = null;
+    private static boolean isInited = false;
 
     /**
      * 初始化百度，只定位一次，立即启动
@@ -36,13 +39,16 @@ public class BaiduFacede {
      * @param isStartNow     是否立即启动，若为false需手动调用mLocationClient.start();才能定位
      */
     public static void init(Context context, boolean isLocationOnce, boolean isStartNow) {
-        mLocationClient = new LocationClient(context);     //声明LocationClient类
-        baiduLocationListener = new BaiduLocationListener(isLocationOnce);
-        mLocationClient.registerLocationListener(baiduLocationListener);    //注册监听函数
-        initLocation();
+        if (isNetworkAvailable(context)) {
+            isInited = true;
+            mLocationClient = new LocationClient(context);     //声明LocationClient类
+            baiduLocationListener = new BaiduLocationListener(isLocationOnce);
+            mLocationClient.registerLocationListener(baiduLocationListener);    //注册监听函数
+            initLocation();
 
-        if (isStartNow) {
-            mLocationClient.start();
+            if (isStartNow) {
+                mLocationClient.start();
+            }
         }
     }
 
@@ -81,5 +87,37 @@ public class BaiduFacede {
 
     static void setLocation(BDLocation location) {
         BaiduFacede.location = location;
+    }
+
+    public static void startLocate(Context context) {
+        if (!isInited) init(context);
+
+        if (mLocationClient != null) {
+            mLocationClient.start();
+        }
+    }
+
+    public static void stopLocate(Context context) {
+        if (!isInited) init(context);
+
+        if (mLocationClient != null) {
+            mLocationClient.stop();
+        }
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                // 当前网络是连接的
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    // 当前所连接的网络可用
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

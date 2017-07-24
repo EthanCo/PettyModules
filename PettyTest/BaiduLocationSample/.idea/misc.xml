@@ -18,18 +18,19 @@
         <option name="DEFINITIONS" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="FOOTNOTES" value="false" />
-        <option name="FORCELISTITEMPARA" value="false" />
         <option name="HARDWRAPS" value="false" />
+        <option name="INSERTED" value="false" />
         <option name="QUOTES" value="false" />
         <option name="RELAXEDHRULES" value="true" />
         <option name="SMARTS" value="false" />
         <option name="STRIKETHROUGH" value="true" />
+        <option name="SUBSCRIPT" value="false" />
+        <option name="SUPERSCRIPT" value="false" />
         <option name="SUPPRESS_HTML_BLOCKS" value="false" />
         <option name="SUPPRESS_INLINE_HTML" value="false" />
         <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="false" />
-        <option name="TRACE_PARSER" value="false" />
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
@@ -117,11 +118,14 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\fengh\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="masterDetails">
     <states>

@@ -135,7 +135,7 @@ public class BaiduLocationListener implements BDLocationListener {
     }
 
     private void locationSuccess(BDLocation location) {
-        Log.i("BaiduLocationApiDem", "locationSuccess");
+        Log.i("BaiduLocationApiDem", "locationSuccess:"+location.getCity());
         for (ILocationListener locationListener : locationListeners) {
             locationListener.onLocationSuccess(location);
         }

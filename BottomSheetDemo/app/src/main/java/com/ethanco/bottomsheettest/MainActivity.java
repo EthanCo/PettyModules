@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //解决在横屏的情况下，初始高度太小的问题
-        resetInitialHeight(recyclerView);
+        //resetInitialHeight(recyclerView);
 
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(recyclerView);

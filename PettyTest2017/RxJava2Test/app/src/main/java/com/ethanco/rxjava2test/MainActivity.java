@@ -165,5 +165,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        Disposable disposable = Flowable.just("")
+                .subscribe();
+        disposable.dispose();
+
     }
 }

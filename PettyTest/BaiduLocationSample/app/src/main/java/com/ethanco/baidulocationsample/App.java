@@ -2,6 +2,7 @@ package com.ethanco.baidulocationsample;
 
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.ethanco.lib.baidu.BaiduFacede;
 
@@ -19,5 +20,8 @@ public class App extends Application {
         super.onCreate();
 
         BaiduFacede.init(this);
+
+        Intent intent = new Intent(this, TestService.class);
+        startService(intent);
     }
 }

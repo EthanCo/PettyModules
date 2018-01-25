@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.color.ColorChooserDialog;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
 import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.ethanco.mymaterialdialogtest.R;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 /**
  * 第三方Material Dialog
  */
-public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implements View.OnClickListener {
+public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implements View.OnClickListener,ColorChooserDialog.ColorCallback {
 
     private ArrayList<Object> list;
     int progress = 0;
@@ -39,6 +41,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         findViewById(R.id.btnPercent).setOnClickListener(this);
         findViewById(R.id.btnCustom).setOnClickListener(this);
         findViewById(R.id.btnSingleList).setOnClickListener(this);
+        findViewById(R.id.btnColorChooser).setOnClickListener(this);
     }
 
     @Override
@@ -170,14 +173,14 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         .show();
                 break;
             case R.id.btnSingleList:
-                final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(new MaterialSimpleListAdapter.Callback() {
+                //列表 竖直
+                /*final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(new MaterialSimpleListAdapter.Callback() {
                     @Override
                     public void onMaterialListItemSelected(MaterialDialog dialog, int index, MaterialSimpleListItem item) {
                         Toast.makeText(getApplicationContext(), "choice:"+index, Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                //列表 竖直
                 adapter.add(new MaterialSimpleListItem.Builder(this)
                         .content("username@gmail.com")
                         .icon(R.mipmap.ic_launcher)
@@ -196,9 +199,73 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
 
                 new MaterialDialog.Builder(this)
                         .title(R.string.set_backup)
-                        .show();
+                        .show();*/
 
-                //.adapter(adapter, new GridLayoutManager(this,3))
+                final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(new MaterialSimpleListAdapter.Callback() {
+                    @Override
+                    public void onMaterialListItemSelected(MaterialDialog dialog, int index, MaterialSimpleListItem item) {
+                        Toast.makeText(getApplicationContext(), "choice:"+index, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+
+                new MaterialDialog.Builder(this)
+                        .title("请选择图标")
+                        .adapter(adapter, new GridLayoutManager(this,3))
+                        .show();
+                break;
+            case R.id.btnColorChooser:
+                boolean accent = true;
+                int accentPreselect = getResources().getColor(R.color.colorAccent);
+                int primaryPreselect = getResources().getColor(R.color.colorPrimary);
+                // Pass a context, along with the title of the dialog
+                new ColorChooserDialog.Builder(this, R.string.choice_color_first)
+                        .titleSub(R.string.choice_color_second)  // title of dialog when viewing shades of a color
+                        .accentMode(accent)  // when true, will display accent palette instead of primary palette
+                        .doneButton(R.string.md_done_label)  // changes label of the done button
+                        .cancelButton(R.string.md_cancel_label)  // changes label of the cancel button
+                        .backButton(R.string.md_back_label)  // changes label of the back button
+                        .preselect(accent ? accentPreselect : primaryPreselect)  // optionally preselects a color
+                        .dynamicButtonColor(true)  // defaults to true, false will disable changing action buttons' color to currently selected color
+                        .show(this); // an AppCompatActivity which implements ColorCallback
                 break;
             default:
         }
@@ -209,5 +276,15 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         for (int i = 0; i < 6; i++) {
             list.add("Item" + i);
         }
+    }
+
+    @Override
+    public void onColorSelection(@NonNull ColorChooserDialog dialog, int selectedColor) {
+        Toast.makeText(ThirdPartyMaterialDialogActivity.this, "颜色选择:"+selectedColor, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onColorChooserDismissed(@NonNull ColorChooserDialog dialog) {
+        Toast.makeText(ThirdPartyMaterialDialogActivity.this, "颜色选择 dismiss", Toast.LENGTH_SHORT).show();
     }
 }

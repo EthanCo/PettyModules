@@ -13,4 +13,6 @@
     <string name="delete_confirm">确认删除?</string>
     <string name="next">下一个</string>
     <string name="set_backup">Simple List</string>
+    <string name="choice_color_first">选择颜色</string>
+    <string name="choice_color_second">微调</string>
 </resources>

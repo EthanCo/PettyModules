@@ -1,5 +1,6 @@
 package com.ethanco.mymaterialdialogtest.thirdparty;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListAdapter;
+import com.afollestad.materialdialogs.simplelist.MaterialSimpleListItem;
 import com.ethanco.mymaterialdialogtest.R;
 
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
         findViewById(R.id.btnMultiChoice).setOnClickListener(this);
         findViewById(R.id.btnPercent).setOnClickListener(this);
         findViewById(R.id.btnCustom).setOnClickListener(this);
+        findViewById(R.id.btnSingleList).setOnClickListener(this);
     }
 
     @Override
@@ -164,6 +168,37 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                         .customView(R.layout.custom_view, wrapInScrollView)
                         .positiveText("确定")
                         .show();
+                break;
+            case R.id.btnSingleList:
+                final MaterialSimpleListAdapter adapter = new MaterialSimpleListAdapter(new MaterialSimpleListAdapter.Callback() {
+                    @Override
+                    public void onMaterialListItemSelected(MaterialDialog dialog, int index, MaterialSimpleListItem item) {
+                        Toast.makeText(getApplicationContext(), "choice:"+index, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //列表 竖直
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .content("username@gmail.com")
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .content("user02@gmail.com")
+                        .icon(R.mipmap.ic_launcher)
+                        .backgroundColor(Color.WHITE)
+                        .build());
+                adapter.add(new MaterialSimpleListItem.Builder(this)
+                        .content(R.string.app_name)
+                        .icon(R.mipmap.ic_launcher)
+                        .iconPaddingDp(8)
+                        .build());
+
+                new MaterialDialog.Builder(this)
+                        .title(R.string.set_backup)
+                        .show();
+
+                //.adapter(adapter, new GridLayoutManager(this,3))
                 break;
             default:
         }

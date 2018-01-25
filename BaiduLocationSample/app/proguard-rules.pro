@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+
+#百度定位
+-keep class com.baidu.location.** { *; }
+-keep class com.ethanco.lib.baidu.** {*;}
+-keep class com.baidu.** { *; }
+-keep class vi.com.gdi.bgl.android.**{*;}

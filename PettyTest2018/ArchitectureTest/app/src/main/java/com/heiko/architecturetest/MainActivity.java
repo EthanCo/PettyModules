@@ -20,6 +20,13 @@ import com.heiko.architecturetest.viewModel.RoomViewModel;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * https://mp.weixin.qq.com/s/JCZGiv6sGZLvm-sVoZfSAw
+ * http://mp.weixin.qq.com/s/rdRozpkXcz_5_QRWhTqLpQ
+ * http://mp.weixin.qq.com/s/B7Os6xvKRkgthwV6G-uAKA
+ * http://mp.weixin.qq.com/s/PnCQwctmWR9SYOWSe_TaKg
+ * http://mp.weixin.qq.com/s/qdgzo5nlsZEFic77LCoV6A
+ */
 public class MainActivity extends AppCompatActivity {
     private TestObserver testObserver;
     public static final String TAG = "Z-MainActivity";

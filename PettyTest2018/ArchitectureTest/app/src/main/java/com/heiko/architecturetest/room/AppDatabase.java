@@ -31,7 +31,8 @@ public abstract class AppDatabase extends RoomDatabase {
                             .build();*/
 
                     Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "user.db")
-                            .allowMainThreadQueries() //为了简化代码线，请允许主线程上的查询。不要在一个真正的应用程序上这样做！关于一个示例，请参阅坚持不懈的示例。
+                            .allowMainThreadQueries() //为了简化代码，请允许主线程上的查询。不要在一个真正的应用程序上这样做！
+                            //.addMigrations() 数据库迁移到新版本 http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2017/0525/7971.html
                             .build();
         }
         return INSTANCE;

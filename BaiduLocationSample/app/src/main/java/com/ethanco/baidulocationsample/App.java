@@ -3,8 +3,6 @@ package com.ethanco.baidulocationsample;
 
 import android.app.Application;
 
-import com.ethanco.lib.baidu.BaiduFacede;
-
 /**
  * Application
  *
@@ -17,7 +15,5 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        BaiduFacede.init(this);
     }
 }

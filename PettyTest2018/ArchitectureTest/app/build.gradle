@@ -30,7 +30,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //LifeCycle
+    /*//LifeCycle
     implementation "android.arch.lifecycle:runtime:1.0.3" //不是必要的，如果你使用 lifecycle:extensions 或者lifecycle:common-java8
     annotationProcessor"android.arch.lifecycle:compiler:1.0.0" //不是必须的，如果你使用 common-java8中的DefaultLifecycleObserver
     implementation "android.arch.lifecycle:common-java8:1.0.0"//支持Java8需要添加
@@ -45,6 +45,27 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     testImplementation "android.arch.persistence.room:testing:1.0.0"//测试Room
     implementation "android.arch.persistence.room:rxjava2:1.0.0"//支持RXJava
+
+    //Paging
+    implementation "android.arch.paging:runtime:1.0.0-alpha3"*/
+
+    //Architecture Components
+    //详见: https://developer.android.google.cn/topic/libraries/architecture/adding-components.html
+    //LifeCycle
+    implementation "android.arch.lifecycle:runtime:1.1.0" //不是必要的，如果你使用 lifecycle:extensions 或者lifecycle:common-java8
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.0" //不是必须的，如果你使用 common-java8中的DefaultLifecycleObserver
+    implementation "android.arch.lifecycle:common-java8:1.1.0" //支持Java8需要添加
+
+    //LiveData 和 ViewModel
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    testImplementation "android.arch.core:core-testing:1.1.0" //测试工作线程中使用LiveData
+    implementation "android.arch.lifecycle:reactivestreams:1.1.0" //配合ReactiveStream API使用
+    implementation "android.arch.persistence.room:rxjava2:1.0.0" ////支持RXJava2
+
+    //Room
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    testImplementation "android.arch.persistence.room:testing:1.0.0" //测试Room
 
     //Paging
     implementation "android.arch.paging:runtime:1.0.0-alpha3"

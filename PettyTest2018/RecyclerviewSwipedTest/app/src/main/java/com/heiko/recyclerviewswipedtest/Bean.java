@@ -1,7 +1,7 @@
 package com.heiko.recyclerviewswipedtest;
 
 /**
- * TODO
+ * Bean
  *
  * @author EthanCo
  * @since 2018/5/10

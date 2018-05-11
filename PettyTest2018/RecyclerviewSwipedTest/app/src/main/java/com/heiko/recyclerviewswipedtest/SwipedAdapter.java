@@ -32,10 +32,19 @@ public class SwipedAdapter extends RecyclerView.Adapter<SwipedAdapter.SwipedView
     private List<Bean> datas = new ArrayList<>();
     private Context context;
 
-    public SwipedAdapter(List<Bean> datas, Context context,ItemTouchHelper itemTouchHelper) {
+    public SwipedAdapter(Context context, List<Bean> datas) {
         this.datas = datas;
         this.context = context;
-        this.mItemTouchHelper = itemTouchHelper;
+    }
+
+    public SwipedAdapter(Context context, List<Bean> datas, ItemTouchHelper mItemTouchHelper) {
+        this.mItemTouchHelper = mItemTouchHelper;
+        this.datas = datas;
+        this.context = context;
+    }
+
+    public void setmItemTouchHelper(ItemTouchHelper mItemTouchHelper) {
+        this.mItemTouchHelper = mItemTouchHelper;
     }
 
     @Override

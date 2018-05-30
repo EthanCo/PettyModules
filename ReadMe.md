@@ -120,7 +120,10 @@ Bottom sheet 的一个示例，在support library23.2中，增加了Bottom sheet
 
 	Beta.checkUpgrade();
 
-  
+## LayoutManagerGroup
+![LayoutManagerGroup](https://github.com/DingMouRen/LayoutManagerGroup/raw/master/picture/img1.gif)  
+
+使用Recyclerview实现炫酷滑动列表，详见[LayoutManagerGroup](https://github.com/DingMouRen/LayoutManagerGroup)
 
 
 

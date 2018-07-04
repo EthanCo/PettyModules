@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!--这里要用到 NavHost 来托管 Navigation，NavHost 是个接口，默认是用 NavHostFragment 来托管，NavHostFragment 是实现了 NavHost 接口的-->
+    <!--navGraph 属性就是写刚才我们写的 nagation 文件，defaultNavHost 这个是和返回键相关的，和这一块相关的[官方文档]-->
+    <!--app:defaultNavHost 如果把这个属性改为 false，从第一个 Fragment 跳到第二个 Fragment 再按返回键就会直接退出程序-->
+    <fragment
+        android:id="@+id/frag_nav_simple"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_simple" />
+
+</android.support.constraint.ConstraintLayout>

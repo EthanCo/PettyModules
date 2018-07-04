@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_simple_first_frag">
+
+    <fragment
+        android:id="@+id/nav_simple_first_frag"
+        android:name="com.heiko.navigationtest2.FirstFragment"
+        android:label="first frag"
+        tools:layout="@layout/fragment_first">
+        <!--这里可以看到 action 有很多属性，这里现在我们只需要 id 和 destination，id 就是这个 action 的 id, destination 是目的地，要跳转到哪里的，这里写上第二个 Fragment 的 id。-->
+        <action
+            android:id="@+id/action_nav_first_frag_to_nav_second_frag"
+            app:destination="@id/nav_simple_second_frag"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_simple_second_frag"
+        android:name="com.heiko.navigationtest2.SecondFragment"
+        android:label="second frag"
+        tools:layout="@layout/fragment_second"></fragment>
+</navigation>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Placeholder （占位符）用于和一个视图关联起来，
+    通过 setContentId() 方法将占位符转换为指定的视图，即视图将在占位符所在位置上显示，
+    如果此时布局中已包含该视图，则视图将从原有位置消失-->
+    <Button
+        android:id="@+id/btn_setContentId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="setContentId"
+        android:text="setContentId"
+        android:textAllCaps="false" />
+
+    <ImageView
+        android:id="@+id/iv_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_setContentId" />
+
+    <!--方式一: Java代码中绑定-->
+    <!--Placeholder placeholder = findViewById(R.id.placeholder);-->
+    <!--placeholder.setContentId(R.id.iv_target);-->
+    <android.support.constraint.Placeholder
+        android:id="@+id/placeholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--此外也可以直接在布局文件中将占位符和视图 ID 绑定在一起-->
+    <!--<android.support.constraint.Placeholder-->
+        <!--android:id="@+id/placeholder"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:content="@id/iv_target"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+</android.support.constraint.ConstraintLayout>

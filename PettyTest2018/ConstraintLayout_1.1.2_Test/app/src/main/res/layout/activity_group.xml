@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Group 用于控制多个控件的可见性，如果要隐藏多个控件则不必再单独设置每个控件的可见性了-->
+    <!--相关属性:-->
+    <!--constraint_referenced_ids ：用于设置所引用的控件的 ID-->
+    <Button
+        android:id="@+id/btn_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target Button"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Source Button"
+        android:textAllCaps="false"
+        app:layout_constraintCircle="@id/btn_target"
+        app:layout_constraintCircleAngle="45"
+        app:layout_constraintCircleRadius="120dp" />
+
+    <android.support.constraint.Group
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="btn_target, btn_source" />
+
+</android.support.constraint.ConstraintLayout>

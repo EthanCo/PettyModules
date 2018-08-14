@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--很多时候我们都会遇到控件的大小随着其包含的数据的多少而改变的情况，
+    而此时如果有多个控件之间是相互约束的话，就比较难来设定各个控件间的约束关系了-->
+    <!--而 Barrier（屏障）就是用于这种情况，Barrier 和 GuideLine 一样是一个虚拟的 View，
+    对界面是不可见的，只是用于辅助布局，而 Barrier 和 GuideLine 的区别在于它可以由多个 View 来决定其属性-->
+
+    <!--相关属性:-->
+    <!--barrierDirection：用于设置 Barrier 的位置，属性值有：bottom、top、start、end、left、right-->
+    <!--constraint_referenced_ids：用于设置 Barrier 所引用的控件的 ID，可同时设置多个-->
+    <!--barrierAllowsGoneWidgets：默认为 true，当 Barrier 所引用的控件为 Gone 时，
+    则 Barrier 的创建行为是在已 Gone 的控件已解析的位置上进行创建。如果设置为 false，
+    则不会将 Gone 的控件考虑在内-->
+    <!--详见:https://cloud.tencent.com/developer/article/1150341-->
+
+    <!--android:text="这是一段并不长的文本,那就随便写写吧"-->
+    <Button
+        android:id="@+id/btn_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这是一段并不长的文本"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我也不知道说什么好"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_target" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:barrierAllowsGoneWidgets="false"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="btn_target,btn_source" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="那就随便写写吧"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/btn_target" />
+
+</android.support.constraint.ConstraintLayout>

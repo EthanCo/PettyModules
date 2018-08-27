@@ -1,0 +1,54 @@
+//编写自定义Gradle插件
+//https://mp.weixin.qq.com/s/DPi0edk_7MAOm_N3X9Tz0w
+//https://blog.csdn.net/sbsujjbcy/article/details/50782830/
+//apply plugin后面引号内的名字就是前文com.tb.plugin.module_plugin.properties文件的文件名
+
+//1.build.gradle文件内的插件
+apply plugin: Plugin2
+
+class Plugin2 implements Plugin<Project> {
+
+    @Override
+    void apply(Project target) {
+        println(">>>1 this is a plugin in the file 'build.gradle'...")
+    }
+}
+
+//2.buildSrc下的插件
+//此处插件id大小写，中下划线均可***
+//apply plugin: 'com.tb.plugin-buildSrc'
+//该方式可以不需要resources文件夹，直接引用插件全类名即可
+apply plugin: com.tb.plugin.TbPlugin
+
+//5.工程内module的插件*************
+apply plugin: 'com.tb.plugin.module_plugin'
+
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url uri('./tbModulePlugin/')
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.tb.plugin:module-plugin:1.0.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

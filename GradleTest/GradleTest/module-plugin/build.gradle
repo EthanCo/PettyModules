@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+}
+
+group='com.tb.plugin'
+version='1.0.0'
+archivesBaseName='module-plugin'
+
+uploadArchives{
+    repositories {
+        mavenDeployer{
+            repository(url: uri('../tbModulePlugin'))
+        }
+    }
+}

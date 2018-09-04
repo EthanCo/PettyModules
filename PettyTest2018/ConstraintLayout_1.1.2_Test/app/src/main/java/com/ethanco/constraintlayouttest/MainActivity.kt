@@ -8,6 +8,7 @@ import android.view.View
 
 
 //详见 https://cloud.tencent.com/developer/article/1150341
+//https://juejin.im/post/5b013e6f51882542c760dc7b
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,7 +3,7 @@ package com.heiko.aidltest;
 
 import com.heiko.aidltest.bean.Person;
 
-import java.lang.Integer;
+//import java.lang.Integer;
 
 // Declare any non-default types here with import statements
 

@@ -142,7 +142,7 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             Drawable bitmapDrawable = mBackDrawAbles.get(2);
             if (bitmapDrawable == null) {
                 bitmapDrawable = new BitmapDrawable(null, drawCircle(radius,
-                        Color.argb(159, 210, 154, 6)));
+                        Color.RED)); //Color.argb(159, 210, 154, 6)
                 mBackDrawAbles.put(2, bitmapDrawable);
             }
 
@@ -151,7 +151,7 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             Drawable bitmapDrawable = mBackDrawAbles.get(3);
             if (bitmapDrawable == null) {
                 bitmapDrawable = new BitmapDrawable(null, drawCircle(radius,
-                        Color.argb(199, 217, 114, 0)));
+                        Color.BLUE)); //Color.argb(199, 217, 114, 0)
                 mBackDrawAbles.put(3, bitmapDrawable);
             }
 
@@ -160,7 +160,7 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             Drawable bitmapDrawable = mBackDrawAbles.get(4);
             if (bitmapDrawable == null) {
                 bitmapDrawable = new BitmapDrawable(null, drawCircle(radius,
-                        Color.argb(235, 215, 66, 2)));
+                        Color.GREEN)); //Color.argb(235, 215, 66, 2)
                 mBackDrawAbles.put(4, bitmapDrawable);
             }
 

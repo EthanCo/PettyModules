@@ -3,9 +3,8 @@ package com.heiko.amaptest;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
-import android.provider.SyncStateContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewTreeObserver;
 
@@ -195,11 +194,11 @@ public class MainActivity extends AppCompatActivity implements AMap.OnMapLoadedL
                 // 自定义定位蓝点图标
                 .myLocationIcon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
                 // 自定义精度范围的圆形边框颜色
-                .strokeColor(0xc4d3e7)
+                .strokeColor(Color.RED) //0xc4d3e7
                 // 自定义精度范围的圆形边框宽度
-                .strokeWidth(1)
+                .strokeWidth(10) //1
                 // 设置圆形的填充颜色
-                .radiusFillColor(0x66c4d3e7)
+                .radiusFillColor(Color.BLUE) //0x66c4d3e7
                 //连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
                 .myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);
         // .interval(DEFAULT_LOCATION_INTERVAL);

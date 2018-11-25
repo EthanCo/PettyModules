@@ -58,6 +58,8 @@
 
         <activity android:name=".cluster.ClusterActivity" />
         <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".cluster.ClusterActivity" />
+        <activity android:name=".anchor.AnchorActivity"></activity>
     </application>
 
 </manifest>

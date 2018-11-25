@@ -9,7 +9,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.heiko.amaptest.anchor.AnchorActivity;
 import com.heiko.amaptest.cluster.ClusterActivity;
+import com.heiko.amaptest.search.SearchActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

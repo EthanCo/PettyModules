@@ -8,12 +8,16 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
@@ -24,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClusterActivity extends AppCompatActivity implements ClusterRender,AMap.OnMapLoadedListener,ClusterClickListener {
+public class ClusterActivity extends AppCompatActivity implements ClusterRender,AMap.OnMapLoadedListener,ClusterClickListener, AMap.OnCameraChangeListener {
 
     private MapView mMapView;
     private AMap mAMap;
@@ -40,6 +44,18 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
         mMapView = (MapView) findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         init();
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+
+                while (true){
+                    SystemClock.sleep(2000);
+                    Log.i("Z-Test-点聚合", "地图缩放级别:"+mAMap.getCameraPosition().zoom);
+                }
+            }
+        }.start();
     }
 
     private void init() {
@@ -47,6 +63,9 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             // 初始化地图
             mAMap = mMapView.getMap();
             mAMap.setOnMapLoadedListener(this);
+            UiSettings settings = mAMap.getUiSettings();
+            settings.setScaleControlsEnabled(true);
+            mAMap.setOnCameraChangeListener(this);
             //点击可以动态添加点
             mAMap.setOnMapClickListener(new AMap.OnMapClickListener() {
                 @Override
@@ -120,8 +139,7 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             builder.include(clusterItem.getPosition());
         }
         LatLngBounds latLngBounds = builder.build();
-        mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0)
-        );
+        mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
     }
 
     @Override
@@ -186,5 +204,15 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
     public int dp2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    @Override
+    public void onCameraChange(CameraPosition cameraPosition) {
+
+    }
+
+    @Override
+    public void onCameraChangeFinish(CameraPosition cameraPosition) {
+
     }
 }

@@ -31,11 +31,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-//    implementation 'com.amap.api:3dmap:5.2.0'
-//    implementation 'com.amap.api:location:3.3.0'
-//    implementation 'com.amap.api:search:5.0.0'
+    implementation 'com.amap.api:3dmap:5.2.0'
+    implementation 'com.amap.api:location:3.3.0'
+    implementation 'com.amap.api:search:5.0.0'
 
-    implementation 'com.amap.api:3dmap:6.5.0'
-    implementation 'com.amap.api:location:4.3.0'
-    implementation 'com.amap.api:search:6.5.0'
+//    implementation 'com.amap.api:3dmap:6.5.0'
+//    implementation 'com.amap.api:location:4.3.0'
+//    implementation 'com.amap.api:search:6.5.0'
 }

@@ -4,6 +4,7 @@
 
     <!-- 地图SDK（包含其搜索功能）需要的基础权限 -->
 
+
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 允许程序设置内置sd卡的写权限 -->
@@ -55,7 +56,8 @@
         <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".cluster.ClusterActivity"></activity>
+        <activity android:name=".cluster.ClusterActivity" />
+        <activity android:name=".search.SearchActivity"></activity>
     </application>
 
 </manifest>

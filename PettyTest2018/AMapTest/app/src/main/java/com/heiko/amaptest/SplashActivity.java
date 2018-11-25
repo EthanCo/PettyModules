@@ -3,13 +3,14 @@ package com.heiko.amaptest;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
 import com.heiko.amaptest.cluster.ClusterActivity;
+import com.heiko.amaptest.search.SearchActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -57,6 +58,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SplashActivity.this,ClusterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashActivity.this,SearchActivity.class);
                 startActivity(intent);
             }
         });

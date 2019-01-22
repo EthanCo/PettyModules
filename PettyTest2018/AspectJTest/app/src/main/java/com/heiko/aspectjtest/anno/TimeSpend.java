@@ -1,4 +1,4 @@
-package com.heiko.aspectjtest;
+package com.heiko.aspectjtest.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

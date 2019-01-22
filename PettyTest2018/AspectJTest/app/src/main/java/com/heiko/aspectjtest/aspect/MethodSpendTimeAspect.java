@@ -1,6 +1,8 @@
-package com.heiko.aspectjtest;
+package com.heiko.aspectjtest.aspect;
 
 import android.util.Log;
+
+import com.heiko.aspectjtest.anno.TimeSpend;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +13,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class MethodSpendTimeAspect {
     private static final String TAG = "MethodSpendTimeAspect";
-    @Pointcut("execution(@com.heiko.aspectjtest.TimeSpend * *(..))") //execution call
+    @Pointcut("execution(@com.heiko.aspectjtest.anno.TimeSpend * *(..))") //execution call
     public void methodTime() {}
 
     @Around("methodTime()")

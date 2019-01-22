@@ -1,4 +1,4 @@
-package com.heiko.aspectjtest;
+package com.heiko.aspectjtest.aspect;
 
 import android.util.Log;
 import android.view.View;

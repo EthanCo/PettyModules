@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.heiko.amaptest.anchor.AnchorActivity;
 import com.heiko.amaptest.cluster.ClusterActivity;
+import com.heiko.amaptest.clusterv2.ClusterV2Activity;
 import com.heiko.amaptest.search.SearchActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -75,6 +76,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SplashActivity.this,SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_anchor_v2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashActivity.this,ClusterV2Activity.class);
                 startActivity(intent);
             }
         });

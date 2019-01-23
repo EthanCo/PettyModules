@@ -57,8 +57,10 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".cluster.ClusterActivity" />
-        <activity android:name=".search.SearchActivity"></activity>
-        <activity android:name=".anchor.AnchorActivity"></activity>
+        <activity android:name=".clusterv2.ClusterV2Activity" />
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".anchor.AnchorActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

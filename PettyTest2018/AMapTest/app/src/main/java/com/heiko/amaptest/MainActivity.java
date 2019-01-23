@@ -1,11 +1,14 @@
 package com.heiko.amaptest;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewTreeObserver;
 
 import com.amap.api.maps.AMap;
@@ -72,13 +75,13 @@ public class MainActivity extends AppCompatActivity implements AMap.OnMapLoadedL
 
         //绘制线
         List<LatLng> latLngs = new ArrayList<LatLng>();
-        latLngs.add(new LatLng(29.858775,121.601885));
-        latLngs.add(new LatLng(29.855513,121.600579));
+        latLngs.add(new LatLng(29.858775, 121.601885));
+        latLngs.add(new LatLng(29.855513, 121.600579));
         Polyline polyline = aMap.addPolyline(new PolylineOptions().
                 addAll(latLngs).width(10).color(Color.argb(255, 1, 1, 1)));
 
         //绘制圆
-        LatLng latLng = new LatLng(29.858775,121.601885);
+        LatLng latLng = new LatLng(29.858775, 121.601885);
         Circle circle = aMap.addCircle(new CircleOptions().
                 center(latLng).
                 radius(100).
@@ -104,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements AMap.OnMapLoadedL
 
         //绘制一个长方形
         aMap.addPolygon(new PolygonOptions()
-                .addAll(createRectangle( new LatLng(29.857275, 121.601185), 0.0005f, 0.0005f))
+                .addAll(createRectangle(new LatLng(29.857275, 121.601185), 0.0005f, 0.0005f))
                 .fillColor(Color.LTGRAY).strokeColor(Color.RED).strokeWidth(1));
 
         //绘制不规则多边形
@@ -235,5 +238,22 @@ public class MainActivity extends AppCompatActivity implements AMap.OnMapLoadedL
     @Override
     public void onMapLoaded() {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.menu_test) {
+            Intent intent = new Intent(this, TestActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

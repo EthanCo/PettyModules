@@ -1,6 +1,5 @@
-package com.heiko.amaptest.cluster;
+package com.heiko.amaptest.clusterv2;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -26,12 +27,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClusterActivity extends AppCompatActivity implements ClusterRender,AMap.OnMapLoadedListener,ClusterClickListener, AMap.OnCameraChangeListener {
+import static com.heiko.amaptest.clusterv2.ClusterUtils.dp2px;
+
+public class ClusterV2Activity extends AppCompatActivity implements ClusterRenderV2, AMap.OnMapLoadedListener, ClusterClickListenerV2, AMap.OnCameraChangeListener {
 
     private MapView mMapView;
     private AMap mAMap;
-    private ClusterOverlay mClusterOverlay;
+    private ClusterOverlayV2 mClusterOverlay;
     private int clusterRadius = 100; //聚合半径
+    private int imgCacheSize = 80; //图片缓存数量
     private Map<Integer, Drawable> mBackDrawAbles = new HashMap<Integer, Drawable>();
 
     @Override
@@ -39,18 +43,18 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cluster);
 
-        mMapView = (MapView) findViewById(R.id.map);
+        mMapView = findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
         init();
 
-       /* new Thread(){
+        /*new Thread() {
             @Override
             public void run() {
                 super.run();
 
-                while (true){
+                while (true) {
                     SystemClock.sleep(2000);
-                    Log.i("Z-Test-点聚合", "地图缩放级别:"+mAMap.getCameraPosition().zoom);
+                    Log.i("Z-Test-点聚合", "地图缩放级别:" + mAMap.getCameraPosition().zoom);
                 }
             }
         }.start();*/
@@ -65,18 +69,19 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
             settings.setScaleControlsEnabled(true);
             mAMap.setOnCameraChangeListener(this);
             //点击可以动态添加点
-            mAMap.setOnMapClickListener(new AMap.OnMapClickListener() {
+            /*mAMap.setOnMapClickListener(new AMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
+                    Toast.makeText(ClusterV2Activity.this, "Click", Toast.LENGTH_SHORT).show();
                     double lat = Math.random() + 39.474923;
                     double lon = Math.random() + 116.027116;
 
                     LatLng latLng1 = new LatLng(lat, lon, false);
-                    RegionItem regionItem = new RegionItem(latLng1, "test");
+                    ParkItemV2 regionItem = new ParkItemV2(latLng1, "test");
                     mClusterOverlay.addClusterItem(regionItem);
 
                 }
-            });
+            });*/
         }
     }
 
@@ -102,38 +107,16 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
 
     @Override
     public void onMapLoaded() {
-        //添加测试数据
-        new Thread() {
-            public void run() {
-
-                List<ClusterItem> items = new ArrayList<ClusterItem>();
-
-                //随机10000个点
-                for (int i = 0; i < 10000; i++) {
-
-                    double lat = Math.random() + 39.474923;
-                    double lon = Math.random() + 116.027116;
-
-                    LatLng latLng = new LatLng(lat, lon, false);
-                    RegionItem regionItem = new RegionItem(latLng,
-                            "test" + i);
-                    items.add(regionItem);
-
-                }
-                mClusterOverlay = new ClusterOverlay(mAMap, items,
-                        dp2px(getApplicationContext(), clusterRadius),
-                        getApplicationContext());
-                mClusterOverlay.setClusterRenderer(ClusterActivity.this);
-                mClusterOverlay.setOnClusterClickListener(ClusterActivity.this);
-            }
-        }.start();
+        mClusterOverlay = new ClusterOverlayV2(getApplication(), mAMap, clusterRadius,imgCacheSize);
+        mClusterOverlay.setClusterRenderer(ClusterV2Activity.this);
+        mClusterOverlay.setOnClusterClickListener(ClusterV2Activity.this);
     }
 
     @Override
-    public void onClick(Marker marker, List<ClusterItem> clusterItems) {
+    public void onClick(Marker marker, List<ClusterItemV2> clusterItems) {
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (ClusterItem clusterItem : clusterItems) {
+        for (ClusterItemV2 clusterItem : clusterItems) {
             builder.include(clusterItem.getPosition());
         }
         LatLngBounds latLngBounds = builder.build();
@@ -196,14 +179,6 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
         return bitmap;
     }
 
-    /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
-     */
-    public int dp2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
 
@@ -212,5 +187,36 @@ public class ClusterActivity extends AppCompatActivity implements ClusterRender,
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_clusterv2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_add_parker) {
+            //添加测试数据
+            new Thread() {
+                public void run() {
+                    List<ClusterItemV2> items = new ArrayList<ClusterItemV2>();
+                    //随机10000个点
+                    for (int i = 0; i < 10000; i++) {
+
+                        double lat = Math.random() + 39.474923;
+                        double lon = Math.random() + 116.027116;
+
+                        LatLng latLng = new LatLng(lat, lon, false);
+                        ParkItemV2 parks = new ParkItemV2(latLng, "test" + i);
+                        items.add(parks);
+                    }
+                    mClusterOverlay.clearClusterItems();
+                    mClusterOverlay.addClusterItems(items);
+                }
+            }.start();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

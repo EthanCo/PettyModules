@@ -12,6 +12,7 @@ import android.view.View;
 import com.heiko.amaptest.anchor.AnchorActivity;
 import com.heiko.amaptest.cluster.ClusterActivity;
 import com.heiko.amaptest.clusterv2.ClusterV2Activity;
+import com.heiko.amaptest.clusterv3.ClusterV3Activity;
 import com.heiko.amaptest.search.SearchActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_main).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -43,7 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_location_mode).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,LocationModeSourceActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LocationModeSourceActivity.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_location_style).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,CustomLocationActivity.class);
+                Intent intent = new Intent(SplashActivity.this, CustomLocationActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,7 +60,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_cluster).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,ClusterActivity.class);
+                Intent intent = new Intent(SplashActivity.this, ClusterActivity.class);
                 startActivity(intent);
             }
         });
@@ -67,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_anchor).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SplashActivity.this,AnchorActivity.class);
+                Intent intent = new Intent(SplashActivity.this, AnchorActivity.class);
                 startActivity(intent);
             }
         });
@@ -75,7 +76,7 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_search).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,SearchActivity.class);
+                Intent intent = new Intent(SplashActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +84,15 @@ public class SplashActivity extends AppCompatActivity {
         findViewById(R.id.btn_anchor_v2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this,ClusterV2Activity.class);
+                Intent intent = new Intent(SplashActivity.this, ClusterV2Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_anchor_v3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SplashActivity.this, ClusterV3Activity.class);
                 startActivity(intent);
             }
         });

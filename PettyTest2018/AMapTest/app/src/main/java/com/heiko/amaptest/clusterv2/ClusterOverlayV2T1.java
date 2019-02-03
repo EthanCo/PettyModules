@@ -32,7 +32,7 @@ import java.util.List;
  * Created by yiyi.qi on 16/10/10.
  * 整体设计采用了两个线程,一个线程用于计算组织聚合数据,一个线程负责处理Marker相关操作
  */
-public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
+public class ClusterOverlayV2T1 implements AMap.OnCameraChangeListener,
         AMap.OnMarkerClickListener {
     private AMap mAMap;
     private Context mContext;
@@ -49,7 +49,7 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
     private Handler mMarkerhandler;
     private Handler mSignClusterHandler;
     private float mPXInMeters;
-    private volatile boolean mIsCanceled = false;
+    private boolean mIsCanceled = false;
 
     /**
      * 构造函数,批量添加聚合元素时,调用此构造函数
@@ -59,7 +59,7 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
      * @param clusterRadius 点聚合半径 (dp)
      * @param imgCacheSize 最多会缓存imgCacheSize张图片作为聚合显示元素图片,根据自己显示需求和app使用内存情况,传相关值
      */
-    public ClusterOverlayV2( Context context,AMap amap,int clusterRadius, int imgCacheSize) {
+    public ClusterOverlayV2T1(Context context, AMap amap, int clusterRadius, int imgCacheSize) {
         mLruCache = new LruCache<Integer, BitmapDescriptor>(imgCacheSize) {
             protected void entryRemoved(boolean evicted, Integer key,
                                         BitmapDescriptor oldValue,
@@ -180,6 +180,8 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
         mSignClusterHandler.sendMessage(message);
     }
 
+    private AlphaAnimation mADDAnimation = new AlphaAnimation(0, 1);
+
     /**
      * 对点进行聚合
      */
@@ -189,8 +191,6 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
         mSignClusterHandler.sendEmptyMessage(SignClusterHandler.CALCULATE_CLUSTER);
     }
 //-----------------------辅助内部类用---------------------------------------------
-
-    private AlphaAnimation mADDAnimation = new AlphaAnimation(0, 1);
 
     /**
      * marker渐变动画，动画结束后将Marker删除
@@ -273,37 +273,9 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
     }
 
     /**
-     * 将单个聚合元素添加至地图显示
-     *
-     * @param cluster
-     */
-    private void addSingleClusterToMap(ClusterV2 cluster) {
-        LatLng latlng = cluster.getCenterLatLng();
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.anchor(0.5f, 0.5f)
-                .icon(getBitmapDes(cluster)).position(latlng);
-        Marker marker = mAMap.addMarker(markerOptions);
-        marker.setAnimation(mADDAnimation);
-        marker.setObject(cluster);
-
-        marker.startAnimation();
-        cluster.setMarker(marker);
-        mAddMarkers.add(marker);
-    }
-
-    /**
-     * 更新已加入地图聚合点的样式
-     */
-    private void updateCluster(ClusterV2 cluster) {
-        Marker marker = cluster.getMarker();
-        marker.setIcon(getBitmapDes(cluster));
-    }
-
-    /**
      * 获取每个聚合点的绘制样式
      */
-    private BitmapDescriptor getBitmapDes(ClusterV2 culster) {
-        int num = culster.getClusterCount();
+    private BitmapDescriptor getBitmapDes(int num) {
         BitmapDescriptor bitmapDescriptor = mLruCache.get(num);
         if (bitmapDescriptor == null) {
             TextView textView = new TextView(mContext);
@@ -324,6 +296,33 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
 
         }
         return bitmapDescriptor;
+    }
+
+    /**
+     * 将单个聚合元素添加至地图显示
+     *
+     * @param cluster
+     */
+    private void addSingleClusterToMap(ClusterV2 cluster) {
+        LatLng latlng = cluster.getCenterLatLng();
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.anchor(0.5f, 0.5f)
+                .icon(getBitmapDes(cluster.getClusterCount())).position(latlng);
+        Marker marker = mAMap.addMarker(markerOptions);
+        marker.setAnimation(mADDAnimation);
+        marker.setObject(cluster);
+
+        marker.startAnimation();
+        cluster.setMarker(marker);
+        mAddMarkers.add(marker);
+    }
+
+    /**
+     * 更新已加入地图聚合点的样式
+     */
+    private void updateCluster(ClusterV2 cluster) {
+        Marker marker = cluster.getMarker();
+        marker.setIcon(getBitmapDes(cluster.getClusterCount()));
     }
 
 //-----------------------处理Marker添加、更新操作 END---------------------------------------------
@@ -361,7 +360,6 @@ public class ClusterOverlayV2 implements AMap.OnCameraChangeListener,
         mIsCanceled = false;
         mClusters.clear();
         LatLngBounds visibleBounds = mAMap.getProjection().getVisibleRegion().latLngBounds;
-        //mClusterItems : IPosition
         for (ClusterItemV2 clusterItem : mClusterItems) {
             if (mIsCanceled) {
                 return;

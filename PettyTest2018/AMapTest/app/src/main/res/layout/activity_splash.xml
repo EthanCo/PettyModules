@@ -32,14 +32,20 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_anchor"
-        android:text="定位点"
+        android:id="@+id/btn_anchor_v2"
+        android:text="点聚合V2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_anchor_v2"
-        android:text="定位点V2"
+        android:id="@+id/btn_anchor_v3"
+        android:text="点聚合V3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_anchor"
+        android:text="定位点"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

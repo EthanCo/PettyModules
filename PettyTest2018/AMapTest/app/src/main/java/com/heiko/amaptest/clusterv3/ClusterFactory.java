@@ -18,7 +18,7 @@ public class ClusterFactory {
      * @return
      */
     @Nullable
-    public static ClusterMeta createClusterMeta(Type type, List<IPosition> positions) {
+    public static ClusterMeta createClusterMeta(Type type, List<ILocation> positions) {
         if (type == Type.BIKE) {
             ClusterMeta clusterMeta = new ClusterMeta(type, false, positions); //positions可去除
             clusterMeta.setClusterRender(createBikeClusterRender());

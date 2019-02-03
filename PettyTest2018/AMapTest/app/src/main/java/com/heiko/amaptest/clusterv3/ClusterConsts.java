@@ -1,7 +1,7 @@
 package com.heiko.amaptest.clusterv3;
 
 /**
- * TODO
+ * 点聚合相关全局变量
  *
  * @author Heiko
  * @date 2019/2/2

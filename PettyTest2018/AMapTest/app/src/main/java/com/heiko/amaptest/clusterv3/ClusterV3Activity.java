@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -112,7 +113,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
             //添加测试数据
             new Thread() {
                 public void run() {
-                    List<IPosition> items = new ArrayList<>();
+                    List<ILocation> items = new ArrayList<>();
                     //随机10000个点
                     for (int i = 0; i < 10000; i++) {
 
@@ -132,7 +133,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
             //添加测试数据
             new Thread() {
                 public void run() {
-                    List<IPosition> items = new ArrayList<>();
+                    List<ILocation> items = new ArrayList<>();
                     //随机10000个点
                     for (int i = 0; i < 10000; i++) {
 
@@ -154,13 +155,18 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         ClusterMeta clusterMeta = mClusterOverlay.getClusterMeta();
-        for (Cluster cluster : clusterMeta.getClusters()) {
-            builder.include(cluster.getLatLng());
+        Cluster cluster = (Cluster) marker.getObject();
+        if (clusterMeta.canCluster()) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (ILocation position : cluster.getLocations()) {
+                builder.include(position.getLocation());
+            }
+            LatLngBounds latLngBounds = builder.build();
+            mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
+        }else{
+            Toast.makeText(ClusterV3Activity.this, cluster.getCenterLatLng().toString(), Toast.LENGTH_SHORT).show();
         }
-        LatLngBounds latLngBounds = builder.build();
-        mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
         return true;
     }
 }

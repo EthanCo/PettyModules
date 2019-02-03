@@ -4,37 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * 点聚合 封装类
  */
 public class ClusterMeta {
-
-    /**
-     * Default constructor
-     */
-    public ClusterMeta(Type type, boolean canCluster,List<IPosition> positions) {
-        this.type = type;
-        this.canCluster = canCluster;
-        this.positions = positions;
-        this.clusters = new ArrayList<>();
-    }
-
-    /**
-     *
-     */
     private Type type;
-
     private ClusterRender clusterRender;
     private boolean canCluster; //是否可以点聚合
-
-    /**
-     *
-     */
     private List<Cluster> clusters;
+    private List<ILocation> locations;
 
-    /**
-     *
-     */
-    private List<IPosition> positions;
+    public ClusterMeta(Type type, boolean canCluster, List<ILocation> locations) {
+        this.type = type;
+        this.canCluster = canCluster;
+        this.locations = locations;
+        this.clusters = new ArrayList<>();
+    }
 
     public List<Cluster> getClusters() {
         return clusters;
@@ -50,6 +34,14 @@ public class ClusterMeta {
 
     public void clearClusters() {
         this.clusters.clear();
+    }
+
+    public void removeCluster(Cluster cluster) {
+        this.clusters.remove(cluster);
+    }
+
+    public void removeClusters(List<Cluster> cluster) {
+        this.clusters.remove(cluster);
     }
 
     public Type getType() {
@@ -72,7 +64,7 @@ public class ClusterMeta {
         this.clusterRender = clusterRender;
     }
 
-    public List<IPosition> getPositions() {
-        return positions;
+    public List<ILocation> getLocations() {
+        return locations;
     }
 }

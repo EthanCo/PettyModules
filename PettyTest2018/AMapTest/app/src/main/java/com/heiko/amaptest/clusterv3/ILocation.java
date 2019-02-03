@@ -5,7 +5,7 @@ import com.amap.api.maps.model.LatLng;
 /**
  * 
  */
-public interface IPosition {
+public interface ILocation {
 
     /**
      * @return

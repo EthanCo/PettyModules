@@ -11,35 +11,35 @@ import java.util.List;
  */
 public class Cluster {
 
-    private List<IPosition> positions;
+    private List<ILocation> locations;
 
     public Cluster(LatLng centerLatLngr) {
-        this.latLng = centerLatLngr;
-        this.positions = new ArrayList<>();
+        this.centerLatLng = centerLatLngr;
+        this.locations = new ArrayList<>();
     }
 
     /**
      * 中心坐标 (点聚合显示的坐标)
      */
-    private LatLng latLng;
+    private LatLng centerLatLng;
 
     /**
-     *
+     * 地图点
      */
     private Marker marker;
 
 
-    public void addPosition(IPosition target) {
-        if (target==null) return;
-        this.positions.add(target);
+    public void addLocation(ILocation target) {
+        if (target == null) return;
+        this.locations.add(target);
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public LatLng getCenterLatLng() {
+        return centerLatLng;
     }
 
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public void setCenterLatLng(LatLng centerLatLng) {
+        this.centerLatLng = centerLatLng;
     }
 
     public Marker getMarker() {
@@ -51,6 +51,10 @@ public class Cluster {
     }
 
     public int getClusterCount() {
-        return positions.size();
+        return locations.size();
+    }
+
+    public List<ILocation> getLocations() {
+        return locations;
     }
 }

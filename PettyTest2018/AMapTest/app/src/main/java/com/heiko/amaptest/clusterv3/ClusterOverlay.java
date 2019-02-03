@@ -1,15 +1,12 @@
 package com.heiko.amaptest.clusterv3;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.LruCache;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
@@ -147,9 +144,11 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
 
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
-        ClusterConsts.pxInMeters = aMap.getScalePerPixel();
-        ClusterConsts.clusterDistance = ClusterConsts.pxInMeters * ClusterConsts.clusterSize;
-        assignClusters();
+        if (clusterMeta.canCluster()) {
+            ClusterConsts.pxInMeters = aMap.getScalePerPixel();
+            ClusterConsts.clusterDistance = ClusterConsts.pxInMeters * ClusterConsts.clusterSize;
+            assignClusters();
+        }
     }
 
     /**
@@ -287,25 +286,27 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
      */
     private BitmapDescriptor getBitmapDes(Cluster culster) {
         int num = culster.getClusterCount();
-        BitmapDescriptor bitmapDescriptor = mLruCache.get(clusterMeta.getType().toString()+num); //TODO
+        BitmapDescriptor bitmapDescriptor = mLruCache.get(clusterMeta.getType().toString() + num); //TODO
         if (bitmapDescriptor == null) {
-            TextView textView = new TextView(context);
+            /*TextView textView = new TextView(context);
             if (num > 1) {
                 String tile = String.valueOf(num);
                 textView.setText(tile);
             }
             textView.setGravity(Gravity.CENTER);
             textView.setTextColor(Color.BLACK);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15);*/
+            ImageView imageView = new ImageView(context);
 
             ClusterRender clusterRender = clusterMeta.getClusterRender();
             if (clusterRender != null && clusterRender.getDrawAble(num) != null) {
-                textView.setBackgroundDrawable(clusterRender.getDrawAble(num));
+                imageView.setBackgroundDrawable(clusterRender.getDrawAble(num));
             } else {
-                textView.setBackgroundResource(R.drawable.defaultcluster);
+                imageView.setBackgroundResource(R.drawable.defaultcluster);
             }
-            bitmapDescriptor = BitmapDescriptorFactory.fromView(textView);
-            mLruCache.put(clusterMeta.getType().toString()+num, bitmapDescriptor); //TODO
+            //bitmapDescriptor = BitmapDescriptorFactory.fromView(textView);
+            bitmapDescriptor = BitmapDescriptorFactory.fromView(imageView);
+            mLruCache.put(clusterMeta.getType().toString() + num, bitmapDescriptor); //TODO
 
         }
         return bitmapDescriptor;
@@ -352,8 +353,11 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
             }
             LatLng latlng = position.getLocation();
             if (visibleBounds.contains(latlng)) {
+                Cluster cluster = null;
+                if (clusterMeta.canCluster()) {
+                    cluster = getCluster(latlng, clusterMeta.getClusters());
+                }
 
-                Cluster cluster = getCluster(latlng, clusterMeta.getClusters());
                 if (cluster != null) {
                     cluster.addPosition(position);
                 } else {
@@ -363,8 +367,6 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
                 }
             }
         }
-//        clusterMeta.setClusterRender(clusterRenderFactory.createClusterRender(type,context));
-//        clusterMeta = ClusterFactory.createClusterMeta(visibleBounds, clusterMeta.getType(), clusterMeta.getPositions(), context);
 
         //复制一份数据，规避同步
         List<Cluster> clusters = new ArrayList<>();
@@ -385,11 +387,11 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
      * @return
      */
     private static Cluster getCluster(LatLng latLng, List<Cluster> clusters) {
-        for (Cluster position : clusters) {
-            LatLng clusterCenterPoint = position.getLatLng();
+        for (Cluster cluster : clusters) {
+            LatLng clusterCenterPoint = cluster.getLatLng();
             double distance = AMapUtils.calculateLineDistance(latLng, clusterCenterPoint);
             if (distance < ClusterConsts.clusterDistance && ClusterConsts.currMapZoom < 19) {
-                return position;
+                return cluster;
             }
         }
 

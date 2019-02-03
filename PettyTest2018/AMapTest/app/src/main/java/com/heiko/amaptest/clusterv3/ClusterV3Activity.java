@@ -123,10 +123,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
                         BikeInfo bikes = new BikeInfo(latLng);
                         items.add(bikes);
                     }
-
-                    LatLngBounds visibleBounds = mAMap.getProjection().getVisibleRegion().latLngBounds;
-
-                    ClusterMeta clusterMeata = ClusterFactory.createClusterMeta(Type.BIKE, items, ClusterV3Activity.this);
+                    ClusterMeta clusterMeata = ClusterFactory.createClusterMeta(Type.BIKE, items);
                     mClusterOverlay.setClusterMeta(clusterMeata);
                 }
             }.start();
@@ -146,10 +143,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
                         BikeInfo bikes = new BikeInfo(latLng);
                         items.add(bikes);
                     }
-
-                    LatLngBounds visibleBounds = mAMap.getProjection().getVisibleRegion().latLngBounds;
-
-                    ClusterMeta clusterMeata = ClusterFactory.createClusterMeta(Type.PARK, items, ClusterV3Activity.this);
+                    ClusterMeta clusterMeata = ClusterFactory.createClusterMeta(Type.PARK, items);
                     mClusterOverlay.setClusterMeta(clusterMeata);
                 }
             }.start();

@@ -11,8 +11,9 @@ public class ClusterMeta {
     /**
      * Default constructor
      */
-    public ClusterMeta(Type type, List<IPosition> positions) {
+    public ClusterMeta(Type type, boolean canCluster,List<IPosition> positions) {
         this.type = type;
+        this.canCluster = canCluster;
         this.positions = positions;
         this.clusters = new ArrayList<>();
     }
@@ -23,6 +24,7 @@ public class ClusterMeta {
     private Type type;
 
     private ClusterRender clusterRender;
+    private boolean canCluster; //是否可以点聚合
 
     /**
      *
@@ -38,20 +40,28 @@ public class ClusterMeta {
         return clusters;
     }
 
-    public void addCluster(Cluster cluster){
+    public void addCluster(Cluster cluster) {
         this.clusters.add(cluster);
     }
 
-    public void addClusters(List<Cluster> clusters){
+    public void addClusters(List<Cluster> clusters) {
         this.clusters = clusters;
     }
 
-    public void clearClusters(){
+    public void clearClusters() {
         this.clusters.clear();
     }
 
     public Type getType() {
         return type;
+    }
+
+    public boolean canCluster() {
+        return canCluster;
+    }
+
+    public void setCanCluster(boolean canCluster) {
+        this.canCluster = canCluster;
     }
 
     public ClusterRender getClusterRender() {

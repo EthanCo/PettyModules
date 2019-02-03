@@ -12,7 +12,6 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.heiko.amaptest.R;
 import com.heiko.amaptest.clusterv3.bean.BikeInfo;
@@ -158,13 +157,17 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
         ClusterMeta clusterMeta = mClusterOverlay.getClusterMeta();
         Cluster cluster = (Cluster) marker.getObject();
         if (clusterMeta.canCluster()) {
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            /*LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for (ILocation position : cluster.getLocations()) {
                 builder.include(position.getLocation());
             }
             LatLngBounds latLngBounds = builder.build();
-            mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
-        }else{
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(latLngBounds, 0);
+            //;cameraUpdate.getCameraUpdateFactoryDelegate().zoom;
+            mAMap.animateCamera(cameraUpdate);
+            ClusterConsts.limitZoom = mAMap.getCameraPosition().zoom;*/
+            mAMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cluster.getCenterLatLng(), 18));
+        } else {
             Toast.makeText(ClusterV3Activity.this, cluster.getCenterLatLng().toString(), Toast.LENGTH_SHORT).show();
         }
         return true;

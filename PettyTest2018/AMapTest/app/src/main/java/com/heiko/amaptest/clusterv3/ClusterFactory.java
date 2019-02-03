@@ -2,6 +2,7 @@ package com.heiko.amaptest.clusterv3;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.heiko.amaptest.App;
 import com.heiko.amaptest.R;
@@ -42,15 +43,20 @@ public class ClusterFactory {
                 private Map<Integer, Drawable> mBackDrawAbles = new HashMap<>();
 
                 @Override
-                public Drawable getDrawAble(int clusterNum) {
-                    Drawable bitmapDrawable = mBackDrawAbles.get(1);
+                public Drawable getDrawAble(int style) {
+                    Drawable bitmapDrawable = mBackDrawAbles.get(style);
                     if (bitmapDrawable == null) {
                         bitmapDrawable = App.getInstance().getResources().getDrawable(
                                 R.mipmap.icon_marker_enable);
-                        mBackDrawAbles.put(1, bitmapDrawable);
+                        mBackDrawAbles.put(style, bitmapDrawable);
                     }
 
                     return bitmapDrawable;
+                }
+
+                @Override
+                public int getDrawAbleStyle(int zoom) {
+                    return 1;
                 }
             };
         }
@@ -63,24 +69,33 @@ public class ClusterFactory {
                 private Map<Integer, Drawable> mBackDrawAbles = new HashMap<>();
 
                 @Override
-                public Drawable getDrawAble(int clusterNum) {
-                    if (clusterNum == 1) {
-                        Drawable bitmapDrawable = mBackDrawAbles.get(1);
+                public Drawable getDrawAble(int style) {
+                    Drawable bitmapDrawable = mBackDrawAbles.get(style);
+                    if (style == 1) {
                         if (bitmapDrawable == null) {
                             bitmapDrawable = App.getInstance().getResources().getDrawable(
-                                    R.mipmap.ic_park_point);
-                            mBackDrawAbles.put(1, bitmapDrawable);
+                                    R.mipmap.ic_park_point_small);
+                            mBackDrawAbles.put(style, bitmapDrawable);
                         }
 
                         return bitmapDrawable;
                     } else {
-                        Drawable bitmapDrawable = mBackDrawAbles.get(2);
                         if (bitmapDrawable == null) {
                             bitmapDrawable = App.getInstance().getResources().getDrawable(
                                     R.mipmap.ic_park_point);
-                            mBackDrawAbles.put(2, bitmapDrawable);
+                            mBackDrawAbles.put(style, bitmapDrawable);
                         }
                         return bitmapDrawable;
+                    }
+                }
+
+                @Override
+                public int getDrawAbleStyle(int zoom) {
+                    Log.i("Z-Zoom", "zoom:" + zoom+" limitZoom:"+ClusterConsts.limitZoom);
+                    if (zoom >= 16) { //18
+                        return 1;
+                    } else {
+                        return 2;
                     }
                 }
             };

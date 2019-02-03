@@ -9,7 +9,8 @@ package com.heiko.amaptest.clusterv3;
 public class ClusterConsts {
     public static volatile boolean isCanceled = false;
     public static volatile double clusterDistance;
-    public static volatile double currMapZoom;
+    //public static volatile double currMapZoom;
     public static volatile int clusterSize;
     public static volatile float pxInMeters;
+    public static volatile float limitZoom = 17;
 }

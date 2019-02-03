@@ -1,6 +1,7 @@
 package com.heiko.amaptest.clusterv3;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -273,19 +274,22 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener {
      * 获取每个聚合点的绘制样式
      */
     private BitmapDescriptor getBitmapDes(Cluster culster) {
-        int num = culster.getClusterCount();
-        BitmapDescriptor bitmapDescriptor = mLruCache.get(clusterMeta.getType().toString() + num);
+        //int num = culster.getClusterCount();
+        int zoom = (int) aMap.getCameraPosition().zoom;
+        ClusterRender clusterRender = clusterMeta.getClusterRender();
+        int style = clusterRender.getDrawAbleStyle(zoom);
+        BitmapDescriptor bitmapDescriptor = mLruCache.get(clusterMeta.getType().toString() + style);
         if (bitmapDescriptor == null) {
             ImageView imageView = new ImageView(context);
 
-            ClusterRender clusterRender = clusterMeta.getClusterRender();
-            if (clusterRender != null && clusterRender.getDrawAble(num) != null) {
-                imageView.setBackgroundDrawable(clusterRender.getDrawAble(num));
+            Drawable drawAble = clusterRender.getDrawAble(style);
+            if (clusterRender != null && drawAble != null) {
+                imageView.setBackgroundDrawable(drawAble);
             } else {
                 throw new IllegalArgumentException("clusterRenter is Null");
             }
             bitmapDescriptor = BitmapDescriptorFactory.fromView(imageView);
-            mLruCache.put(clusterMeta.getType().toString() + num, bitmapDescriptor);
+            mLruCache.put(clusterMeta.getType().toString() + style, bitmapDescriptor);
 
         }
         return bitmapDescriptor;
@@ -365,11 +369,11 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener {
      * @param latLng
      * @return
      */
-    private static Cluster getCluster(LatLng latLng, List<Cluster> clusters) {
+    private Cluster getCluster(LatLng latLng, List<Cluster> clusters) {
         for (Cluster cluster : clusters) {
             LatLng clusterCenterPoint = cluster.getCenterLatLng();
             double distance = AMapUtils.calculateLineDistance(latLng, clusterCenterPoint);
-            if (distance < ClusterConsts.clusterDistance && ClusterConsts.currMapZoom < 19) {
+            if (distance < ClusterConsts.clusterDistance && aMap.getCameraPosition().zoom < 19) {
                 return cluster;
             }
         }

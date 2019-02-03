@@ -29,7 +29,7 @@ import java.util.List;
 /**
  *
  */
-public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarkerClickListener {
+public class ClusterOverlay implements AMap.OnCameraChangeListener {
     private final Context context;
     private HandlerThread mMarkerHandlerThread = new HandlerThread("addMarker");
     private HandlerThread mSignClusterThread = new HandlerThread("calculateCluster");
@@ -38,8 +38,11 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
     private LruCache<String, BitmapDescriptor> mLruCache;
     private final AMap aMap;
     private ClusterClickListener mClusterClickListener;
+    private ClusterMeta clusterMeta;
 
-    private ClusterMeta clusterMeta; //TODO
+    public ClusterMeta getClusterMeta() {
+        return clusterMeta;
+    }
 
     /**
      * Default constructor
@@ -57,8 +60,6 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
         ClusterConsts.clusterSize = ClusterUtils.dp2px(context, clusterRadius);
         ClusterConsts.pxInMeters = aMap.getScalePerPixel();
         ClusterConsts.clusterDistance = ClusterConsts.clusterSize * ClusterConsts.pxInMeters;
-        aMap.setOnCameraChangeListener(this);
-        aMap.setOnMarkerClickListener(this);
         initThreadHandler();
         if (clusterMeta != null) {
             setClusterMeta(clusterMeta);
@@ -156,13 +157,13 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
      *
      * @param clusterClickListener
      */
-    public void setOnClusterClickListener(
+    /*public void setOnClusterClickListener(
             ClusterClickListener clusterClickListener) {
         mClusterClickListener = clusterClickListener;
-    }
+    }*/
 
     //点击事件
-    @Override
+    /*@Override
     public boolean onMarkerClick(Marker arg0) {
         if (mClusterClickListener == null) {
             return true;
@@ -173,7 +174,7 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
             return true;
         }
         return false;
-    }
+    }*/
 
     //-----------------------辅助内部类用---------------------------------------------
 

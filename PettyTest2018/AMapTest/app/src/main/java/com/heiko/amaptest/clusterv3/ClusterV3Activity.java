@@ -19,7 +19,7 @@ import com.heiko.amaptest.clusterv3.bean.BikeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLoadedListener, ClusterClickListener, AMap.OnCameraChangeListener {
+public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLoadedListener, AMap.OnCameraChangeListener, AMap.OnMarkerClickListener {
 
     private MapView mMapView;
     private AMap mAMap;
@@ -45,6 +45,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
             UiSettings settings = mAMap.getUiSettings();
             settings.setScaleControlsEnabled(true);
             mAMap.setOnCameraChangeListener(this);
+            mAMap.setOnMarkerClickListener(this);
             //点击可以动态添加点
             /*mAMap.setOnMapClickListener(new AMap.OnMapClickListener() {
                 @Override
@@ -86,17 +87,17 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
     public void onMapLoaded() {
         mClusterOverlay = new ClusterOverlay(getApplication(), mAMap, null, clusterRadius, imgCacheSize);
         //mClusterOverlay.setClusterRenderer(ClusterV3Activity.this);
-        mClusterOverlay.setOnClusterClickListener(ClusterV3Activity.this);
+        //mClusterOverlay.setOnClusterClickListener(ClusterV3Activity.this);
     }
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
-
+        mClusterOverlay.onCameraChange(cameraPosition);
     }
 
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
-
+        mClusterOverlay.onCameraChangeFinish(cameraPosition);
     }
 
     @Override
@@ -127,7 +128,7 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
                     mClusterOverlay.setClusterMeta(clusterMeata);
                 }
             }.start();
-        }else if (item.getItemId() == R.id.menu_add_parker) {
+        } else if (item.getItemId() == R.id.menu_add_parker) {
             //添加测试数据
             new Thread() {
                 public void run() {
@@ -152,12 +153,14 @@ public class ClusterV3Activity extends AppCompatActivity implements AMap.OnMapLo
     }
 
     @Override
-    public void onClick(Marker marker, ClusterMeta clusterMeta) {
+    public boolean onMarkerClick(Marker marker) {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        ClusterMeta clusterMeta = mClusterOverlay.getClusterMeta();
         for (Cluster cluster : clusterMeta.getClusters()) {
             builder.include(cluster.getLatLng());
         }
         LatLngBounds latLngBounds = builder.build();
         mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
+        return true;
     }
 }

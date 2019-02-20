@@ -31,6 +31,19 @@ public class SplashActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
         }
+        //这里以ACCESS_COARSE_LOCATION为例
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
+        }
+        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    WRITE_COARSE_LOCATION_REQUEST_CODE);//自定义的code
+        }*/
 
 
         findViewById(R.id.btn_main).setOnClickListener(new View.OnClickListener() {

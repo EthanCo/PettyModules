@@ -55,8 +55,6 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener {
         this.context = context;
         this.aMap = aMap;
         ClusterConsts.clusterSize = ClusterUtils.dp2px(context, clusterRadius);
-        ClusterConsts.pxInMeters = aMap.getScalePerPixel();
-        ClusterConsts.clusterDistance = ClusterConsts.clusterSize * ClusterConsts.pxInMeters;
         initThreadHandler();
         if (clusterMeta != null) {
             setClusterMeta(clusterMeta);
@@ -81,6 +79,8 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener {
      * @param clusterMeta
      */
     public void setClusterMeta(ClusterMeta clusterMeta) {
+        ClusterConsts.pxInMeters = aMap.getScalePerPixel();
+        ClusterConsts.clusterDistance = ClusterConsts.clusterSize * ClusterConsts.pxInMeters;
         this.clusterMeta = clusterMeta;
         assignClusters();
     }

@@ -32,9 +32,9 @@ public class AnchorActivity extends AppCompatActivity implements AMap.OnMapLoade
         mapView.onCreate(savedInstanceState);
 
         aMap = mapView.getMap();
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_MAP_ZOOM));  //设置缩放级别
         aMap.setMyLocationStyle(new MyLocationStyle());//设置定位蓝点的Style
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(DEFAULT_MAP_ZOOM));  //设置缩放级别
         aMap.setOnMapLoadedListener(this);
 
 

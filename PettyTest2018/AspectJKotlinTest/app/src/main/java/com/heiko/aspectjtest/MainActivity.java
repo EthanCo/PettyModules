@@ -1,5 +1,6 @@
 package com.heiko.aspectjtest;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 attemptLogin();
+            }
+        });
+
+        Button btnGoKotlin = findViewById(R.id.btn_go_kotlin);
+        btnGoKotlin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,KotlinActivity.class);
+                startActivity(intent);
             }
         });
     }

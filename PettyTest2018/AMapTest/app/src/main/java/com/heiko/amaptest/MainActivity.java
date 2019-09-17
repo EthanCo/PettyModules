@@ -1,5 +1,6 @@
 package com.heiko.amaptest;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
+import android.view.animation.LinearInterpolator;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
@@ -20,12 +22,15 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.Circle;
 import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.Polygon;
 import com.amap.api.maps.model.PolygonOptions;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
+import com.amap.api.maps.model.animation.Animation;
+import com.amap.api.maps.model.animation.ScaleAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,7 +163,33 @@ public class MainActivity extends AppCompatActivity implements AMap.OnMapLoadedL
                 .decodeResource(getResources(), R.mipmap.ic_launcher)));
         // 将Marker设置为贴地显示，可以双指下拉地图查看效果
         markerOption.setFlat(true);//设置marker平贴地图效果
-        aMap.addMarker(markerOption);
+        final Marker marker = aMap.addMarker(markerOption);
+
+        Animation animation = new ScaleAnimation(1F,2F,1F,2F);
+        long duration = 1000L;
+        animation.setRepeatMode(Animation.INFINITE);
+        animation.setDuration(duration);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(1);
+        animation.setRepeatMode(ValueAnimator.REVERSE);
+        /*animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart() {
+
+            }
+
+            @Override
+            public void onAnimationEnd() {
+                Animation animation2 = new AlphaAnimation(0F,1F);
+                animation2.setDuration(5000);
+                animation2.setInterpolator(new LinearInterpolator());
+                marker.setAnimation(animation2);
+                marker.startAnimation();
+            }
+        });*/
+
+        marker.setAnimation(animation);
+        marker.startAnimation();
     }
 
     /**

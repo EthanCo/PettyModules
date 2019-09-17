@@ -1,5 +1,6 @@
 package com.ethanco.mymaterialdialogtest.thirdparty;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -48,11 +49,18 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnNormal: //普通
-                new MaterialDialog.Builder(this)
+                MaterialDialog dialog = new MaterialDialog.Builder(this)
                         .title("Title")
+                        .titleColorRes(R.color.colorPrimaryDark)
                         .content("Content")
                         .positiveText("确定")
                         .negativeText("取消")
+                        .input("", "", new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+
+                            }
+                        })
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -66,6 +74,19 @@ public class ThirdPartyMaterialDialogActivity extends AppCompatActivity implemen
                             }
                         })
                         .show();
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+
+                    }
+                });
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialog) {
+
+                    }
+                });
                 break;
             case R.id.btnInput: //输入框
                 /*new MaterialDialog.Builder(this)

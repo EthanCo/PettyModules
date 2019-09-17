@@ -15,7 +15,7 @@ public class Main2Activity extends AppCompatActivity {
 
     public void intro(View view) {
         BottomSheetBehavior behavior = BottomSheetBehavior.from(findViewById(R.id.scroll));
-        behavior.setPeekHeight();
+        //behavior.setPeekHeight();
         //behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         if(behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);

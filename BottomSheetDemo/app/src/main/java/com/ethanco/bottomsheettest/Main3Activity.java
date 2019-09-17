@@ -5,6 +5,11 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+/**
+ * Behavior详见
+ * https://blog.csdn.net/lisdye2/article/details/78344030
+ * https://www.jianshu.com/p/b987fad8fcb4
+ */
 public class Main3Activity extends AppCompatActivity {
 
     @Override

@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
                 kotlin.run {
                     val person1 = Person("a" + System.currentTimeMillis(), 18)
                     person1.lastName = "lastName hhh"
+                    val map = HashMap<String,Int>()
+                    map["aaa"] = 1
+                    map["bbb"] = 2
+                    person1.myMap = map
                     var id = mPersonDao.insertPerson(person1)
                     Log.i(TAG, "添加数据:$id")
                     val person = mPersonDao.getPersonById(id.toInt())

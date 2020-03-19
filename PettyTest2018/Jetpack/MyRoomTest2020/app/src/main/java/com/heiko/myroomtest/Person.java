@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import java.util.Map;
 
 /**
  * Person
@@ -17,6 +20,7 @@ import androidx.room.PrimaryKey;
  * @date 2020/3/18 0018
  */
 @Entity(tableName = "person")
+@TypeConverters(MapConverter.class)
 public class Person {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -29,6 +33,16 @@ public class Person {
     private int age;
 
     private String lastName;
+
+    private Map<String,Integer> myMap;
+
+    public Map<String, Integer> getMyMap() {
+        return myMap;
+    }
+
+    public void setMyMap(Map<String, Integer> myMap) {
+        this.myMap = myMap;
+    }
 
     /**
      * 必须指定一个构造方法，room框架需要。并且只能指定一个
@@ -110,6 +124,7 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", lastName='" + lastName + '\'' +
+                ", myMap=" + myMap +
                 '}';
     }
 }

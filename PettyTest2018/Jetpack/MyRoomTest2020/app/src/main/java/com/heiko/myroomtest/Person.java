@@ -127,4 +127,7 @@ public class Person {
                 ", myMap=" + myMap +
                 '}';
     }
+
+    //@Embedded内嵌对象
+    //https://www.baidu.com/link?url=rCNBgvA70pt551u1qOXlYzHzKSOU9hV7F84Zr_ZPMhARz66eO7qvVMcubtwxTjj3ia64sg7v7EPksff1LY48QK&wd=&eqid=b4ac8dbd000b89ed000000055eba4967
 }
